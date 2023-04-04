@@ -24,7 +24,7 @@ export const unhar = (har: Har): Request[] =>
             startTime: new Date(e.startedDateTime),
             method: e.request.method,
             host: url.hostname,
-            path: url.pathname,
+            path: url.pathname + url.search,
             endpointUrl,
             content: e.request.postData?.text,
             port: url.port,
