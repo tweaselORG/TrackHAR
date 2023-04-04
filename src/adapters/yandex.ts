@@ -1,12 +1,14 @@
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
+    slug: 'yandex',
     name: 'Yandex Oy',
     datenanfragenSlug: 'yandex',
 };
 
 export const adapters: Adapter[] = [
     {
+        slug: 'appmetrica',
         tracker,
 
         endpointUrls: [
@@ -58,21 +60,39 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            os: {
+            osName: {
                 context: 'query',
-                path: ['app_platform', 'os_version'],
+                path: 'app_platform',
+                reasoning: 'obvious property name',
+            },
+
+            osVersion: {
+                context: 'query',
+                path: 'os_version',
+                reasoning: 'obvious property name',
+            },
+
+            manufacturer: {
+                context: 'query',
+                path: 'manufacturer',
                 reasoning: 'obvious property name',
             },
 
             model: {
                 context: 'query',
-                path: ['manufacturer', 'model'],
+                path: 'model',
                 reasoning: 'obvious property name',
             },
 
-            screenDimensions: {
+            screenHeight: {
                 context: 'query',
-                path: ['screen_width', 'screen_height'],
+                path: 'screen_height',
+                reasoning: 'obvious property name',
+            },
+
+            screenWidth: {
+                context: 'query',
+                path: 'screen_width',
                 reasoning: 'obvious property name',
             },
 

@@ -9,8 +9,8 @@
 You can install TrackHAR using yarn or npm:
 
 ```sh
-yarn add TrackHAR
-# or `npm i TrackHAR`
+yarn add trackhar
+# or `npm i trackhar`
 ```
 
 ## API reference
