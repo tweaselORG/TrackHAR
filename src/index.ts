@@ -1,13 +1,11 @@
 import type { Har } from 'har-format';
 import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
-import { getAllAdapters } from './common/adapters';
+import { allAdapters } from './common/adapters';
 import { decodeFunctions } from './common/decode-functions';
 import type { Request } from './common/request';
 import { unhar } from './common/request';
 import type { ArrayOrSingle } from './common/type-utils';
-
-const allAdapters = getAllAdapters();
 
 /** A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath. */
 export type JsonPath = string;
@@ -138,16 +136,13 @@ const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
 };
 
 const adapterForRequest = (r: Request) =>
-    allAdapters.then((adapters) =>
-        adapters.find(
-            (a) =>
-                a.endpointUrls.some((url) =>
-                    url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl
-                ) && (a.match ? a.match(r) : true)
-        )
+    allAdapters.find(
+        (a) =>
+            a.endpointUrls.some((url) => (url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl)) &&
+            (a.match ? a.match(r) : true)
     );
-const processRequest = async (r: Request) => {
-    const adapter = await adapterForRequest(r);
+const processRequest = (r: Request) => {
+    const adapter = adapterForRequest(r);
     if (!adapter) return undefined;
 
     const decodedRequest = decodeRequest(r, adapter.decodingSteps);
@@ -191,3 +186,6 @@ export const process = async <ValuesOnly extends boolean = false>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return ret as any;
 };
+
+// Somehow export ... from './common/adapters' breaks the typedef, so we use this
+export const adapters = allAdapters;

@@ -18,4 +18,4 @@ A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath.
 
 #### Defined in
 
-[index.ts:13](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L13)
+[index.ts:11](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L11)
