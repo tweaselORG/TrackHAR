@@ -26,34 +26,48 @@ export type Property =
     | 'accelerometerY'
     | 'accelerometerZ'
     | 'appId'
+    | 'appName'
     | 'appVersion'
+    | 'architecture'
     | 'batteryLevel'
     | 'carrier'
     | 'country'
     | 'diskFree'
     | 'diskTotal'
     | 'diskUsed'
+    | 'hashedIdfa'
     | 'idfa'
     | 'idfv'
     | 'isCharging'
     | 'isEmulator'
+    | 'isInDarkMode'
+    | 'isInForeground'
+    | 'isRoaming'
     | 'isRooted'
     | 'language'
+    | 'macAddress'
     | 'manufacturer'
     | 'model'
+    | 'networkConnectionType'
+    | 'orientation'
     | 'osName'
     | 'osVersion'
     | 'otherIdentifiers'
     | 'ramFree'
     | 'ramTotal'
     | 'ramUsed'
-    | 'rooted'
     | 'rotationX'
     | 'rotationY'
     | 'rotationZ'
     | 'screenHeight'
     | 'screenWidth'
-    | 'trackerSdkVersion';
+    | 'signalStrengthCellular'
+    | 'signalStrengthWifi'
+    | 'timezone'
+    | 'trackerSdkVersion'
+    | 'uptime'
+    | 'userAgent'
+    | 'viewedPage';
 export type Variable = LiteralUnion<Context | 'res', string>;
 export type Path = LiteralUnion<Variable, JsonPath>;
 export type Identifier =
@@ -63,7 +77,7 @@ export type Identifier =
     | `res.${Context}.${string}`;
 export type DecodingStep = (
     | {
-          function: 'parseQueryString' | 'parseJson' | 'decodeProtobuf' | 'ensureArray';
+          function: 'parseQueryString' | 'parseJson' | 'decodeBase64' | 'decodeProtobuf' | 'ensureArray';
       }
     | { function: 'getProperty'; options: { path: JsonPath } }
 ) &

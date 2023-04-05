@@ -7,6 +7,7 @@ import { Protobuf } from './protobuf.mjs';
 export const decodeFunctions: Record<DecodingStep['function'], (input: any, options?: any) => any> = {
     parseQueryString: (input) => qs.parse(input.replace(/^.+?\?/, '')),
     parseJson: (input) => JSON.parse(input),
+    decodeBase64: (input) => Buffer.from(input, 'base64').toString(),
     decodeProtobuf: (input) => Protobuf.decode(input, ['', false, false]),
     ensureArray: (input) => (Array.isArray(input) ? input : [input]),
     getProperty: (input, options) => JSONPath({ path: options.path, json: input, wrap: false }),
