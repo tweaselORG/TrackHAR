@@ -47,6 +47,7 @@ export type Property =
     | 'isRooted'
     | 'language'
     | 'latitude'
+    | 'localIp'
     | 'longitude'
     | 'macAddress'
     | 'manufacturer'
@@ -56,6 +57,7 @@ export type Property =
     | 'osName'
     | 'osVersion'
     | 'otherIdentifiers'
+    | 'publicIp'
     | 'ramFree'
     | 'ramTotal'
     | 'ramUsed'
@@ -70,7 +72,8 @@ export type Property =
     | 'trackerSdkVersion'
     | 'uptime'
     | 'userAgent'
-    | 'viewedPage';
+    | 'viewedPage'
+    | 'volume';
 export type Variable = LiteralUnion<Context | 'res', string>;
 export type Path = LiteralUnion<Variable, JsonPath>;
 export type Identifier =
@@ -80,7 +83,7 @@ export type Identifier =
     | `res.${Context}.${string}`;
 export type DecodingStep = (
     | {
-          function: 'parseQueryString' | 'parseJson' | 'decodeBase64' | 'decodeProtobuf' | 'ensureArray';
+          function: 'parseQueryString' | 'parseJson' | 'decodeBase64' | 'decodeUrl' | 'decodeProtobuf' | 'ensureArray';
       }
     | { function: 'getProperty'; options: { path: JsonPath } }
 ) &
