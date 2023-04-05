@@ -165,4 +165,123 @@ export const adapters: Adapter[] = [
             },
         },
     },
+
+    {
+        slug: 'configure',
+        tracker,
+
+        endpointUrls: [/^https:\/\/(android|ios)?ads\d-?\d\.adcolony\.com\/configure$/],
+        decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
+
+        containedDataPaths: {
+            appId: {
+                context: 'body',
+                path: 'bundle_id',
+                reasoning: 'obvious property name',
+            },
+
+            appVersion: {
+                context: 'body',
+                path: 'bundle_version_short',
+                reasoning: 'obvious property name',
+            },
+
+            osName: {
+                context: 'body',
+                path: 'os_name',
+                reasoning: 'obvious property name',
+            },
+
+            osVersion: {
+                context: 'body',
+                path: 'os_version',
+                reasoning: 'obvious property name',
+            },
+
+            idfa: {
+                context: 'body',
+                path: 'advertiser_id',
+                reasoning: 'obvious property name',
+            },
+
+            idfv: {
+                context: 'body',
+                path: 'vendor_id',
+                reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'sid',
+                reasoning: 'obvious property name',
+            },
+
+            carrier: {
+                context: 'body',
+                path: 'carrier',
+                reasoning: 'obvious property name',
+            },
+
+            language: {
+                context: 'body',
+                path: 'ln',
+                reasoning: 'obvious property name',
+            },
+
+            manufacturer: [
+                {
+                    context: 'body',
+                    path: 'device_brand',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'manufacturer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            model: {
+                context: 'body',
+                path: 'device_model',
+                reasoning: 'obvious property name',
+            },
+
+            batteryLevel: {
+                context: 'body',
+                path: 'battery_level',
+                reasoning: 'obvious property name',
+            },
+
+            orientation: {
+                context: 'body',
+                path: 'current_orientation',
+                reasoning: 'obvious property name',
+            },
+
+            timezone: {
+                context: 'body',
+                path: 'timezone_ietf',
+                reasoning: 'obvious property name',
+            },
+
+            screenWidth: {
+                context: 'body',
+                path: 'screen_width',
+                reasoning: 'obvious property name',
+            },
+
+            screenHeight: {
+                context: 'body',
+                path: 'screen_height',
+                reasoning: 'obvious property name',
+            },
+
+            trackerSdkVersion: {
+                context: 'body',
+                path: 'sdk_version',
+                reasoning: 'obvious property name',
+            },
+        },
+    },
 ];
