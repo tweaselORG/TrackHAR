@@ -1,6 +1,9 @@
 {
     "extends": "@baltpeter/tsconfig",
     "include": ["src/**/*"],
+    "compilerOptions": {
+        "module": "es2022"
+    },
     "typedocOptions": {
         "plugin": ["typedoc-plugin-markdown"],
         "entryPoints": ["src/index.ts"],
