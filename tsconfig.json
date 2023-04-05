@@ -2,8 +2,7 @@
     "extends": "@baltpeter/tsconfig",
     "include": ["src/**/*"],
     "compilerOptions": {
-        "module": "es2022",
-        "resolveJsonModule": true
+        "module": "es2022"
     },
     "typedocOptions": {
         "plugin": ["typedoc-plugin-markdown"],
