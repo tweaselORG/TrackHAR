@@ -15,6 +15,7 @@ export const adapters: Adapter[] = [
         endpointUrls: [
             /^https:\/\/api2?\.branch\.io\/v1\/install$/,
             /^https:\/\/api2?\.branch\.io\/v1\/open$/,
+            /^https:\/\/api2?\.branch\.io\/v1\/close$/,
             /^https:\/\/api2?\.branch\.io\/v1\/profile$/,
             /^https:\/\/api2?\.branch\.io\/v1\/logout$/,
         ],
