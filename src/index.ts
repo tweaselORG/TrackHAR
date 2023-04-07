@@ -172,14 +172,14 @@ const processRequest = (r: Request) => {
         .flat();
     return flattenedPaths
         .map(([property, path]) =>
-            JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true })
+            (JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true }) ?? [])
                 .map((v) => ({
                     adapter: `${adapter.tracker.slug}/${adapter.slug}`,
                     property,
                     ...path,
                     value: v,
                 }))
-                .filter((v) => v.value !== undefined && v.value !== null && v.value.trim() !== '')
+                .filter((v) => v.value !== undefined && v.value !== null && v.value.trim?.() !== '')
         )
         .flat();
 };
