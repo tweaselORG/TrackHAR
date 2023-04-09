@@ -19,7 +19,7 @@ export const adapters: Adapter[] = [
             idfa: {
                 context: 'body',
                 path: 'advertiser_id',
-                reasoning: 'obvious property name',
+                reasoning: 'obvious observed values',
             },
 
             otherIdentifiers: {
@@ -106,7 +106,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'platform',
-                    reasoning: 'obvious property name',
+                    reasoning: 'obvious observed values',
                 },
             ],
 

@@ -71,7 +71,7 @@ export const adapters: Adapter[] = [
             manufacturer: {
                 context: 'body',
                 path: 'device_type',
-                reasoning: 'obvious property name',
+                reasoning: 'obvious observed values',
             },
 
             model: {

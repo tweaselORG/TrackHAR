@@ -196,11 +196,18 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            country: {
-                context: 'body',
-                path: 'country',
-                reasoning: 'obvious property name',
-            },
+            country: [
+                {
+                    context: 'body',
+                    path: 'country',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'locale',
+                    reasoning: 'obvious property name',
+                },
+            ],
 
             appVersion: {
                 context: 'body',

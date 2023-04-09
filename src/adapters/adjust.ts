@@ -150,6 +150,6 @@ export const adapters: Adapter[] = [
         endpointUrls: [/^https:\/\/app(\.eu)?\.adjust\.(com|net\.in|world)\/attribution$/],
 
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
-        containedDataPaths: containedDataPaths('body'),
+        containedDataPaths: containedDataPaths('query'),
     },
 ];
