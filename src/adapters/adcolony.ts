@@ -171,8 +171,9 @@ export const adapters: Adapter[] = [
         tracker,
 
         endpointUrls: [/^https:\/\/(android|ios)?ads\d-?\d\.adcolony\.com\/configure$/],
-        decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
+        match: (r) => r.content?.startsWith('{"'),
 
+        decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         containedDataPaths: {
             appId: {
                 context: 'body',
