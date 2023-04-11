@@ -4,6 +4,7 @@ const tracker: Tracker = {
     slug: 'yandex',
     name: 'Yandex Oy',
     datenanfragenSlug: 'yandex',
+    exodusId: 124,
 };
 
 export const adapters: Adapter[] = [
@@ -108,7 +109,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            rooted: {
+            isRooted: {
                 context: 'query',
                 path: 'is_rooted',
                 reasoning: 'obvious property name',

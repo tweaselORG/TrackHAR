@@ -26,34 +26,54 @@ export type Property =
     | 'accelerometerY'
     | 'accelerometerZ'
     | 'appId'
+    | 'appName'
     | 'appVersion'
+    | 'architecture'
     | 'batteryLevel'
     | 'carrier'
     | 'country'
+    | 'deviceName'
     | 'diskFree'
     | 'diskTotal'
     | 'diskUsed'
+    | 'hashedIdfa'
     | 'idfa'
     | 'idfv'
     | 'isCharging'
     | 'isEmulator'
+    | 'isInDarkMode'
+    | 'isInForeground'
+    | 'isRoaming'
     | 'isRooted'
     | 'language'
+    | 'latitude'
+    | 'localIp'
+    | 'longitude'
+    | 'macAddress'
     | 'manufacturer'
     | 'model'
+    | 'networkConnectionType'
+    | 'orientation'
     | 'osName'
     | 'osVersion'
     | 'otherIdentifiers'
+    | 'publicIp'
     | 'ramFree'
     | 'ramTotal'
     | 'ramUsed'
-    | 'rooted'
     | 'rotationX'
     | 'rotationY'
     | 'rotationZ'
     | 'screenHeight'
     | 'screenWidth'
-    | 'trackerSdkVersion';
+    | 'signalStrengthCellular'
+    | 'signalStrengthWifi'
+    | 'timezone'
+    | 'trackerSdkVersion'
+    | 'uptime'
+    | 'userAgent'
+    | 'viewedPage'
+    | 'volume';
 export type Variable = LiteralUnion<Context | 'res', string>;
 export type Path = LiteralUnion<Variable, JsonPath>;
 export type Identifier =
@@ -63,7 +83,7 @@ export type Identifier =
     | `res.${Context}.${string}`;
 export type DecodingStep = (
     | {
-          function: 'parseQueryString' | 'parseJson' | 'decodeProtobuf' | 'ensureArray';
+          function: 'parseQueryString' | 'parseJson' | 'decodeBase64' | 'decodeUrl' | 'decodeProtobuf' | 'ensureArray';
       }
     | { function: 'getProperty'; options: { path: JsonPath } }
 ) &
@@ -152,14 +172,14 @@ const processRequest = (r: Request) => {
         .flat();
     return flattenedPaths
         .map(([property, path]) =>
-            JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true })
+            (JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true }) ?? [])
                 .map((v) => ({
                     adapter: `${adapter.tracker.slug}/${adapter.slug}`,
                     property,
                     ...path,
                     value: v,
                 }))
-                .filter((v) => v.value !== undefined && v.value !== null && v.value.trim() !== '')
+                .filter((v) => v.value !== undefined && v.value !== null && v.value.trim?.() !== '')
         )
         .flat();
 };
