@@ -249,11 +249,20 @@ const adapterForRequest = (r: Request) =>
             a.endpointUrls.some((url) => (url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl)) &&
             (a.match ? a.match(r) : true)
     );
-const processRequest = (r: Request) => {
-    const adapter = adapterForRequest(r);
+/**
+ * Parse a single request in our internal request representation and extract tracking data as an annotated result from
+ * it.
+ *
+ * @remarks
+ * This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+ *
+ * @param request The request to process in our internal request format.
+ */
+export const processRequest = (request: Request): AnnotatedResult | undefined => {
+    const adapter = adapterForRequest(request);
     if (!adapter) return undefined;
 
-    const decodedRequest = decodeRequest(r, adapter.decodingSteps);
+    const decodedRequest = decodeRequest(request, adapter.decodingSteps);
 
     const flattenedPaths = Object.entries(adapter.containedDataPaths)
         .map(([property, paths]) => (Array.isArray(paths) ? paths : [paths]).map((p) => [property, p] as const))

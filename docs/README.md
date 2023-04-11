@@ -29,6 +29,7 @@ trackhar
 ### Functions
 
 - [process](README.md#process)
+- [processRequest](README.md#processrequest)
 
 ## Type Aliases
 
@@ -78,7 +79,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:289](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L289)
+[index.ts:298](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L298)
 
 ___
 
@@ -258,7 +259,7 @@ of that property found in a request.
 
 #### Defined in
 
-[index.ts:294](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L294)
+[index.ts:303](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L303)
 
 ___
 
@@ -320,7 +321,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:338](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L338)
+[index.ts:347](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L347)
 
 ## Functions
 
@@ -353,4 +354,31 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:309](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L309)
+[index.ts:318](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L318)
+
+___
+
+### processRequest
+
+▸ **processRequest**(`request`): `undefined` \| [`AnnotatedResult`](README.md#annotatedresult)
+
+Parse a single request in our internal request representation and extract tracking data as an annotated result from
+it.
+
+**`Remarks`**
+
+This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
+
+#### Returns
+
+`undefined` \| [`AnnotatedResult`](README.md#annotatedresult)
+
+#### Defined in
+
+[index.ts:261](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L261)
