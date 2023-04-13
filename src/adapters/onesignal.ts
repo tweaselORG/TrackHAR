@@ -40,11 +40,6 @@ export const adapters: Adapter[] = [
                     path: 'ios_bundle',
                     reasoning: 'obvious property name',
                 },
-                {
-                    context: 'body',
-                    path: 'app_id',
-                    reasoning: 'obvious property name',
-                },
             ],
 
             idfa: {
