@@ -8,58 +8,6 @@ const tracker: Tracker = {
 
 const graphActivitiesEndpointRegex = /^https:\/\/graph\.facebook\.com\/v\d{1,2}.\d\/\d+\/activities$/;
 
-const graphContainedDataPaths: Adapter['containedDataPaths'] = {
-    appId: {
-        context: 'body',
-        path: 'application_package_name',
-        reasoning: 'obvious property name',
-    },
-
-    trackerSdkVersion: {
-        context: 'body',
-        path: 'sdk_version',
-        reasoning: 'obvious property name',
-    },
-
-    idfa: {
-        context: 'body',
-        path: 'advertiser_id',
-        reasoning: 'obvious property name',
-    },
-
-    otherIdentifiers: [
-        {
-            context: 'body',
-            path: 'anon_id',
-            reasoning: 'obvious property name',
-        },
-        {
-            context: 'body',
-            path: 'app_user_id',
-            reasoning: 'obvious property name',
-        },
-    ],
-
-    osName: [
-        {
-            context: 'body',
-            path: 'platform',
-            reasoning: 'obvious property name',
-        },
-        {
-            context: 'body',
-            path: 'sdk',
-            reasoning: 'obvious observed values',
-        },
-    ],
-
-    osVersion: {
-        context: 'body',
-        path: 'os_version',
-        reasoning: 'obvious property name',
-    },
-};
-
 export const adapters: Adapter[] = [
     {
         slug: 'graph-activities-json',
@@ -69,7 +17,32 @@ export const adapters: Adapter[] = [
         match: (r) => r.content?.startsWith('{"'),
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
-        containedDataPaths: graphContainedDataPaths,
+        containedDataPaths: {
+            idfa: {
+                context: 'body',
+                path: 'advertiser_id',
+                reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'anon_id',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'app_user_id',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            osName: {
+                context: 'body',
+                path: 'sdk',
+                reasoning: 'obvious observed values',
+            },
+        },
     },
 
     {
@@ -80,7 +53,38 @@ export const adapters: Adapter[] = [
         match: (r) => r.content?.startsWith('format=json&'),
 
         decodingSteps: [{ function: 'parseQueryString', input: 'body', output: 'res.body' }],
-        containedDataPaths: graphContainedDataPaths,
+        containedDataPaths: {
+            appId: {
+                context: 'body',
+                path: 'application_package_name',
+                reasoning: 'obvious property name',
+            },
+
+            idfa: {
+                context: 'body',
+                path: 'advertiser_id',
+                reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'anon_id',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'app_user_id',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            osName: {
+                context: 'body',
+                path: 'sdk',
+                reasoning: 'obvious observed values',
+            },
+        },
     },
 
     {
