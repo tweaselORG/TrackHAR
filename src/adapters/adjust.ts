@@ -70,28 +70,10 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         reasoning: 'obvious property name',
     },
 
-    manufacturer: {
-        context,
-        path: 'device_manufacturer',
-        reasoning: 'obvious property name',
-    },
-
     model: {
         context,
         path: 'device_name',
         reasoning: 'obvious observed values',
-    },
-
-    screenWidth: {
-        context,
-        path: 'display_width',
-        reasoning: 'obvious property name',
-    },
-
-    screenHeight: {
-        context,
-        path: 'display_height',
-        reasoning: 'obvious property name',
     },
 
     osName: {
@@ -140,7 +122,27 @@ export const adapters: Adapter[] = [
             { function: 'parseJson', input: 'res.body.partner_params', output: 'res.body.partner_params' },
             { function: 'parseJson', input: 'res.body.callback_params', output: 'res.body.callback_params' },
         ],
-        containedDataPaths: containedDataPaths('body'),
+        containedDataPaths: {
+            ...containedDataPaths('body'),
+
+            manufacturer: {
+                context: 'body',
+                path: 'device_manufacturer',
+                reasoning: 'obvious property name',
+            },
+
+            screenWidth: {
+                context: 'body',
+                path: 'display_width',
+                reasoning: 'obvious property name',
+            },
+
+            screenHeight: {
+                context: 'body',
+                path: 'display_height',
+                reasoning: 'obvious property name',
+            },
+        },
     },
 
     {
