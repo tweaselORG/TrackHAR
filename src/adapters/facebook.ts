@@ -88,16 +88,53 @@ export const adapters: Adapter[] = [
         tracker,
 
         endpointUrls: [/^https:\/\/graph\.facebook\.com\/v\d{1,2}.\d$/],
-        match: (r) => r.content?.startsWith('format=json&'),
+        match: (r) => r.content?.startsWith('{"'),
 
         decodingSteps: [
             { function: 'parseJson', input: 'body', output: 'b' },
             { function: 'parseJson', input: 'b.batch', output: 'batch' },
             { function: 'getProperty', mapInput: 'batch', options: { path: 'relative_url' }, output: 'relativeUrls' },
-            { function: 'parseQueryString', mapInput: 'relativeUrls', output: 'res.body' },
+            { function: 'parseQueryString', mapInput: 'relativeUrls', output: 'res.body.batch' },
             { function: 'getProperty', input: 'b', options: { path: 'batch_app_id' }, output: 'res.body.batch_app_id' },
         ],
-        containedDataPaths: graphContainedDataPaths,
+        containedDataPaths: {
+            trackerSdkVersion: {
+                context: 'body',
+                path: 'batch.*.sdk_version',
+                reasoning: 'obvious property name',
+            },
+
+            idfa: {
+                context: 'body',
+                path: 'batch.*.advertiser_id',
+                reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'batch.*.anon_id',
+                reasoning: 'obvious property name',
+            },
+
+            osName: [
+                {
+                    context: 'body',
+                    path: 'batch.*.platform',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'batch.*.sdk',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            osVersion: {
+                context: 'body',
+                path: 'batch.*.os_version',
+                reasoning: 'obvious property name',
+            },
+        },
     },
 
     {
