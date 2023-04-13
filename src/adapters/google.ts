@@ -240,6 +240,7 @@ export const adapters: Adapter[] = [
         tracker,
 
         endpointUrls: ['https://googleads.g.doubleclick.net/mads/gma'],
+        match: (r) => !!r.content,
 
         decodingSteps: [{ function: 'parseQueryString', input: 'body', output: 'res.body' }],
         containedDataPaths: containedDataPathsDoubleclickMadsGma('body'),
