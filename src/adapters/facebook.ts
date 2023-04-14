@@ -428,10 +428,10 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [
             { function: 'parseJson', input: 'body', output: 'b' },
-            { function: 'getProperty', input: 'b', options: { path: 'batch_app_id' }, output: 'res.body.batch_app_id' },
             { function: 'parseJson', input: 'b.batch', output: 'batch' },
             { function: 'getProperty', mapInput: 'batch', options: { path: 'relative_url' }, output: 'relativeUrls' },
             { function: 'parseQueryString', mapInput: 'relativeUrls', output: 'res.body' },
+            { function: 'getProperty', input: 'b', options: { path: 'batch_app_id' }, output: 'res.body.batch_app_id' },
         ],
         containedDataPaths: graphContainedDataPaths,
     },

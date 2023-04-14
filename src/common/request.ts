@@ -1,20 +1,36 @@
 import type { Har } from 'har-format';
 
+/** Our internal representation of an HTTP request. */
 export type Request = {
+    /** The time when the request was sent. */
     startTime: Date;
+    /** The HTTP method used. */
     method: string;
+    /** The host name of the request. */
     host: string;
+    /** The full path of the request, including the query string. */
     path: string;
-    /** The endpoint URL is the URL without the query string. This is useful for matching in the adapters. */
+    /** The full URL, but without the query string. This is useful for matching in the adapters. */
     endpointUrl: string;
+    /** The request body, if any. */
     content?: string;
+    /** The port of the request. */
     port: string;
+    /** The scheme of the request. */
     scheme: 'http' | 'https';
+    /** The HTTP version of the request. */
     httpVersion: string;
+    /** The headers included in the request. */
     headers?: { name: string; value: string }[];
+    /** The cookies set through request. */
     cookies?: { name: string; value: string }[];
 };
 
+/**
+ * Parse a traffic dump in HAR format into our internal request representation.
+ *
+ * @param har The HAR traffic dump.
+ */
 export const unhar = (har: Har): Request[] =>
     har.log.entries.map((e) => {
         const url = new URL(e.request.url);

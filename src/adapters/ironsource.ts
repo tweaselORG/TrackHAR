@@ -15,8 +15,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [
             { function: 'parseQueryString', input: 'query', output: 'q' },
-            { function: 'getProperty', input: 'q', options: { path: 'data' }, output: 'b64' },
-            { function: 'decodeBase64', input: 'b64', output: 'j' },
+            { function: 'decodeBase64', input: 'q.data', output: 'j' },
             { function: 'parseJson', input: 'j', output: 'res.body' },
         ],
         containedDataPaths: {
