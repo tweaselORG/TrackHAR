@@ -1,6 +1,6 @@
 {
     "name": "trackhar",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "Library for detecting tracking data transmissions from traffic in HAR format.",
     "bugs": "https://github.com/tweaselORG/TrackHAR/issues",
     "repository": {
