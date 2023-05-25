@@ -123,8 +123,8 @@ import { process as processHar } from 'trackhar';
     const har = await readFile(process.argv[2], 'utf-8');
 
     const indicators = {
-        localIp: [ "10.0.0.2", "fd31:4159::a2a1" ],
-        idfa: "6a1c1487-a0af-4223-b142-a0f4621d0311"
+        localIp: [ '10.0.0.2', 'fd31:4159::a2a1' ],
+        idfa: '6a1c1487-a0af-4223-b142-a0f4621d0311'
     };
 
     const data = await processHar(JSON.parse(har), { indicatorValues: indicators });
@@ -137,12 +137,12 @@ With this, we can see that our device's advertising ID was transmitted in the fi
 ```ts
 [
     {
-        adapter: "indicators",
-        property: "idfa",
-        context: "body",
-        path: "$[12]",
-        reasoning: "indicator matching (base64)",
-        value: "NmExYzE0ODctYTBhZi00MjIzLWIxNDItYTBmNDYyMWQwMzEx"
+        adapter: 'indicators',
+        property: 'idfa',
+        context: 'body',
+        path: '$[12]',
+        reasoning: 'indicator matching (base64)',
+        value: 'NmExYzE0ODctYTBhZi00MjIzLWIxNDItYTBmNDYyMWQwMzEx'
     }
 ]
 
