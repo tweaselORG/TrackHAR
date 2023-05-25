@@ -260,7 +260,9 @@ const adapterForRequest = (r: Request) =>
  * @param request The request to process in our internal request format.
  * @param options An optional object that can configure the following options:
  *
- *   - `indicatorValues`: TODO.
+ *   - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match
+ *       the request but indicator values are provided, this function will fall back to indicator matching and try to
+ *       find the indicator values in the request headers, path or body. See {@link IndicatorValues}.
  */
 export const processRequest = (
     request: Request,
@@ -344,15 +346,22 @@ export const processRequest = (
  * Extended version of the {@link Result} type that includes additional metadata about the detected tracking. Each entry
  * in the array is one instance of a tracking data value that was found in a request, with the following properties:
  *
- * - `adapter`: The adapter that detected the tracking data (`<tracker slug>/<adapter slug>`).
+ * - `adapter`: The adapter that detected the tracking data (`<tracker slug>/<adapter slug>`) or `indicators` if the entry
+ *   was detected through indicator matching.
  * - `property`: The type of tracking data that was detected.
  * - `value`: The actual value of the tracking data that was transmitted.
  * - `context`: The part of the request in which the tracking data was found (e.g. `body`, `path`).
  * - `path`: A JSONPath expression indicating where this match was found. Note that while we try to keep this path as
  *   close as possible to the format used by the tracker, it refers to the decoded request, after our processing steps.
  *   This is unavoidable as the trackers don't transmit in a standardized format.
+ *
+ *   If indicator matching was used to detect this entry, the path will point to the first character of the match in the
+ *   respective part of the request.
  * - `reasoning`: An explanation of how we concluded that this is information is actually the type of data we labelled it
  *   as. This can either be a standardized description, or a URL to a more in-depth research report.
+ *
+ *   If indicator matching was used to detect this entry, the reasoning will be `indicator matching` followed by the
+ *   encoding that was used to match the indicator value in parentheses.
  */
 export type AnnotatedResult = ({
     adapter: string;
@@ -367,9 +376,31 @@ export type AnnotatedResult = ({
 /**
  * A mapping from properties (standardized names for certain types of tracking data) to the actual instances of values
  * of that property found in a request.
+ *
+ * If indicator matching is enabled, it is not possible to distinguish between instances detected through adapter and
+ * indicator matching.
  */
 export type Result = Partial<Record<LiteralUnion<Property, string>, TrackingDataValue[]>>;
 
+/**
+ * A mapping from properties (standardized names for certain types of tracking data) to indicator values (known honey
+ * data strings that appear in the request if the property is present). Indicator values can be provided as arrays or
+ * single strings. They are automatically matched against their encoded versions (e.g. base64 and URL encoded). Where
+ * possible, they are matched case-insensitively.
+ *
+ * @example
+ *
+ * ```ts
+ * {
+ *     "localIp": ["10.0.0.2", "fd31:4159::a2a1"],
+ *     "idfa": "6a1c1487-a0af-4223-b142-a0f4621d0311"
+ * }
+ * ```
+ *
+ * This example means that if the string `10.0.0.2` or `fd31:4159::a2a1` is found in the request, it indicates that the
+ * local IP is being transmitted. Similarly, if the string `6a1c1487-a0af-4223-b142-a0f4621d0311` is found in the
+ * request, it indicates that the advertising ID is being transmitted.
+ */
 export type IndicatorValues = Partial<Record<LiteralUnion<Property, string>, ArrayOrSingle<string>>>;
 
 /**
@@ -384,10 +415,13 @@ export type IndicatorValues = Partial<Record<LiteralUnion<Property, string>, Arr
  *   - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that
  *       processed the request). If you only need the values, you can set this option to `true` to get a simpler
  *       result.
- *   - `indicatorValues`: TODO.
+ *   - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match
+ *       the request but indicator values are provided, this function will fall back to indicator matching and try to
+ *       find the indicator values in the request headers, path or body. See {@link IndicatorValues}.
  *
  * @returns An array of results, corresponding to each request in the HAR file. If a request could not be processed
- *   (i.e. if no adapter was found that could handle it), the corresponding entry in the array will be `undefined`.
+ *   (i.e. if no adapter was found that could handle it and indicator matching is disabled), the corresponding entry in
+ *   the array will be `undefined`.
  */
 export const process = async <ValuesOnly extends boolean = false>(
     har: Har,

@@ -68,20 +68,26 @@ ___
 Extended version of the [Result](README.md#result) type that includes additional metadata about the detected tracking. Each entry
 in the array is one instance of a tracking data value that was found in a request, with the following properties:
 
-- `adapter`: The adapter that detected the tracking data (`<tracker slug>/<adapter slug>`).
+- `adapter`: The adapter that detected the tracking data (`<tracker slug>/<adapter slug>`) or `indicators` if the entry
+  was detected through indicator matching.
 - `property`: The type of tracking data that was detected.
 - `value`: The actual value of the tracking data that was transmitted.
 - `context`: The part of the request in which the tracking data was found (e.g. `body`, `path`).
 - `path`: A JSONPath expression indicating where this match was found. Note that while we try to keep this path as
   close as possible to the format used by the tracker, it refers to the decoded request, after our processing steps.
   This is unavoidable as the trackers don't transmit in a standardized format.
+
+  If indicator matching was used to detect this entry, the path will point to the first character of the match in the
+  respective part of the request.
 - `reasoning`: An explanation of how we concluded that this is information is actually the type of data we labelled it
-  as. This can either be a standardized description, or a URL to a more in-depth research report. If indicator
-  matching was used.
+  as. This can either be a standardized description, or a URL to a more in-depth research report.
+
+  If indicator matching was used to detect this entry, the reasoning will be `indicator matching` followed by the
+  encoding that was used to match the indicator value in parentheses.
 
 #### Defined in
 
-[index.ts:364](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L364)
+[index.ts:366](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L366)
 
 ___
 
@@ -190,8 +196,8 @@ ___
 
 A mapping from properties (standardized names for certain types of tracking data) to indicator values (known honey
 data strings that appear in the request if the property is present). Indicator values can be provided as arrays or
-single strings. They are automatically matched against their encoded versions (e.g. base64 and URL encoded). For
-plain text, they are matched case-insensitively.
+single strings. They are automatically matched against their encoded versions (e.g. base64 and URL encoded). Where
+possible, they are matched case-insensitively.
 
 **`Example`**
 
@@ -202,12 +208,13 @@ plain text, they are matched case-insensitively.
 }
 ```
 
-For example, `{ "advertising_id": "aaid" }` means that if the string "aaid" is found in the request, it indicates
-that an advertising ID is being transmitted.
+This example means that if the string `10.0.0.2` or `fd31:4159::a2a1` is found in the request, it indicates that the
+local IP is being transmitted. Similarly, if the string `6a1c1487-a0af-4223-b142-a0f4621d0311` is found in the
+request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:398](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L398)
+[index.ts:404](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L404)
 
 ___
 
@@ -286,9 +293,12 @@ ___
 A mapping from properties (standardized names for certain types of tracking data) to the actual instances of values
 of that property found in a request.
 
+If indicator matching is enabled, it is not possible to distinguish between instances detected through adapter and
+indicator matching.
+
 #### Defined in
 
-[index.ts:378](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L378)
+[index.ts:383](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L383)
 
 ___
 
@@ -350,7 +360,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:454](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L454)
+[index.ts:455](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L455)
 
 ## Functions
 
@@ -374,7 +384,7 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
-| `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that maps properties (standardized names for certain types of tracking data) to indicator values (strings that are expected to appear in the request if the property is present). For example, `{ "advertising_id": "aaid" }` means that if the string "aaid" is found in the request, it indicates that an advertising ID is being transmitted. Indicator values can be provided as arrays or single strings, and can be plain text, base64 encoded or URL encoded. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. Note that indicator matching is less reliable than adapter matching and may produce false positives or miss some tracking data. Therefore, it should only be used as a last resort when no adapter is available for a tracker. |
+| `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
 | `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
@@ -383,11 +393,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
-  (i.e. if no adapter was found that could handle it), the corresponding entry in the array will be `undefined`.
+  (i.e. if no adapter was found that could handle it and indicator matching is disabled), the corresponding entry in
+  the array will be `undefined`.
 
 #### Defined in
 
-[index.ts:425](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L425)
+[index.ts:426](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L426)
 
 ___
 
@@ -407,7 +418,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
-| `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that maps properties (standardized names for certain types of tracking data) to indicator values (strings that are expected to appear in the request if the property is present). For example, `{ "advertising_id": "aaid" }` means that if the string "aaid" is found in the request, it indicates that an advertising ID is being transmitted. Indicator values can be provided as arrays or single strings. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. |
+| `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
 | `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
@@ -416,4 +427,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:271](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L271)
+[index.ts:267](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L267)
