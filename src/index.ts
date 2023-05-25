@@ -302,7 +302,7 @@ export const processRequest = (
                         // We don't want to match multiple times if the encoding is equivalent to plain text.
                         if (encoding !== 'plain text' && encodedIndicatorValue === indicatorValue) return undefined;
 
-                        const caseInsensitive = encoding === 'plain text' ? 'i' : '';
+                        const caseInsensitive = ['plain text', 'URL encoded'].includes(encoding) ? 'i' : '';
                         const matches = haystack.matchAll(new RegExp(encodedIndicatorValue, `g${caseInsensitive}`));
 
                         return [...matches].map((m) => ({
