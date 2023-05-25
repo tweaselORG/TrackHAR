@@ -56,13 +56,13 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:166](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L166)
+[index.ts:167](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L167)
 
 ___
 
 ### AnnotatedResult
 
-Ƭ **AnnotatedResult**: { `adapter`: `string` ; `property`: [`Property`](README.md#property) ; `value`: [`TrackingDataValue`](README.md#trackingdatavalue)  } & [`DataPath`](README.md#datapath)[]
+Ƭ **AnnotatedResult**: { `adapter`: `string` ; `property`: `LiteralUnion`<[`Property`](README.md#property), `string`\> ; `reasoning`: [`DataPath`](README.md#datapath)[``"reasoning"``] \| ``"indicator matching (plain text)"`` \| ``"indicator matching (base64)"`` \| ``"indicator matching (URL encoded)"`` ; `value`: [`TrackingDataValue`](README.md#trackingdatavalue)  } & `Omit`<[`DataPath`](README.md#datapath), ``"reasoning"``\>[]
 
 Extended version of the [Result](README.md#result) type that includes additional metadata about the detected tracking. Each entry
 in the array is one instance of a tracking data value that was found in a request, with the following properties:
@@ -79,7 +79,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:298](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L298)
+[index.ts:357](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L357)
 
 ___
 
@@ -109,7 +109,7 @@ A part of a request, to explain where some information was found.
 
 #### Defined in
 
-[index.ts:18](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L18)
+[index.ts:19](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L19)
 
 ___
 
@@ -129,7 +129,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:148](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L148)
+[index.ts:149](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L149)
 
 ___
 
@@ -165,7 +165,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:139](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L139)
+[index.ts:140](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L140)
 
 ___
 
@@ -178,7 +178,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:107](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L107)
+[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
 
 ___
 
@@ -190,7 +190,7 @@ A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath.
 
 #### Defined in
 
-[index.ts:11](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L11)
+[index.ts:12](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L12)
 
 ___
 
@@ -203,7 +203,7 @@ process of a request.
 
 #### Defined in
 
-[index.ts:102](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L102)
+[index.ts:103](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L103)
 
 ___
 
@@ -218,7 +218,7 @@ by the tracker.
 
 #### Defined in
 
-[index.ts:43](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L43)
+[index.ts:44](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L44)
 
 ___
 
@@ -252,14 +252,14 @@ ___
 
 ### Result
 
-Ƭ **Result**: `Partial`<`Record`<[`Property`](README.md#property), [`TrackingDataValue`](README.md#trackingdatavalue)[]\>\>
+Ƭ **Result**: `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`TrackingDataValue`](README.md#trackingdatavalue)[]\>\>
 
 A mapping from properties (standardized names for certain types of tracking data) to the actual instances of values
 of that property found in a request.
 
 #### Defined in
 
-[index.ts:303](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L303)
+[index.ts:371](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L371)
 
 ___
 
@@ -280,7 +280,7 @@ A tracking company that we have adapters for.
 
 #### Defined in
 
-[index.ts:21](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L21)
+[index.ts:22](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L22)
 
 ___
 
@@ -292,7 +292,7 @@ Some value transmitted by a tracker. We don't have any type information about it
 
 #### Defined in
 
-[index.ts:15](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L15)
+[index.ts:16](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L16)
 
 ___
 
@@ -304,7 +304,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:97](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L97)
+[index.ts:98](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L98)
 
 ## Variables
 
@@ -321,15 +321,18 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:347](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L347)
+[index.ts:421](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L421)
 
 ## Functions
 
 ### process
 
-▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<[`Property`](README.md#property), `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 Parse the requests in a HAR traffic dump and extract tracking data.
+
+This always tries to parse requests with the tracker-specific adapters first. If none of them can handle a request,
+and `options.indicatorValues` is provided, it will fall back to indicator matching.
 
 #### Type parameters
 
@@ -342,25 +345,26 @@ Parse the requests in a HAR traffic dump and extract tracking data.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
-| `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. |
+| `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: TODO. |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
 #### Returns
 
-`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<[`Property`](README.md#property), `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
   (i.e. if no adapter was found that could handle it), the corresponding entry in the array will be `undefined`.
 
 #### Defined in
 
-[index.ts:318](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L318)
+[index.ts:392](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L392)
 
 ___
 
 ### processRequest
 
-▸ **processRequest**(`request`): `undefined` \| [`AnnotatedResult`](README.md#annotatedresult)
+▸ **processRequest**(`request`, `options?`): `undefined` \| [`AnnotatedResult`](README.md#annotatedresult)
 
 Parse a single request in our internal request representation and extract tracking data as an annotated result from
 it.
@@ -374,6 +378,8 @@ This is not needed for the main purposes of this library, but can be useful for 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
+| `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: TODO. |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
 
@@ -381,4 +387,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:261](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L261)
+[index.ts:265](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L265)

@@ -1198,6 +1198,11 @@ base-x@^3.0.8:
   dependencies:
     safe-buffer "^5.0.1"
 
+base64-search@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/base64-search/-/base64-search-1.0.0.tgz#8e3fe74d9999f056c26f69a3d3b7eb7b23f4c6f9"
+  integrity sha512-EHQrX/E0N/ODCli/npLoWGX5US3jWl5DEUHboNMlRDCbSWVK1dk5xcYSrcjz48bByzf1S0OI+VS4iDuY9Y85JA==
+
 binary-searching@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/binary-searching/-/binary-searching-2.0.5.tgz#ab6d08d51cd1b58878ae208ab61988f885b22dd3"
