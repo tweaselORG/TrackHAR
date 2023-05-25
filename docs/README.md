@@ -63,7 +63,7 @@ ___
 
 ### AnnotatedResult
 
-Ƭ **AnnotatedResult**: { `adapter`: `string` ; `property`: `LiteralUnion`<[`Property`](README.md#property), `string`\> ; `reasoning`: [`DataPath`](README.md#datapath)[``"reasoning"``] \| ``"indicator matching (plain text)"`` \| ``"indicator matching (base64)"`` \| ``"indicator matching (URL encoded)"`` ; `value`: [`TrackingDataValue`](README.md#trackingdatavalue)  } & `Omit`<[`DataPath`](README.md#datapath), ``"reasoning"``\>[]
+Ƭ **AnnotatedResult**: { `adapter`: `string` ; `property`: `LiteralUnion`<[`Property`](README.md#property), `string`\> ; `reasoning`: [`DataPath`](README.md#datapath)[``"reasoning"``] \| ``"indicator matching (plain text)"`` \| ``"indicator matching (base64)"`` \| ``"indicator matching (URL-encoded)"`` ; `value`: [`TrackingDataValue`](README.md#trackingdatavalue)  } & `Omit`<[`DataPath`](README.md#datapath), ``"reasoning"``\>[]
 
 Extended version of the [Result](README.md#result) type that includes additional metadata about the detected tracking. Each entry
 in the array is one instance of a tracking data value that was found in a request, with the following properties:
@@ -196,7 +196,7 @@ ___
 
 A mapping from properties (standardized names for certain types of tracking data) to indicator values (known honey
 data strings that appear in the request if the property is present). Indicator values can be provided as arrays or
-single strings. They are automatically matched against their encoded versions (e.g. base64 and URL encoded). Where
+single strings. They are automatically matched against their encoded versions (e.g. base64 and URL-encoded). Where
 possible, they are matched case-insensitively.
 
 **`Example`**

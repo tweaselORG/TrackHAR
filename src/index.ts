@@ -288,7 +288,7 @@ export const processRequest = (
         return indicators
             .map(({ property, indicatorValue }) =>
                 (['header', 'path', 'body'] as const).map((context) =>
-                    (['plain text', 'base64', 'URL encoded'] as const).map((encoding) => {
+                    (['plain text', 'base64', 'URL-encoded'] as const).map((encoding) => {
                         const haystack =
                             context === 'body'
                                 ? request.content || ''
@@ -304,7 +304,7 @@ export const processRequest = (
                         // We don't want to match multiple times if the encoding is equivalent to plain text.
                         if (encoding !== 'plain text' && encodedIndicatorValue === indicatorValue) return undefined;
 
-                        const caseInsensitive = ['plain text', 'URL encoded'].includes(encoding) ? 'i' : '';
+                        const caseInsensitive = ['plain text', 'URL-encoded'].includes(encoding) ? 'i' : '';
                         const matches = haystack.matchAll(new RegExp(encodedIndicatorValue, `g${caseInsensitive}`));
 
                         return [...matches].map((m) => ({
@@ -371,7 +371,7 @@ export type AnnotatedResult = ({
         | DataPath['reasoning']
         | 'indicator matching (plain text)'
         | 'indicator matching (base64)'
-        | 'indicator matching (URL encoded)';
+        | 'indicator matching (URL-encoded)';
 } & Omit<DataPath, 'reasoning'>)[];
 /**
  * A mapping from properties (standardized names for certain types of tracking data) to the actual instances of values
@@ -385,7 +385,7 @@ export type Result = Partial<Record<LiteralUnion<Property, string>, TrackingData
 /**
  * A mapping from properties (standardized names for certain types of tracking data) to indicator values (known honey
  * data strings that appear in the request if the property is present). Indicator values can be provided as arrays or
- * single strings. They are automatically matched against their encoded versions (e.g. base64 and URL encoded). Where
+ * single strings. They are automatically matched against their encoded versions (e.g. base64 and URL-encoded). Where
  * possible, they are matched case-insensitively.
  *
  * @example
