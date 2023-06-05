@@ -4,8 +4,14 @@
 
 For research into mobile privacy and complaints against tracking, it is important to know what data is being transmitted in a request to a tracking server. But these requests are in a huge variety of different formats and often heavily nested and/or obfuscated, which hinders straightforward automatic analysis. TrackHAR aims to address this problem. It takes recorded traffic in a [HAR files](http://www.softwareishard.com/blog/har-12-spec/) as the input and returns a parsed list of the transmitted data (and, optionally, additional metadata like the tracking company and location in the data) for each request it can handle.
 
-To achieve this, TrackHAR uses adapters written for specific tracking endpoints. In our [research](https://benjamin-altpeter.de/doc/thesis-consent-dialogs.pdf), we have found that generic approaches (like indicator matching in the raw transmitted plain text or [base64-encoded](https://github.com/baltpeter/base64-search) request content) are not sufficient due to the frankly ridiculous nesting and obfuscation we observed. In addition, approaches that search for static honey data values can never capture dynamic data types such as free disk space and current RAM usage, or low-entropy values like the operating system version (e.g. `11`).  
-However, we have also noticed that there is a comparatively small number of tracking endpoints which make up a large portion of all app traffic. This makes our adapter-based approach feasible to detect most of the transmitted tracking data. But it will never be possible to write an adapter for every request. As such, we plan to implement [support for indicator matching](https://github.com/tweaselORG/TrackHAR/issues/6) as a fallback for requests not covered by any adapter in the future.
+To achieve this, TrackHAR uses two complementary approaches: adapter-based parsing and indicator matching.
+
+* **Adapter-based parsing**: Our main approach is to use adapters written for specific tracking endpoints. In our [research](https://benjamin-altpeter.de/doc/thesis-consent-dialogs.pdf), we have found that generic approaches (like indicator matching in the raw transmitted plain text or [base64-encoded](https://github.com/baltpeter/base64-search) request content) are not sufficient due to the frankly ridiculous nesting and obfuscation we observed. In addition, approaches that search for static honey data values can never capture dynamic data types such as free disk space and current RAM usage, or low-entropy values like the operating system version (e.g. `11`).  
+    However, we have also noticed that there is a comparatively small number of tracking endpoints which make up a large portion of all app traffic. This makes our adapter-based approach feasible to detect most of the transmitted tracking data.
+
+* **Indicator matching**: But it will never be possible to write an adapter for every request. Thus, we use indicator matching as a fallback for requests not covered by any adapter. Indicator matching relies on the user providing known honey data values (such as the advertising ID or geolocation) that are then searched for in the requests. TrackHAR supports indicator matching for plain text, base64-encoded and URL-encoded values in the request headers, path, or body. It also tries to match case-insensitively where possible.
+
+Note that TrackHAR is designed to err on the side of matching too little instead of overmatching. Both the adapters and indicator matching can miss transmitted tracking data. However conversely, you can be sure that any data that TrackHAR detects is actually transmitted. This is beneficial for research but also legal enforcement against tracking.
 
 An important additional goal of TrackHAR is to produce outputs that make it possible to automatically generate human-readable documentation that allows people to comprehend why we detected each data transmission. This is especially important to submit complaints against illegal tracking to the data protection authorities. The generation of these reports is not handled by TrackHAR itself, but this requirement influences the design of our adapters and return values. As a result, the adapters are not regular functions that know how to handle a request, but implement a specific custom decoding "language" that can more easily be parsed and reasoned about automatically. This documentation is generated in [tweaselORG/tracker-wiki](https://github.com/tweaselORG/tracker-wiki) and hosted at [trackers.tweasel.org](https://trackers.tweasel.org).
 
@@ -106,6 +112,44 @@ undefined
     osVersion: [ '13' ]
 }
 ```
+
+If you want to enable indicator matching for requests not handled by any adapter, you need to provide an object with indicator values for certain properties:
+
+```ts
+import { readFile } from 'fs/promises';
+import { process as processHar } from 'trackhar';
+
+(async () => {
+    const har = await readFile(process.argv[2], 'utf-8');
+
+    const indicators = {
+        localIp: [ '10.0.0.2', 'fd31:4159::a2a1' ],
+        idfa: '6a1c1487-a0af-4223-b142-a0f4621d0311'
+    };
+
+    const data = await processHar(JSON.parse(har), { indicatorValues: indicators });
+    for (const request of data) console.log(request, '\n');
+})();
+```
+
+With this, we can see that our device's advertising ID was transmitted in the first request, after all:
+
+```ts
+[
+    {
+        adapter: 'indicators',
+        property: 'idfa',
+        context: 'body',
+        path: '$[12]',
+        reasoning: 'indicator matching (base64)',
+        value: 'NmExYzE0ODctYTBhZi00MjIzLWIxNDItYTBmNDYyMWQwMzEx'
+    }
+]
+
+// [second request as before…]
+```
+
+In this case, it was not transmitted as plain text but base64-encoded. TrackHAR was still able to detect it. The `path` indicates the index into the body where the IDFA was found.
 
 ## Contributing adapters
 
