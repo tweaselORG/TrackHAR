@@ -285,7 +285,7 @@ export const processRequest = (
             )
             .flat();
 
-        return indicators
+        const indicatorMatches = indicators
             .map(({ property, indicatorValue }) =>
                 (['header', 'path', 'body'] as const).map((context) =>
                     (['plain text', 'base64', 'URL-encoded'] as const).map((encoding) => {
@@ -320,6 +320,8 @@ export const processRequest = (
             )
             .flat(3)
             .filter((r): r is Exclude<typeof r, undefined> => r !== undefined);
+        if (indicatorMatches.length > 0) return indicatorMatches;
+        return undefined;
     }
 
     // If an adapter matched, we only return its results.
@@ -420,8 +422,8 @@ export type IndicatorValues = Partial<Record<LiteralUnion<Property, string>, Arr
  *       find the indicator values in the request headers, path or body. See {@link IndicatorValues}.
  *
  * @returns An array of results, corresponding to each request in the HAR file. If a request could not be processed
- *   (i.e. if no adapter was found that could handle it and indicator matching is disabled), the corresponding entry in
- *   the array will be `undefined`.
+ *   (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
+ *   the corresponding entry in the array will be `undefined`.
  */
 export const process = async <ValuesOnly extends boolean = false>(
     har: Har,

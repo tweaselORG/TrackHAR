@@ -87,7 +87,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:366](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L366)
+[index.ts:368](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L368)
 
 ___
 
@@ -214,7 +214,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:404](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L404)
+[index.ts:406](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L406)
 
 ___
 
@@ -298,7 +298,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:383](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L383)
+[index.ts:385](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L385)
 
 ___
 
@@ -360,7 +360,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:455](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L455)
+[index.ts:457](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L457)
 
 ## Functions
 
@@ -393,12 +393,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
-  (i.e. if no adapter was found that could handle it and indicator matching is disabled), the corresponding entry in
-  the array will be `undefined`.
+  (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
+  the corresponding entry in the array will be `undefined`.
 
 #### Defined in
 
-[index.ts:426](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L426)
+[index.ts:428](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L428)
 
 ___
 
