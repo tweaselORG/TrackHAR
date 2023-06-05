@@ -57,7 +57,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:167](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L167)
+[index.ts:168](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L168)
 
 ___
 
@@ -87,7 +87,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:368](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L368)
+[index.ts:371](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L371)
 
 ___
 
@@ -117,7 +117,7 @@ A part of a request, to explain where some information was found.
 
 #### Defined in
 
-[index.ts:19](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L19)
+[index.ts:20](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L20)
 
 ___
 
@@ -137,7 +137,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:149](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L149)
+[index.ts:150](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L150)
 
 ___
 
@@ -173,7 +173,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:140](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L140)
+[index.ts:141](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L141)
 
 ___
 
@@ -186,7 +186,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
+[index.ts:109](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L109)
 
 ___
 
@@ -214,7 +214,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:406](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L406)
+[index.ts:409](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L409)
 
 ___
 
@@ -226,7 +226,7 @@ A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath.
 
 #### Defined in
 
-[index.ts:12](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L12)
+[index.ts:13](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L13)
 
 ___
 
@@ -239,7 +239,7 @@ process of a request.
 
 #### Defined in
 
-[index.ts:103](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L103)
+[index.ts:104](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L104)
 
 ___
 
@@ -254,7 +254,7 @@ by the tracker.
 
 #### Defined in
 
-[index.ts:44](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L44)
+[index.ts:45](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L45)
 
 ___
 
@@ -298,7 +298,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:385](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L385)
+[index.ts:388](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L388)
 
 ___
 
@@ -319,7 +319,7 @@ A tracking company that we have adapters for.
 
 #### Defined in
 
-[index.ts:22](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L22)
+[index.ts:23](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L23)
 
 ___
 
@@ -331,7 +331,7 @@ Some value transmitted by a tracker. We don't have any type information about it
 
 #### Defined in
 
-[index.ts:16](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L16)
+[index.ts:17](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L17)
 
 ___
 
@@ -343,7 +343,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:98](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L98)
+[index.ts:99](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L99)
 
 ## Variables
 
@@ -360,7 +360,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:457](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L457)
+[index.ts:460](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L460)
 
 ## Functions
 
@@ -398,7 +398,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:428](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L428)
+[index.ts:431](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L431)
 
 ___
 
@@ -427,4 +427,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:267](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L267)
+[index.ts:268](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L268)

@@ -1,4 +1,5 @@
 import { base64Regex } from 'base64-search';
+import escapeStringRegexp from 'escape-string-regexp';
 import type { Har } from 'har-format';
 import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
@@ -305,7 +306,9 @@ export const processRequest = (
                         if (encoding !== 'plain text' && encodedIndicatorValue === indicatorValue) return undefined;
 
                         const caseInsensitive = ['plain text', 'URL-encoded'].includes(encoding) ? 'i' : '';
-                        const matches = haystack.matchAll(new RegExp(encodedIndicatorValue, `g${caseInsensitive}`));
+                        const matches = haystack.matchAll(
+                            new RegExp(escapeStringRegexp(encodedIndicatorValue), `g${caseInsensitive}`)
+                        );
 
                         return [...matches].map((m) => ({
                             adapter: 'indicators',
