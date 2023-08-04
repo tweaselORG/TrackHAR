@@ -38,11 +38,20 @@ const datasetteHost = 'http://localhost:8001';
         nextUrl = res.next_url;
     }
 
-    // The endpoint URLs may be the same for multiple adapters, so we still need to filter the requests.
-    const requestsForAdapter = requests.filter((r) => {
-        const a = adapterForRequest(r);
-        return a && a.slug === adapter.slug && a.tracker.slug === adapter.tracker.slug;
-    });
+    const requestsForAdapter = requests
+        // The endpoint URLs may be the same for multiple adapters, so we still need to filter the requests.
+        .filter((r) => {
+            const a = adapterForRequest(r);
+            return a && a.slug === adapter.slug && a.tracker.slug === adapter.tracker.slug;
+        })
+        // And if the content is binary, Datasette encodes it as base64
+        // (https://docs.datasette.io/en/stable/binary_data.html).
+        .map((r) => {
+            const content = r.content as string | { $base64: true; encoded: string } | undefined;
+            if (content && typeof content !== 'string' && content['$base64'] === true)
+                r.content = Buffer.from(content.encoded, 'base64').toString('binary');
+            return r;
+        });
 
     // We want both the decoding and the full adapter result, so we unfortunately need to run the decoding twice (once
     // manually, once through the adapter). Luckily, the decoding is fast.
