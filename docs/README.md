@@ -59,7 +59,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:168](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L168)
+[index.ts:175](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L175)
 
 ___
 
@@ -89,7 +89,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:392](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L392)
+[index.ts:399](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L399)
 
 ___
 
@@ -135,11 +135,11 @@ A description of where a certain piece of tracking data can be found in the deco
 | :------ | :------ | :------ |
 | `context` | [`Context`](README.md#context) | The part of the original request that the data can be found in. |
 | `path` | [`JsonPath`](README.md#jsonpath) | A JSONPath expression describing where in the decoded request object the data can be found. |
-| `reasoning` | ``"obvious property name"`` \| ``"obvious observed values"`` \| \`https://${string}\` \| \`http://${string}\` | An explanation of how we concluded that this is information is actually the type of data we labelled it as. This can either be a standardized description, or a URL to a more in-depth research report. |
+| `reasoning` | ``"obvious property name"`` \| ``"obvious observed values"`` \| ``"observed values match known device parameters"`` \| \`https://${string}\` \| \`http://${string}\` | An explanation of how we concluded that this is information is actually the type of data we labelled it as. This can either be a standardized description, or a URL to a more in-depth research report. |
 
 #### Defined in
 
-[index.ts:150](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L150)
+[index.ts:152](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L152)
 
 ___
 
@@ -175,7 +175,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:141](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L141)
+[index.ts:143](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L143)
 
 ___
 
@@ -188,7 +188,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:109](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L109)
+[index.ts:111](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L111)
 
 ___
 
@@ -216,7 +216,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:430](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L430)
+[index.ts:437](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L437)
 
 ___
 
@@ -241,13 +241,13 @@ process of a request.
 
 #### Defined in
 
-[index.ts:104](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L104)
+[index.ts:106](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L106)
 
 ___
 
 ### Property
 
-Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
+Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
 
 A type of tracking data that we can detect in a request.
 
@@ -300,7 +300,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:409](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L409)
+[index.ts:416](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L416)
 
 ___
 
@@ -345,7 +345,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:99](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L99)
+[index.ts:101](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L101)
 
 ## Variables
 
@@ -362,7 +362,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:481](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L481)
+[index.ts:488](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L488)
 
 ## Functions
 
@@ -390,7 +390,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:269](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L269)
+[index.ts:276](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L276)
 
 ___
 
@@ -419,7 +419,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:208](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L208)
+[index.ts:215](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L215)
 
 ___
 
@@ -457,7 +457,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:452](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L452)
+[index.ts:459](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L459)
 
 ___
 
@@ -486,4 +486,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:289](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L289)
+[index.ts:296](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L296)
