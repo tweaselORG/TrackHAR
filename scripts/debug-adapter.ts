@@ -6,7 +6,9 @@ import { adapterForRequest, decodeRequest, processRequest, type Request } from '
 import { allAdapters } from '../src/common/adapters';
 
 const adapterArgument = process.argv[2];
-if (!adapterArgument) throw new Error('You need to specify the adapter as the only argument.');
+if (!adapterArgument) throw new Error('You need to specify the adapter as the first argument.');
+
+const mergeResult = process.argv.includes('--merge-result');
 
 // Due to the problems described in https://github.com/tweaselORG/meta/issues/33#issuecomment-1663825083, we can
 // unfortunately not use the live instance for that at the moment.
@@ -67,9 +69,15 @@ const datasetteHost = 'http://localhost:8001';
     );
 
     // We print the adapter results to the console and save the deepmerged decoding results to a file.
-    for (const r of adapterResults) {
-        console.dir(r, { depth: null });
-        console.log();
+    if (mergeResult) {
+        const mergedResult = deepmerge.all(adapterResults.filter(Boolean) as Record<string, unknown>[]);
+        for (const key of Object.keys(mergedResult)) mergedResult[key] = [...new Set(mergedResult[key] as unknown[])];
+        console.dir(mergedResult, { depth: null });
+    } else {
+        for (const r of adapterResults) {
+            console.dir(r, { depth: null });
+            console.log();
+        }
     }
     await writeFile(`merged-decoded-requests.tmp.json`, JSON.stringify(deepmerge.all(decodingResults), null, 4));
 })();

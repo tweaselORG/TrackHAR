@@ -225,6 +225,8 @@ yarn debug-adapter <tracker slug>/<adapter slug>
 
 This will run your adapter against all matching requests in the database and print the results to the console. In addition, it will output a deepmerged version of the intermediate decoding result to the file `./merged-decoded-requests.tmp.json`.
 
+You can optionally pass `--merge-result` to see the results for all requests merged into a single object and with duplicate values for each data type removed.
+
 ## License
 
 This code and the adapters are licensed under a Creative Commons CC0 1.0 Universal license, see the [`LICENSE`](LICENSE) file for details.
