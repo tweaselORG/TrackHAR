@@ -27,36 +27,36 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'google_advertising_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
                 {
                     context: 'body',
                     path: 'advertising_ids.aaid',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
             ],
 
             idfv: {
                 context: 'body',
                 path: 'ios_vendor_id',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             otherIdentifiers: [
                 {
                     context: 'body',
                     path: 'hardware_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
                 {
                     context: 'body',
                     path: 'metadata.$marketing_cloud_visitor_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/partners-portal/docs/adobe-analytics',
                 },
                 {
                     context: 'body',
                     path: 'metadata.$braze_install_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/partners-portal/docs/braze',
                 },
                 {
                     context: 'body',
@@ -71,27 +71,22 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'metadata.$google_analytics_client_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/partners-portal/docs/google-analytics',
                 },
                 {
                     context: 'body',
                     path: 'metadata.$mixpanel_distinct_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/partners-portal/docs/mixpanel',
                 },
                 {
                     context: 'body',
                     path: 'metadata.$segment_anonymous_id',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'body',
-                    path: 'metadata.transaction_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/partners-portal/docs/segment-export',
                 },
                 {
                     context: 'body',
                     path: 'metadata.user_id',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/using-branch/docs/advertising-identifiers-for-attribution',
                 },
                 {
                     context: 'body',
@@ -107,6 +102,11 @@ export const adapters: Adapter[] = [
                     context: 'body',
                     path: 'identity_id',
                     reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'identity',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
             ],
 
@@ -125,13 +125,13 @@ export const adapters: Adapter[] = [
             screenWidth: {
                 context: 'body',
                 path: 'screen_width',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             screenHeight: {
                 context: 'body',
                 path: 'screen_height',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             networkConnectionType: {
@@ -143,7 +143,7 @@ export const adapters: Adapter[] = [
             osName: {
                 context: 'body',
                 path: 'os',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             osVersion: [
@@ -155,7 +155,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'os_version',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
             ],
 
@@ -175,7 +175,7 @@ export const adapters: Adapter[] = [
             localIp: {
                 context: 'body',
                 path: 'local_ip',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             architecture: {
@@ -193,26 +193,19 @@ export const adapters: Adapter[] = [
             userAgent: {
                 context: 'body',
                 path: 'user_agent',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
-            country: [
-                {
-                    context: 'body',
-                    path: 'country',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'body',
-                    path: 'locale',
-                    reasoning: 'obvious property name',
-                },
-            ],
+            country: {
+                context: 'body',
+                path: 'country',
+                reasoning: 'obvious property name',
+            },
 
             appVersion: {
                 context: 'body',
                 path: 'app_version',
-                reasoning: 'obvious property name',
+                reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
             appId: [
