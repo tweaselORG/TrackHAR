@@ -12,81 +12,110 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         {
             context,
             path: 'package_name',
-            reasoning: 'obvious property name',
+            reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
         },
         {
             context,
             path: 'bundle_id',
-            reasoning: 'obvious property name',
+            reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
         },
     ],
 
-    appVersion: {
-        context,
-        path: 'app_version',
-        reasoning: 'obvious property name',
-    },
+    appVersion: [
+        {
+            context,
+            path: 'app_version',
+            reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
+        },
+        {
+            context,
+            path: 'app_version_short',
+            reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
+        },
+    ],
 
     idfa: [
         {
             context,
             path: 'gps_adid',
-            reasoning: 'obvious property name',
+            reasoning: 'https://help.adjust.com/en/article/device-identifiers',
         },
         {
             context,
             path: 'idfa',
-            reasoning: 'obvious property name',
+            reasoning: 'https://help.adjust.com/en/article/device-identifiers',
         },
     ],
 
-    idfv: {
-        context,
-        path: 'idfv',
-        reasoning: 'obvious property name',
-    },
+    idfv: [
+        {
+            context,
+            path: 'idfv',
+            reasoning: 'https://help.adjust.com/en/article/device-identifiers',
+        },
+        {
+            context,
+            path: 'android_id',
+            reasoning: 'https://help.adjust.com/en/article/device-identifiers',
+        },
+    ],
 
     otherIdentifiers: [
         {
             context,
             path: 'android_uuid',
-            reasoning: 'obvious property name',
+            reasoning: 'adjust/uuid.md',
         },
         {
             context,
             path: 'ios_uuid',
-            reasoning: 'obvious property name',
+            reasoning: 'adjust/uuid.md',
+        },
+        {
+            context,
+            path: 'persistent_ios_uuid',
+            reasoning: 'adjust/uuid.md',
+        },
+        {
+            context,
+            path: 'web_uuid',
+            reasoning: 'adjust/uuid.md',
         },
         {
             context,
             path: 'fb_anon_id',
-            reasoning: 'obvious property name',
+            reasoning: 'adjust/fb_anon_id.md',
+        },
+        {
+            context,
+            path: 'external_device_id',
+            reasoning: 'https://help.adjust.com/en/article/external-device-identifiers',
         },
     ],
 
     language: {
         context,
         path: 'language',
-        reasoning: 'obvious property name',
+        reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
     },
 
     model: {
         context,
         path: 'device_name',
-        reasoning: 'obvious observed values',
+        reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
     },
 
     osName: {
         context,
         path: 'os_name',
-        reasoning: 'obvious property name',
+        reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
     },
 
     osVersion: [
         {
             context,
             path: 'os_version',
-            reasoning: 'obvious property name',
+            reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
         },
         {
             context,
@@ -98,7 +127,13 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
     country: {
         context,
         path: 'country',
-        reasoning: 'obvious property name',
+        reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
+    },
+
+    installTime: {
+        context,
+        path: 'installed_at',
+        reasoning: 'adjust/installed_at.md',
     },
 });
 
@@ -142,6 +177,25 @@ export const adapters: Adapter[] = [
                 path: 'display_height',
                 reasoning: 'obvious property name',
             },
+
+            timeSpent: [
+                {
+                    context: 'body',
+                    path: 'session_length',
+                    reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
+                },
+                {
+                    context: 'body',
+                    path: 'time_spent',
+                    reasoning: 'https://help.adjust.com/en/article/server-to-server-sessions',
+                },
+            ],
+
+            revenue: {
+                context: 'body',
+                path: 'revenue',
+                reasoning: 'https://help.adjust.com/en/article/s2s-ad-revenue',
+            },
         },
     },
 
@@ -149,7 +203,10 @@ export const adapters: Adapter[] = [
         slug: 'qs',
         tracker,
 
-        endpointUrls: [/^https:\/\/app(\.eu)?\.adjust\.(com|net\.in|world)\/attribution$/],
+        endpointUrls: [
+            /^https:\/\/app(\.eu)?\.adjust\.(com|net\.in|world)\/attribution$/,
+            /^https:\/\/app(\.eu)?\.adjust\.(com|net\.in|world)\/measurement_consent$/,
+        ],
 
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
         containedDataPaths: containedDataPaths('query'),
