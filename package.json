@@ -29,6 +29,7 @@
     ],
     "scripts": {
         "build": "parcel build",
+        "debug-adapter": "tsx scripts/debug-adapter.ts",
         "fix": "yarn eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx --fix",
         "lint": "tsc && eslint . --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx && git diff --check",
         "prepack": "rm -rf dist && yarn build && yarn typedoc",
@@ -67,6 +68,8 @@
         "@types/node": "^18.15.11",
         "@types/qs": "^6.9.7",
         "@typescript-eslint/eslint-plugin": "5.57.0",
+        "cross-fetch": "^4.0.0",
+        "deepmerge": "^4.3.1",
         "eslint": "8.37.0",
         "eslint-plugin-eslint-comments": "3.2.0",
         "eslint-plugin-import": "2.27.5",

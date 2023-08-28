@@ -194,7 +194,18 @@ export type Adapter = {
     containedDataPaths: Partial<Record<Property, ArrayOrSingle<DataPath>>>;
 };
 
-const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
+/**
+ * Decode a request into an object representation using the given decoding steps.
+ *
+ * @remarks
+ * This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+ *
+ * @param r The request to decode in our internal request format.
+ * @param decodingSteps The decoding steps to use (from the adapter).
+ *
+ * @returns An object representation of the request.
+ */
+export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
     const [path, query] = r.path.split('?');
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -245,7 +256,17 @@ const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
     return vars.res;
 };
 
-const adapterForRequest = (r: Request) =>
+/**
+ * Find the adapter that can handle a certain request.
+ *
+ * @remarks
+ * This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+ *
+ * @param r The request to find an adapter for.
+ *
+ * @returns The adapter that can handle the request, or `undefined` if none could be found.
+ */
+export const adapterForRequest = (r: Request) =>
     allAdapters.find(
         (a) =>
             a.endpointUrls.some((url) => (url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl)) &&

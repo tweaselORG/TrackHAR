@@ -29,6 +29,8 @@ trackhar
 
 ### Functions
 
+- [adapterForRequest](README.md#adapterforrequest)
+- [decodeRequest](README.md#decoderequest)
 - [process](README.md#process)
 - [processRequest](README.md#processrequest)
 
@@ -87,7 +89,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:371](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L371)
+[index.ts:392](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L392)
 
 ___
 
@@ -214,7 +216,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:409](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L409)
+[index.ts:430](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L430)
 
 ___
 
@@ -298,7 +300,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:388](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L388)
+[index.ts:409](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L409)
 
 ___
 
@@ -360,9 +362,66 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:460](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L460)
+[index.ts:481](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L481)
 
 ## Functions
+
+### adapterForRequest
+
+▸ **adapterForRequest**(`r`): `undefined` \| [`Adapter`](README.md#adapter)
+
+Find the adapter that can handle a certain request.
+
+**`Remarks`**
+
+This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `r` | [`Request`](README.md#request) | The request to find an adapter for. |
+
+#### Returns
+
+`undefined` \| [`Adapter`](README.md#adapter)
+
+The adapter that can handle the request, or `undefined` if none could be found.
+
+#### Defined in
+
+[index.ts:269](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L269)
+
+___
+
+### decodeRequest
+
+▸ **decodeRequest**(`r`, `decodingSteps`): `any`
+
+Decode a request into an object representation using the given decoding steps.
+
+**`Remarks`**
+
+This is not needed for the main purposes of this library, but can be useful for more advanced use cases.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `r` | [`Request`](README.md#request) | The request to decode in our internal request format. |
+| `decodingSteps` | [`DecodingStep`](README.md#decodingstep)[] | The decoding steps to use (from the adapter). |
+
+#### Returns
+
+`any`
+
+An object representation of the request.
+
+#### Defined in
+
+[index.ts:208](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L208)
+
+___
 
 ### process
 
@@ -398,7 +457,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:431](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L431)
+[index.ts:452](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L452)
 
 ___
 
@@ -427,4 +486,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:268](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L268)
+[index.ts:289](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L289)

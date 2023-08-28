@@ -214,6 +214,19 @@ Properties in `containedDataPaths` may also contain an array of several `DataPat
 
 In case you come across a data type that is not defined in the types yet, add your data type to the `Property` type in the `index.ts`. Give it an obvious, camelCased name and also a human-readable description in the [tracker-wiki translations](https://github.com/tweaselORG/tracker-wiki/tree/main/i18n).
 
+### Debugging adapters
+
+While developing an adapter, you can use our debug script to test your adapter against hundreds of thousands of real requests in our [open request database](https://data.tweasel.org/). To do so, run:
+
+```sh
+yarn debug-adapter <tracker slug>/<adapter slug>
+# e.g.: yarn debug-adapter facebook/graph
+```
+
+This will run your adapter against all matching requests in the database and print the results to the console. In addition, it will output a deepmerged version of the intermediate decoding result to the file `./merged-decoded-requests.tmp.json`.
+
+You can optionally pass `--merge-result` to see the results for all requests merged into a single object and with duplicate values for each data type removed.
+
 ## License
 
 This code and the adapters are licensed under a Creative Commons CC0 1.0 Universal license, see the [`LICENSE`](LICENSE) file for details.
