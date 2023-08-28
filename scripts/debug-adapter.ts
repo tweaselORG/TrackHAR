@@ -10,10 +10,6 @@ if (!adapterArgument) throw new Error('You need to specify the adapter as the fi
 
 const mergeResult = process.argv.includes('--merge-result');
 
-// Due to the problems described in https://github.com/tweaselORG/meta/issues/33#issuecomment-1663825083, we can
-// unfortunately not use the live instance for that at the moment.
-const datasetteHost = 'http://localhost:8001';
-
 (async () => {
     const [trackerSlug, adapterSlug] = adapterArgument.split('/');
     const adapter = allAdapters.find((a) => a.tracker.slug === trackerSlug && a.slug === adapterSlug);
@@ -31,7 +27,7 @@ const datasetteHost = 'http://localhost:8001';
     const whereClause = `endpointUrl is not null and (${adapterClauses.join(' or ')})`;
 
     const requests: Request[] = [];
-    let nextUrl = `${datasetteHost}/data/requests.json?_shape=objects&_where=${encodeURIComponent(
+    let nextUrl = `https://data.tweasel.org/data/requests.json?_shape=objects&_where=${encodeURIComponent(
         whereClause
     )}&_json=headers&_json=cookies&_size=max&_nocol=initiator&_nocol=platform&_nocol=runType&_nofacet=1&_nosuggest=1&_nocount=1`;
     while (nextUrl) {
