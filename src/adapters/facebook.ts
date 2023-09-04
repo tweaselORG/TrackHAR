@@ -7,124 +7,137 @@ const tracker: Tracker = {
 };
 
 const graphActivitiesEndpointRegex = /^https:\/\/graph\.facebook\.com\/v\d{1,2}.\d\/\d+\/activities$/;
-const graphActivitiesDataPaths: Adapter['containedDataPaths'] = {
+const graphActivitiesDataPaths = ({
+    pathPrefix,
+    includeExtinfo,
+}: {
+    pathPrefix: string;
+    includeExtinfo?: boolean;
+}): Adapter['containedDataPaths'] => ({
     idfa: {
         context: 'body',
-        path: 'advertiser_id',
+        path: pathPrefix + 'advertiser_id',
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
     },
 
     otherIdentifiers: [
         {
             context: 'body',
-            path: 'anon_id',
+            path: pathPrefix + 'anon_id',
             reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/27#issuecomment-1693282982',
         },
         {
             context: 'body',
-            path: 'app_user_id',
+            path: pathPrefix + 'app_user_id',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
         {
             context: 'body',
-            path: 'device_token',
+            path: pathPrefix + 'device_token',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
     ],
 
     osName: {
         context: 'body',
-        path: 'sdk',
+        path: pathPrefix + 'sdk',
         reasoning: 'obvious observed values',
     },
 
     appId: [
+        ...(includeExtinfo !== false
+            ? [
+                  {
+                      context: 'body',
+                      path: pathPrefix + 'extinfo.1',
+                      reasoning:
+                          'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+                  } as const,
+              ]
+            : []),
         {
             context: 'body',
-            path: 'application_package_name',
+            path: pathPrefix + 'application_package_name',
             reasoning: 'obvious property name',
         },
-        {
-            context: 'body',
-            path: 'extinfo.1',
-            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-        },
     ],
 
-    appVersion: [
-        {
+    ...(includeExtinfo !== false && {
+        appVersion: [
+            {
+                context: 'body',
+                path: pathPrefix + 'extinfo.2',
+                reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+            },
+            {
+                context: 'body',
+                path: pathPrefix + 'extinfo.3',
+                reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+            },
+        ],
+
+        osVersion: {
             context: 'body',
-            path: 'extinfo.2',
+            path: pathPrefix + 'extinfo.4',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
-        {
+
+        model: {
             context: 'body',
-            path: 'extinfo.3',
+            path: pathPrefix + 'extinfo.5',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
-    ],
 
-    osVersion: {
-        context: 'body',
-        path: 'extinfo.4',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
-
-    model: {
-        context: 'body',
-        path: 'extinfo.5',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
-
-    language: {
-        context: 'body',
-        path: 'extinfo.6',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
-
-    timezone: [
-        {
+        language: {
             context: 'body',
-            path: 'extinfo.7',
+            path: pathPrefix + 'extinfo.6',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
-        {
+
+        timezone: [
+            {
+                context: 'body',
+                path: pathPrefix + 'extinfo.7',
+                reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+            },
+            {
+                context: 'body',
+                path: pathPrefix + 'extinfo.15',
+                reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+            },
+        ],
+
+        carrier: {
             context: 'body',
-            path: 'extinfo.15',
+            path: pathPrefix + 'extinfo.8',
             reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
-    ],
 
-    carrier: {
-        context: 'body',
-        path: 'extinfo.8',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
+        screenWidth: {
+            context: 'body',
+            path: pathPrefix + 'extinfo.9',
+            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+        },
 
-    screenWidth: {
-        context: 'body',
-        path: 'extinfo.9',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
+        screenHeight: {
+            context: 'body',
+            path: pathPrefix + 'extinfo.10',
+            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+        },
 
-    screenHeight: {
-        context: 'body',
-        path: 'extinfo.10',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
+        diskTotal: {
+            context: 'body',
+            path: pathPrefix + 'extinfo.13',
+            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+        },
 
-    diskTotal: {
-        context: 'body',
-        path: 'extinfo.13',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
-
-    diskFree: {
-        context: 'body',
-        path: 'extinfo.14',
-        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-    },
-};
+        diskFree: {
+            context: 'body',
+            path: pathPrefix + 'extinfo.14',
+            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+        },
+    }),
+});
 
 const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['containedDataPaths'] => ({
     appId: {
@@ -303,7 +316,7 @@ export const adapters: Adapter[] = [
             { function: 'parseJson', input: 'body', output: 'res.body' },
             { function: 'parseJson', input: 'res.body.extinfo', output: 'res.body.extinfo' },
         ],
-        containedDataPaths: graphActivitiesDataPaths,
+        containedDataPaths: graphActivitiesDataPaths({ pathPrefix: '' }),
     },
 
     {
@@ -317,11 +330,10 @@ export const adapters: Adapter[] = [
             { function: 'parseQueryString', input: 'body', output: 'res.body' },
             { function: 'parseJson', input: 'res.body.extinfo', output: 'res.body.extinfo' },
         ],
-        containedDataPaths: graphActivitiesDataPaths,
+        containedDataPaths: graphActivitiesDataPaths({ pathPrefix: '' }),
     },
 
     {
-        // TODO!
         slug: 'graph',
         tracker,
 
@@ -335,44 +347,15 @@ export const adapters: Adapter[] = [
             { function: 'parseQueryString', mapInput: 'relativeUrls', output: 'res.body.batch' },
             { function: 'getProperty', input: 'b', options: { path: 'batch_app_id' }, output: 'res.body.batch_app_id' },
         ],
-        containedDataPaths: {
-            trackerSdkVersion: {
-                context: 'body',
-                path: 'batch.*.sdk_version',
-                reasoning: 'obvious property name',
-            },
-
-            idfa: {
-                context: 'body',
-                path: 'batch.*.advertiser_id',
-                reasoning: 'obvious property name',
-            },
-
-            otherIdentifiers: {
-                context: 'body',
-                path: 'batch.*.anon_id',
-                reasoning: 'obvious property name',
-            },
-
-            osName: [
-                {
-                    context: 'body',
-                    path: 'batch.*.platform',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'body',
-                    path: 'batch.*.sdk',
-                    reasoning: 'obvious observed values',
-                },
-            ],
-
-            osVersion: {
-                context: 'body',
-                path: 'batch.*.os_version',
-                reasoning: 'obvious property name',
-            },
-        },
+        // The batch endpoint can receive requests to any of the other endpoints, so we would need to combine the data
+        // paths here (see: https://developers.facebook.com/docs/graph-api/batch-requests).
+        // However, from the traffic we have observed, it seems like it never receives `network_ads_common` or
+        // `adnw_sync2` requests.
+        containedDataPaths: graphActivitiesDataPaths({
+            pathPrefix: 'batch.*.',
+            // The batch objects _can_ have extinfo, but we currently don't support decoding that.
+            includeExtinfo: false,
+        }),
     },
 
     {
