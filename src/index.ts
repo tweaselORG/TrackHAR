@@ -144,7 +144,14 @@ export type Identifier =
  */
 export type DecodingStep = (
     | {
-          function: 'parseQueryString' | 'parseJson' | 'decodeBase64' | 'decodeUrl' | 'decodeProtobuf' | 'ensureArray';
+          function:
+              | 'parseQueryString'
+              | 'parseJson'
+              | 'decodeBase64'
+              | 'decodeUrl'
+              | 'decodeProtobuf'
+              | 'ensureArray'
+              | 'gunzip';
       }
     | { function: 'getProperty'; options: { path: JsonPath } }
 ) &
