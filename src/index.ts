@@ -85,6 +85,7 @@ export type Property =
     | 'ramTotal'
     | 'ramUsed'
     | 'revenue'
+    | 'referer'
     | 'rotationX'
     | 'rotationY'
     | 'rotationZ'
@@ -93,6 +94,9 @@ export type Property =
     | 'signalStrengthCellular'
     | 'signalStrengthWifi'
     | 'timeSpent'
+    | 'startTime'
+    // As in: subnational political entity
+    | 'state'
     | 'timezone'
     | 'trackerSdkVersion'
     | 'uptime'
