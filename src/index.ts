@@ -17,7 +17,7 @@ export type JsonPath = string;
 export type TrackingDataValue = any;
 
 /** A part of a request, to explain where some information was found. */
-export type Context = 'header' | 'path' | 'query' | 'body';
+export type Context = 'header' | 'cookie' | 'path' | 'query' | 'body';
 
 /** A tracking company that we have adapters for. */
 export type Tracker = {
@@ -225,9 +225,13 @@ export type Adapter = {
 export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
     const [path, query] = r.path.split('?');
 
+    const reduceHeadersOrCookies = (headersOrCookies: typeof r.headers | typeof r.cookies) =>
+        headersOrCookies?.reduce<Record<string, string>>((acc, cur) => ({ ...acc, [cur.name]: cur.value }), {});
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const vars: Record<Variable, any> & { res: Partial<Record<Context, any>> } = {
-        header: r.headers,
+        header: reduceHeadersOrCookies(r.headers),
+        cookie: reduceHeadersOrCookies(r.cookies),
         path,
         query,
         body: r.content,

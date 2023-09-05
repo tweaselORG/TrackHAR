@@ -59,7 +59,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:178](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L178)
+[index.ts:185](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L185)
 
 ___
 
@@ -89,7 +89,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:402](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L402)
+[index.ts:413](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L413)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 ### Context
 
-Ƭ **Context**: ``"header"`` \| ``"path"`` \| ``"query"`` \| ``"body"``
+Ƭ **Context**: ``"header"`` \| ``"cookie"`` \| ``"path"`` \| ``"query"`` \| ``"body"``
 
 A part of a request, to explain where some information was found.
 
@@ -139,13 +139,13 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:154](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L154)
+[index.ts:161](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L161)
 
 ___
 
 ### DecodingStep
 
-Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"ensureArray"``  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
+Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"ensureArray"`` \| ``"gunzip"``  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
 
 A step in the process of decoding a tracking request. This is essentially a function call with some input and output,
 and potentially additional options.
@@ -216,7 +216,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:440](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L440)
+[index.ts:451](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L451)
 
 ___
 
@@ -300,7 +300,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:419](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L419)
+[index.ts:430](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L430)
 
 ___
 
@@ -362,7 +362,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:491](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L491)
+[index.ts:502](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L502)
 
 ## Functions
 
@@ -390,7 +390,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:279](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L279)
+[index.ts:290](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L290)
 
 ___
 
@@ -419,7 +419,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:218](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L218)
+[index.ts:225](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L225)
 
 ___
 
@@ -457,7 +457,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:462](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L462)
+[index.ts:473](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L473)
 
 ___
 
@@ -486,4 +486,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:299](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L299)
+[index.ts:310](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L310)
