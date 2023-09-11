@@ -57,7 +57,7 @@ const ioamJsonDataPaths = ({
     hashedIdfa: {
         context,
         path: prefix + 'client.uuids.advertisingIdentifier',
-        reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/38#issuecomment-1706825238',
+        reasoning: 'infonline/client.uuids.advertisingIdentifier.md',
     },
 
     model: {
@@ -216,7 +216,7 @@ const ioamTxQueryDataPaths: Adapter['containedDataPaths'] = {
     otherIdentifiers: {
         context: 'cookie',
         path: 'i00',
-        reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/38#issuecomment-1706543604',
+        reasoning: 'infonline/i00.md',
     },
 };
 
@@ -269,6 +269,7 @@ export const adapters: Adapter[] = [
             { function: 'decodeBase64', input: 'ae', output: 'decodedAe' },
             { function: 'gunzip', input: 'decodedAe', output: 'unzippedAe' },
             { function: 'parseJson', input: 'unzippedAe', output: 'res.body.ae' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.i00', options: { path: 'i00' } },
         ],
         containedDataPaths: {
             ...ioamJsonDataPaths({ context: 'body', prefix: 'ae.', hasEvents: true }),
@@ -276,7 +277,7 @@ export const adapters: Adapter[] = [
             otherIdentifiers: {
                 context: 'cookie',
                 path: 'i00',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/38#issuecomment-1706543604',
+                reasoning: 'infonline/i00.md',
             },
         },
     },
@@ -294,6 +295,7 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'parsedBody', output: 'ae', options: { path: 'ae' } },
             { function: 'decodeBase64', input: 'ae', output: 'decodedAe' },
             { function: 'parseJson', input: 'decodedAe', output: 'res.body.ae' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.i00', options: { path: 'i00' } },
         ],
         containedDataPaths: {
             ...ioamJsonDataPaths({ context: 'body', prefix: 'ae.', hasEvents: true }),
@@ -301,7 +303,7 @@ export const adapters: Adapter[] = [
             otherIdentifiers: {
                 context: 'cookie',
                 path: 'i00',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/38#issuecomment-1706543604',
+                reasoning: 'infonline/i00.md',
             },
         },
     },

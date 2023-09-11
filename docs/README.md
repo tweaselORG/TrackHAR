@@ -59,7 +59,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:185](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L185)
+[index.ts:189](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L189)
 
 ___
 
@@ -89,7 +89,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:413](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L413)
+[index.ts:417](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L417)
 
 ___
 
@@ -139,7 +139,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:161](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L161)
+[index.ts:165](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L165)
 
 ___
 
@@ -175,7 +175,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:145](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L145)
+[index.ts:149](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L149)
 
 ___
 
@@ -188,7 +188,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:113](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L113)
+[index.ts:117](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L117)
 
 ___
 
@@ -216,7 +216,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:451](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L451)
+[index.ts:455](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L455)
 
 ___
 
@@ -241,13 +241,13 @@ process of a request.
 
 #### Defined in
 
-[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
+[index.ts:112](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L112)
 
 ___
 
 ### Property
 
-Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
+Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"revenue"`` \| ``"referer"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timeSpent"`` \| ``"startTime"`` \| ``"state"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
 
 A type of tracking data that we can detect in a request.
 
@@ -300,7 +300,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:430](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L430)
+[index.ts:434](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L434)
 
 ___
 
@@ -345,7 +345,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:103](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L103)
+[index.ts:107](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L107)
 
 ## Variables
 
@@ -362,7 +362,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:502](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L502)
+[index.ts:506](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L506)
 
 ## Functions
 
@@ -390,7 +390,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:290](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L290)
+[index.ts:294](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L294)
 
 ___
 
@@ -419,7 +419,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:225](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L225)
+[index.ts:229](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L229)
 
 ___
 
@@ -457,7 +457,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:473](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L473)
+[index.ts:477](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L477)
 
 ___
 
@@ -486,4 +486,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:310](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L310)
+[index.ts:314](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L314)
