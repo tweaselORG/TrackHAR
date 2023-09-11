@@ -14,104 +14,123 @@ export const adapters: Adapter[] = [
 
         endpointUrls: ['https://in.appcenter.ms/logs'],
 
-        decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            {
+                function: 'getProperty',
+                input: 'header',
+                output: 'res.header.Install-ID',
+                options: { path: 'Install-ID' },
+            },
+        ],
         containedDataPaths: {
             appId: {
                 context: 'body',
                 path: 'logs.*.device.appNamespace',
-                reasoning: 'obvious observed values',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
-            appVersion: {
-                context: 'body',
-                path: 'logs.*.device.appVersion',
-                reasoning: 'obvious property name',
-            },
+            appVersion: [
+                {
+                    context: 'body',
+                    path: 'logs.*.device.appVersion',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+                },
+                {
+                    context: 'body',
+                    path: 'logs.*.device.appBuild',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+                },
+            ],
 
             trackerSdkVersion: {
                 context: 'body',
                 path: 'logs.*.device.sdkVersion',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             otherIdentifiers: [
                 {
+                    context: 'header',
+                    path: 'Install-ID',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+                },
+                {
                     context: 'body',
                     path: 'logs.*.sid',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
                 },
                 {
                     context: 'body',
                     path: 'logs.*.userId',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
                 },
             ],
 
             manufacturer: {
                 context: 'body',
                 path: 'logs.*.device.oemName',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             model: {
                 context: 'body',
                 path: 'logs.*.device.model',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             osName: {
                 context: 'body',
                 path: 'logs.*.device.osName',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             osVersion: [
                 {
                     context: 'body',
                     path: 'logs.*.device.osVersion',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
                 },
                 {
                     context: 'body',
                     path: 'logs.*.device.osBuild',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+                },
+                {
+                    context: 'body',
+                    path: 'logs.*.device.osApiLevel',
+                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
                 },
             ],
 
             language: {
                 context: 'body',
                 path: 'logs.*.device.locale',
-                reasoning: 'obvious property name',
-            },
-
-            country: {
-                context: 'body',
-                path: 'logs.*.device.locale',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             timezone: {
                 context: 'body',
                 path: 'logs.*.device.timeZoneOffset',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             screenWidth: {
                 context: 'body',
                 path: 'logs.*.device.screenSize',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             screenHeight: {
                 context: 'body',
                 path: 'logs.*.device.screenSize',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
             carrier: {
                 context: 'body',
                 path: 'logs.*.device.carrierName',
-                reasoning: 'obvious property name',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
         },
     },
