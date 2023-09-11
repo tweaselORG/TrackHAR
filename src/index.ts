@@ -92,6 +92,7 @@ export type Property =
     | 'rotationZ'
     | 'screenHeight'
     | 'screenWidth'
+    | 'startTime'
     | 'signalStrengthCellular'
     | 'signalStrengthWifi'
     | 'timeSpent'

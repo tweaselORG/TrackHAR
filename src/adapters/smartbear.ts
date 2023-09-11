@@ -19,14 +19,36 @@ export const adapters: Adapter[] = [
             trackerSdkVersion: {
                 context: 'body',
                 path: 'notifier.version',
-                reasoning: 'obvious property name',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },
 
-            appVersion: {
-                context: 'body',
-                path: 'app.version',
-                reasoning: 'obvious property name',
-            },
+            appVersion: [
+                {
+                    context: 'body',
+                    path: 'app.version',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'app.versionCode',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'app.bundleVersion',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'app.codeBundleId',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+            ],
 
             appId: [
                 {
@@ -40,6 +62,12 @@ export const adapters: Adapter[] = [
                     reasoning: 'obvious property name',
                 },
             ],
+
+            appName: {
+                context: 'body',
+                path: 'app.name',
+                reasoning: 'obvious property name',
+            },
 
             isInForeground: {
                 context: 'body',
@@ -62,14 +90,16 @@ export const adapters: Adapter[] = [
             osName: {
                 context: 'body',
                 path: 'device.osName',
-                reasoning: 'obvious property name',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },
 
             osVersion: [
                 {
                     context: 'body',
                     path: 'device.osVersion',
-                    reasoning: 'obvious property name',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
                 },
                 {
                     context: 'body',
@@ -81,14 +111,16 @@ export const adapters: Adapter[] = [
             isRooted: {
                 context: 'body',
                 path: 'device.jailbroken',
-                reasoning: 'obvious property name',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },
 
             manufacturer: [
                 {
                     context: 'body',
                     path: 'device.manufacturer',
-                    reasoning: 'obvious property name',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
                 },
                 {
                     context: 'body',
@@ -97,11 +129,20 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            model: {
-                context: 'body',
-                path: 'device.model',
-                reasoning: 'obvious property name',
-            },
+            model: [
+                {
+                    context: 'body',
+                    path: 'device.model',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'device.modelNumber',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+            ],
 
             language: {
                 context: 'body',
@@ -112,7 +153,8 @@ export const adapters: Adapter[] = [
             userAgent: {
                 context: 'body',
                 path: 'device.userAgent',
-                reasoning: 'obvious property name',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },
 
             orientation: {
@@ -179,6 +221,34 @@ export const adapters: Adapter[] = [
                 context: 'body',
                 path: 'device.batteryLevel',
                 reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'device.id',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'sessions.*.user.id',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+                {
+                    context: 'body',
+                    path: 'sessions.*.id',
+                    reasoning:
+                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+                },
+            ],
+
+            startTime: {
+                context: 'body',
+                path: 'sessions.*.startedAt',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },
         },
     },
