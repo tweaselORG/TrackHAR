@@ -1,0 +1,6 @@
+{
+    "waybackAuth": {
+        "s3AccessKey": "Obtain me at https://archive.org/account/s3.php",
+        "s3SecretKey": "Obtain me at https://archive.org/account/s3.php"
+    }
+}

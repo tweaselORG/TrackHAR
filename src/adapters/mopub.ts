@@ -7,7 +7,7 @@ const tracker: Tracker = {
 };
 
 const keyUrl = (lineNumber: number) =>
-    `https://web.archive.org/web/20220222115549/https://github.com/mopub/mopub-ios-sdk/blob/4b5e70e4ff69b0c3f4ab71a8791f5e7351ad2828/MoPubSDK/Internal/MPAdServerKeys.m#L${lineNumber}` as const;
+    `https://github.com/mopub/mopub-ios-sdk/blob/4b5e70e4ff69b0c3f4ab71a8791f5e7351ad2828/MoPubSDK/Internal/MPAdServerKeys.m#L${lineNumber}` as const;
 
 export const adapters: Adapter[] = [
     {
