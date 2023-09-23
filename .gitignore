@@ -1,3 +1,6 @@
+archive-config.json
+research-docs/archive-errors.json
+
 tmp/
 *.tmp
 tmp.*
