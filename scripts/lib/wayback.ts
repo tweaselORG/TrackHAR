@@ -323,4 +323,24 @@ export const captureAndWait = async (url: string, auth: ArchiveOrgAuth, options?
     };
 };
 
+/**
+ * Converts a timestamp in the format used by the Wayback Machine to a Date object.
+ *
+ * @param timestamp A timestampt in the format "YYYYMMDDHHMMSS"
+ *
+ * @returns
+ */
+export const archiveOrgTimestampToDate = (timestamp: string) =>
+    new Date(
+        Date.UTC(
+            parseInt(timestamp.slice(0, 4), 10), // Year
+            parseInt(timestamp.slice(4, 6), 10) - 1, // Month (starts at 0)
+            parseInt(timestamp.slice(6, 8), 10), // Day
+            parseInt(timestamp.slice(8, 10), 10), // Hour
+            parseInt(timestamp.slice(10, 12), 10), // Minute
+            parseInt(timestamp.slice(12, 14), 10), // Second
+            0 // Millisecond
+        )
+    );
+
 const camelToSnakeCase = (str) => str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
