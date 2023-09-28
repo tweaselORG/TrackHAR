@@ -23,3 +23,15 @@ research-docs
 ```
 
 You can reference your research in the adapter’s `reasoning` field by specifying a folder and Markdown file relative to the `research-docs/` folder: `tracker-1/gssid.md`.
+
+## Archived links
+
+To ensure the information we refer to in our documentation isn’t lost, we archive these links to public web archives. This can be done manually or automatically. External URLs in you mention in the reasoning for an adapter must be archived and the URL (without fragments) needs to be added to the `research-docs/archived-urls.csv` file. A line in that file looks like this:
+
+```csv
+"<your original URL>","<URL where the archived website can be accessed>","<ISO 8601 timestamp of the capture>","<list of properties, separated by semicolons>"
+```
+
+The properties must be a string in the format `<tracker slug>/<adapter slug>#<property name>`, e.g. `mopub/ads#screenHeight`. The individual properties must not be wrapped in `"` characters. A full list of properties could look like this: `,"mopub/ads#appVersion;mopub/ads#trackerSdkVersion"`
+
+If you want URLs you add to an adapter’s `reasoning` to be archived automatically, you can run `yarn auto-archive` and keep it running while you edit the files. You’ll need to create an `archive-config.json` in the project root containing the API credentials for the S3 API of the Internet Archive. The script will look for URLs in the `reasoning` and automatically try to archive them to the Internet Archive. If this fails, the script will report an error and log it to `research-docs/archive-errors.json`. Some of these errors will be retried after a while, e.g. errors due to rate limiting. If an error persists or is not recoverable, you need to archive the URL manually and add it to the CSV. You may need to use another public archive then. We usually use [archive.today](https://archive.today/) as a fallback.
