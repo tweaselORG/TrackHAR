@@ -9,8 +9,6 @@ import { parse, stringify } from 'csv/sync';
 import { readFile, writeFile } from 'fs/promises';
 import { register } from 'module';
 import pMap, { pMapSkip } from 'p-map';
-// eslint-disable-next-line import/no-unresolved
-import PQueue from 'p-queue';
 import { resolve } from 'path';
 import { isMainThread, parentPort, Worker, workerData } from 'worker_threads';
 import type { Adapter } from '../src/index';
@@ -194,43 +192,72 @@ const workerTask = async (workerData: { waybackAuth: ArchiveOrgAuth; path: strin
     }
 };
 
+class ArchiveQueue {
+    // We use a Set so that we don’t run multiple times on the same file because multiple changes were registered in a short time.
+    private _queue: Set<string>;
+    private waybackAuth: ArchiveOrgAuth;
+    isIdle: boolean;
+
+    constructor(waybackAuth: ArchiveOrgAuth) {
+        this._queue = new Set();
+        this.waybackAuth = waybackAuth;
+        this.isIdle = true;
+    }
+
+    add(path: string) {
+        // We delete and readd the value so that it is moved to the end of the queue
+        this._queue.delete(path);
+        this._queue.add(path);
+
+        if (this.isIdle) this.startNext();
+    }
+
+    startNext() {
+        this.isIdle = false;
+        const nextPath = this._queue[Symbol.iterator]().next();
+        if (nextPath.done) {
+            this.isIdle = true;
+            return;
+        }
+        this._queue.delete(nextPath.value);
+
+        const worker = new Worker(new URL(import.meta.url), {
+            workerData: { path: nextPath.value, waybackAuth: this.waybackAuth },
+        });
+
+        worker.on('message', (result) => {
+            if (result === 'archive-worker:success') this.startNext();
+            else if (result === 'archive-worker:parse-error') this.startNext();
+        });
+
+        worker.on('error', (e) => {
+            throw e;
+        });
+        worker.on('exit', (code) => {
+            if (code !== 0) {
+                throw new Error(`Worker stopped with exit code ${code}`);
+            }
+        });
+    }
+}
+
 if (isMainThread)
     (async () => {
-        const config = await readFile(configPath, 'utf-8').then(JSON.parse);
-        if (!config.waybackAuth)
+        const config = (await readFile(configPath, 'utf-8')
+            .then(JSON.parse)
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            .catch(() => {})) as { waybackAuth?: ArchiveOrgAuth } | undefined;
+        if (!config?.waybackAuth)
             throw new Error(
                 'Please provide your archive.org credentials in archive-config.json. You can find them at https://archive.org/account/s3.php.'
             );
-        const waybackAuth = config.waybackAuth as ArchiveOrgAuth;
+        const waybackAuth = config.waybackAuth;
 
-        const archiveQueue = new PQueue({ concurrency: 1 });
-
-        // TODO: Remove entries for the same file that have not run, yet.
-        const onAdapterChange = (path: string) =>
-            archiveQueue.add(
-                () =>
-                    new Promise<void>((resolve, reject) => {
-                        const worker = new Worker(new URL(import.meta.url), {
-                            workerData: { path, waybackAuth },
-                        });
-
-                        worker.on('message', (result) => {
-                            if (result === 'archive-worker:success') resolve();
-                            else if (result === 'archive-worker:parse-error') resolve();
-                        });
-
-                        worker.on('error', reject);
-                        worker.on('exit', (code) => {
-                            if (code !== 0) {
-                                reject(new Error(`Worker stopped with exit code ${code}`));
-                            }
-                        });
-                    })
-            );
+        const archiveQueue = new ArchiveQueue(waybackAuth);
 
         const watcher = watch('src/adapters/**/*.ts', { awaitWriteFinish: true });
-        watcher.on('add', onAdapterChange);
-        watcher.on('change', onAdapterChange);
+        watcher.on('add', (path) => archiveQueue.add(path));
+        watcher.on('change', (path) => archiveQueue.add(path));
     })();
 else workerTask(workerData);
 /* eslint-enable no-console */
