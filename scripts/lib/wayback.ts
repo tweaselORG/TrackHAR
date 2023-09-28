@@ -81,6 +81,10 @@ export type CaptureResult = {
     job_id: string;
     /** An optional message from the API, e.g. telling you your capture will be delayed for some reason. */
     message?: string;
+    /** An undocumented property that sometimes contains `error`, presumably if there was an error in the URL validation, */
+    status?: 'error';
+    /** An undocumented property which seems to contain a description of what type of error occurred. */
+    status_ext?: 'error:invalid-url-syntax' | 'error:blocked-url' | string;
 };
 
 /**
@@ -259,12 +263,12 @@ export class CaptureFailedException extends Error {
     jobId: string;
     exception: string;
 
-    constructor(status: CaptureStatusError) {
+    constructor(status: CaptureStatusError | CaptureResult) {
         super(status.message);
         this.name = 'CaptureFailedException';
-        this.type = status.status_ext;
+        this.type = status.status_ext || '';
         this.jobId = status.job_id;
-        this.exception = status.exception;
+        this.exception = status['exception'] || '';
     }
 
     toJSON() {
@@ -307,6 +311,8 @@ export const isCapturePendingException = (error: Error): error is CapturePending
 export const captureAndWait = async (url: string, auth: ArchiveOrgAuth, options?: CaptureRequestOptions) => {
     const captureResult = await capture(url, auth, options);
 
+    if (captureResult.status === 'error') throw new AbortError(new CaptureFailedException(captureResult));
+
     const captureStatus = await pRetry(
         async () => {
             const statusResult = await status(captureResult.job_id, auth);
@@ -326,7 +332,7 @@ export const captureAndWait = async (url: string, auth: ArchiveOrgAuth, options?
 /**
  * Converts a timestamp in the format used by the Wayback Machine to a Date object.
  *
- * @param timestamp A timestampt in the format "YYYYMMDDHHMMSS"
+ * @param timestamp A timestamp in the format "YYYYMMDDHHMMSS"
  *
  * @returns
  */
