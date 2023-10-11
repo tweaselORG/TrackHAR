@@ -5,14 +5,15 @@ import chalk from 'chalk';
 import { watch } from 'chokidar';
 // eslint-plugin-import doesn't support the "exports" field in package.json, yet (https://github.com/import-js/eslint-plugin-import/issues/1810).
 // eslint-disable-next-line import/no-unresolved
-import { parse, stringify } from 'csv/sync';
+import { stringify } from 'csv/sync';
 import { readFile, writeFile } from 'fs/promises';
 import { register } from 'module';
 import pMap, { pMapSkip } from 'p-map';
 import { resolve } from 'path';
 import { isMainThread, parentPort, Worker, workerData } from 'worker_threads';
 import type { Adapter } from '../src/index';
-import type { ArchiveOrgAuth, CaptureFailedException } from './lib/wayback';
+import { csvPath, errorPath, getArchivedUrls, getArchiveErrors, getReasoningUrlsFromAdapters } from './lib/archiving';
+import type { ArchiveOrgAuth } from './lib/wayback';
 import {
     archiveOrgTimestampToDate,
     captureAndWait,
@@ -38,77 +39,20 @@ const errorsToRetry = [
     'error:browsing-timeout',
     'error:bandwidth-limit-exceeded',
 ];
-const csvPath = './research-docs/archived-urls.csv';
-const errorPath = './research-docs/archive-errors.json';
+
 const configPath = './archive-config.json';
 
-type ArchivedUrlEntry = {
-    originalUrl: string;
-    archivedUrl: string;
-    timestamp: Date;
-    referringDataPaths: Set<string>;
-};
-
 const archiveUrls = async (waybackAuth: ArchiveOrgAuth, adapters: Adapter[]) => {
-    const linkRegex = /^https?:\/\//;
+    const { archivedUrls, archivedDataPaths, archivedUrlEntries } = await getArchivedUrls();
 
-    const urlFile = await readFile(csvPath, 'utf-8');
-    const urlCsv = parse(urlFile, {
-        bom: true,
-        delimiter: ',',
-        columns: true,
-        cast: (value, context) => {
-            if (context.column === 'referringDataPaths') return new Set(value.split(';'));
-            else if (context.column === 'timestamp') return new Date(value);
-            return value;
-        },
-    }) as ArchivedUrlEntry[];
+    const reasoningURLs = await getReasoningUrlsFromAdapters(adapters);
 
-    const archivedURLs = new Set<string>();
-    const archivedDataPaths = urlCsv.reduce((acc: Record<string, Set<string>>, cur) => {
-        archivedURLs.add(cur.originalUrl);
-        // We save the data paths as a Set to avoid duplicates (e.g. if a URL has been archived twice for a data path) and because of the performance benefit when we check if a data path is already archived.
-        acc[cur.originalUrl] = new Set([...(acc[cur.originalUrl] || []), ...cur.referringDataPaths]);
-        return acc;
-    }, {});
-
-    const reasoningURLs = adapters
-        // Get all data paths from all adapters
-        .map((adapter) =>
-            Object.entries(adapter.containedDataPaths)
-                .map(([property, paths]) =>
-                    (Array.isArray(paths) ? paths : [paths]).map(
-                        (p) => [`${adapter.tracker.slug}/${adapter.slug}`, property, p] as const
-                    )
-                )
-                .flat()
-        )
-        .flat()
-        // Filter out data paths that don't have an external link in their reasoning
-        .filter((dataPath) => linkRegex.test(dataPath[2].reasoning))
-        // Group by the reasoning URL
-        .reduce((acc: Record<string, string[]>, dataPath) => {
-            const url = new URL(dataPath[2].reasoning);
-            // Remove the fragment from the url to reduce the amount of requests to the Internet Archive
-            url.hash = '';
-            acc[url.toString()] = [...(acc[url.toString()] || []), `${dataPath[0]}#${dataPath[1]}`];
-            return acc;
-        }, {});
-
-    const archiveErrors = (await readFile(errorPath, 'utf-8')
-        .catch((e) => {
-            if (e.code === 'ENOENT') return '{}';
-            throw e;
-        })
-        .then(JSON.parse)) as Record<
-        string,
-        { try: number; lastTried: number; error: ReturnType<CaptureFailedException['toJSON']> }
-    >;
+    const archiveErrors = await getArchiveErrors();
 
     const newURLs = await pMap(
         Object.entries(reasoningURLs),
         async ([url, dataPaths]) => {
-            const unarchivedPaths = archivedURLs.has(url)
+            const unarchivedPaths = archivedUrls.has(url)
                 ? dataPaths.filter((path) => !archivedDataPaths[url].has(path))
                 : dataPaths;
 
@@ -162,7 +106,7 @@ const archiveUrls = async (waybackAuth: ArchiveOrgAuth, adapters: Adapter[]) => 
     if (newURLs.length > 0) {
         await writeFile(
             csvPath,
-            stringify([...urlCsv, ...newURLs], {
+            stringify([...archivedUrlEntries, ...newURLs], {
                 quoted: true,
                 header: true,
                 columns: ['originalUrl', 'archivedUrl', 'timestamp', 'referringDataPaths'],
