@@ -48,6 +48,9 @@
         ],
         "*.{ts,js,tsx,jsx}": [
             "eslint --fix"
+        ],
+        "src/adapters/*.ts": [
+            "tsx scripts/check-archived.ts"
         ]
     },
     "prettier": "@baltpeter/prettier-config",
@@ -77,6 +80,7 @@
         "eslint": "8.37.0",
         "eslint-plugin-eslint-comments": "3.2.0",
         "eslint-plugin-import": "2.27.5",
+        "execa": "^8.0.1",
         "husky": "4.3.7",
         "lint-staged": "13.2.0",
         "p-map": "^6.0.0",
