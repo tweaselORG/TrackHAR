@@ -29,7 +29,8 @@ export const adapters: Adapter[] = [
             appId: {
                 context: 'query',
                 path: 'i',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682422486',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             appName: {
@@ -42,12 +43,13 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'app_v',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682526415',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
                 {
                     context: 'query',
                     path: 'av',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1681931972',
+                    reasoning: 'singular-net/av.md',
                 },
             ],
 
@@ -67,12 +69,14 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'idfa',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682506723',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
                 {
                     context: 'query',
                     path: 'aifa',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682513989',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
             ],
 
@@ -80,49 +84,56 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'idfv',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682512312',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
                 {
                     context: 'query',
                     path: 'asid',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682450838',
+                    reasoning: 'singular-net/asid.md',
                 },
                 {
                     context: 'query',
                     path: 'andi',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682523347',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
             ],
 
             installTime: {
                 context: 'query',
                 path: 'install_time',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682543705',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             isFirstLaunch: {
                 context: 'query',
                 path: 'install',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682535237',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             language: {
                 context: 'query',
                 path: 'lc',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682484280',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             manufacturer: {
                 context: 'query',
                 path: 'ma',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682453852',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             model: [
                 {
                     context: 'query',
                     path: 'mo',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682474695',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
                 {
                     context: 'query',
@@ -134,43 +145,48 @@ export const adapters: Adapter[] = [
             networkConnectionType: {
                 context: 'query',
                 path: 'c',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682553354',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             osName: {
                 context: 'query',
                 path: 'p',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682418766',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             osVersion: [
                 {
                     context: 'query',
                     path: 'v',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1681939019',
+                    reasoning: 'singular-net/v.md',
                 },
                 {
                     context: 'query',
                     path: 've',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682432136',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
                 {
                     context: 'query',
                     path: 'bd',
-                    reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682503639',
+                    reasoning:
+                        'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
                 },
             ],
 
             otherIdentifiers: {
                 context: 'query',
                 path: 'custom_user_id',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682307154',
+                reasoning: 'singular-net/custom_user_id.md',
             },
 
             publicIp: {
                 context: 'query',
                 path: 'ip',
-                reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/16#issuecomment-1682426940',
+                reasoning:
+                    'https://support.singular.net/hc/en-us/articles/360048588672-Server-to-Server-S2S-API-Endpoint-Reference',
             },
 
             timezone: {

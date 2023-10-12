@@ -163,7 +163,8 @@ export type DataPath = {
         | 'obvious observed values'
         | 'observed values match known device parameters'
         | `https://${string}`
-        | `http://${string}`;
+        | `http://${string}`
+        | `${string}.md`;
 };
 /**
  * An adapter that contains instructions on how to extract the tracking data included in a request to certain endpoints.
