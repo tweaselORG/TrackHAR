@@ -11,6 +11,7 @@ import { adapters as microsoft } from '../adapters/microsoft';
 import { adapters as mopub } from '../adapters/mopub';
 import { adapters as onesignal } from '../adapters/onesignal';
 import { adapters as rayjump } from '../adapters/rayjump';
+import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
 import { adapters as startIo } from '../adapters/start-io';
 import { adapters as unity } from '../adapters/unity';
@@ -31,6 +32,7 @@ export const allAdapters = [
     ...mopub,
     ...onesignal,
     ...rayjump,
+    ...singularNet,
     ...smartbear,
     ...startIo,
     ...unity,

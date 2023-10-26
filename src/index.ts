@@ -60,8 +60,10 @@ export type Property =
     | 'hashedIdfa'
     | 'idfa'
     | 'idfv'
+    | 'installTime'
     | 'isCharging'
     | 'isEmulator'
+    | 'isFirstLaunch'
     | 'isInDarkMode'
     | 'isInForeground'
     | 'isRoaming'
@@ -156,7 +158,13 @@ export type DataPath = {
      * An explanation of how we concluded that this is information is actually the type of data we labelled it as. This
      * can either be a standardized description, or a URL to a more in-depth research report.
      */
-    reasoning: 'obvious property name' | 'obvious observed values' | `https://${string}` | `http://${string}`;
+    reasoning:
+        | 'obvious property name'
+        | 'obvious observed values'
+        | 'observed values match known device parameters'
+        | `https://${string}`
+        | `http://${string}`
+        | `${string}.md`;
 };
 /**
  * An adapter that contains instructions on how to extract the tracking data included in a request to certain endpoints.
