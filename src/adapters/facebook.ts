@@ -24,7 +24,7 @@ const graphActivitiesDataPaths = ({
         {
             context: 'body',
             path: pathPrefix + 'anon_id',
-            reasoning: 'https://github.com/tweaselORG/TrackHAR/issues/27#issuecomment-1693282982',
+            reasoning: 'facebook/anon_id.md',
         },
         {
             context: 'body',
