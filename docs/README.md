@@ -59,7 +59,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:176](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L176)
+[index.ts:178](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L178)
 
 ___
 
@@ -89,7 +89,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:400](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L400)
+[index.ts:402](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L402)
 
 ___
 
@@ -139,7 +139,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:152](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L152)
+[index.ts:154](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L154)
 
 ___
 
@@ -175,7 +175,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:143](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L143)
+[index.ts:145](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L145)
 
 ___
 
@@ -188,7 +188,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:111](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L111)
+[index.ts:113](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L113)
 
 ___
 
@@ -216,7 +216,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:438](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L438)
+[index.ts:440](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L440)
 
 ___
 
@@ -241,13 +241,13 @@ process of a request.
 
 #### Defined in
 
-[index.ts:106](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L106)
+[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
 
 ___
 
 ### Property
 
-Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
+Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
 
 A type of tracking data that we can detect in a request.
 
@@ -300,7 +300,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:417](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L417)
+[index.ts:419](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L419)
 
 ___
 
@@ -345,7 +345,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:101](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L101)
+[index.ts:103](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L103)
 
 ## Variables
 
@@ -362,7 +362,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:489](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L489)
+[index.ts:491](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L491)
 
 ## Functions
 
@@ -390,7 +390,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:277](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L277)
+[index.ts:279](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L279)
 
 ___
 
@@ -419,7 +419,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:216](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L216)
+[index.ts:218](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L218)
 
 ___
 
@@ -457,7 +457,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:460](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L460)
+[index.ts:462](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L462)
 
 ___
 
@@ -486,4 +486,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:297](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L297)
+[index.ts:299](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L299)
