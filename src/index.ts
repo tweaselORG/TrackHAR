@@ -94,10 +94,10 @@ export type Property =
     | 'screenWidth'
     | 'signalStrengthCellular'
     | 'signalStrengthWifi'
-    | 'timeSpent'
     | 'startTime'
     // As in: subnational political entity
     | 'state'
+    | 'timeSpent'
     | 'timezone'
     | 'trackerSdkVersion'
     | 'uptime'
