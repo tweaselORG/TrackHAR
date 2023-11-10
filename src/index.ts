@@ -81,6 +81,7 @@ export type Property =
     | 'osVersion'
     | 'otherIdentifiers'
     | 'publicIp'
+    | 'pushNotificationToken'
     | 'ramFree'
     | 'ramTotal'
     | 'ramUsed'
