@@ -1,4 +1,6 @@
-# Unique tracking IDs
+{
+    "title": "Unique tracking IDs"
+}
 
 The `android_uuid`, `ios_uuid`, `persistent_ios_uuid`, and `web_uuid` properties are unique IDs for the device that Adjust generates on install and correlates with other device IDs.
 
