@@ -25,7 +25,8 @@
     "source": "src/index.ts",
     "types": "dist/index.d.ts",
     "files": [
-        "/dist"
+        "/dist",
+        "/i18n"
     ],
     "scripts": {
         "auto-archive": "tsx scripts/archive-links.ts",

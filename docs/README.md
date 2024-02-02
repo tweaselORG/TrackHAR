@@ -52,14 +52,16 @@ The first adapter that matches a request will be used to decode it.
 | :------ | :------ | :------ |
 | `containedDataPaths` | `Partial`<`Record`<[`Property`](README.md#property), [`ArrayOrSingle`](README.md#arrayorsingle)<[`DataPath`](README.md#datapath)\>\>\> | A description of how to extract the transmitted tracking data from the decoded object. |
 | `decodingSteps` | [`DecodingStep`](README.md#decodingstep)[] | An array of the steps (in order) used to decode the request into an object format. |
+| `description?` | keyof typeof `translations`[``"tracker-descriptions"``] | TODO. |
 | `endpointUrls` | (`string` \| `RegExp`)[] | The endpoints that this adapter can handle. Each entry can either be a string (which will have to be equal to the full endpoint URL in the request) or a regular expression that is matched against the endpoint URL. The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query string. |
 | `match?` | (`r`: [`Request`](README.md#request)) => `boolean` \| `undefined` | An optional function to further filter which requests can be handled by this adapter. This is useful if there are multiple adapters for one endpoint that handle different request formats. |
+| `name?` | `string` | A human-readable name for the adapter. |
 | `slug` | `string` | A slug to identify the adapter. These only need to be unique per tracker, not globally. |
 | `tracker` | [`Tracker`](README.md#tracker) | The tracking company behind these endpoints. |
 
 #### Defined in
 
-[index.ts:190](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L190)
+[index.ts:130](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L130)
 
 ___
 
@@ -89,7 +91,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:418](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L418)
+[index.ts:362](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L362)
 
 ___
 
@@ -119,7 +121,7 @@ A part of a request, to explain where some information was found.
 
 #### Defined in
 
-[index.ts:20](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L20)
+[index.ts:21](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L21)
 
 ___
 
@@ -139,7 +141,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:166](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L166)
+[index.ts:106](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L106)
 
 ___
 
@@ -175,7 +177,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:150](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L150)
+[index.ts:90](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L90)
 
 ___
 
@@ -188,7 +190,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:118](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L118)
+[index.ts:58](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L58)
 
 ___
 
@@ -216,7 +218,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:456](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L456)
+[index.ts:400](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L400)
 
 ___
 
@@ -228,7 +230,7 @@ A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath.
 
 #### Defined in
 
-[index.ts:13](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L13)
+[index.ts:14](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L14)
 
 ___
 
@@ -241,13 +243,13 @@ process of a request.
 
 #### Defined in
 
-[index.ts:113](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L113)
+[index.ts:53](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L53)
 
 ___
 
 ### Property
 
-Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"revenue"`` \| ``"referer"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
+Ƭ **Property**: keyof typeof `translations`[``"properties"``]
 
 A type of tracking data that we can detect in a request.
 
@@ -256,7 +258,7 @@ by the tracker.
 
 #### Defined in
 
-[index.ts:45](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L45)
+[index.ts:46](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L46)
 
 ___
 
@@ -300,7 +302,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:435](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L435)
+[index.ts:379](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L379)
 
 ___
 
@@ -321,7 +323,7 @@ A tracking company that we have adapters for.
 
 #### Defined in
 
-[index.ts:23](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L23)
+[index.ts:24](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L24)
 
 ___
 
@@ -333,7 +335,7 @@ Some value transmitted by a tracker. We don't have any type information about it
 
 #### Defined in
 
-[index.ts:17](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L17)
+[index.ts:18](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L18)
 
 ___
 
@@ -345,7 +347,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
+[index.ts:48](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L48)
 
 ## Variables
 
@@ -362,7 +364,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:507](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L507)
+[index.ts:451](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L451)
 
 ## Functions
 
@@ -390,7 +392,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:295](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L295)
+[index.ts:239](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L239)
 
 ___
 
@@ -419,13 +421,13 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:230](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L230)
+[index.ts:174](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L174)
 
 ___
 
 ### process
 
-▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 Parse the requests in a HAR traffic dump and extract tracking data.
 
@@ -444,12 +446,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
 #### Returns
 
-`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
   (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
@@ -457,7 +459,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:478](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L478)
+[index.ts:422](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L422)
 
 ___
 
@@ -478,7 +480,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
 
@@ -486,4 +488,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:315](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L315)
+[index.ts:259](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L259)

@@ -151,6 +151,15 @@ With this, we can see that our device's advertising ID was transmitted in the fi
 
 In this case, it was not transmitted as plain text but base64-encoded. TrackHAR was still able to detect it. The `path` indicates the index into the body where the IDFA was found.
 
+Finally, TrackHAR bundles translations that map our standardized property names to human-readable descriptions. You can use those like this:
+
+```ts
+import { properties as propertyTranslationsEn } from 'trackhar/i18n/en.json';
+
+console.log(propertyTranslationsEn.diskTotal);
+// => "Total disk space"
+```
+
 ## Contributing adapters
 
 As stated, TrackHAR uses so-called adapters to detect tracking traffic. They are JavaScript objects defining a decoding algorithm for the request and the paths to the transmitted data in the decoded request. For each endpoint of a tracker, a separate adapter needs to be defined. To determine which adapter fits a request, the URL is matched against the `endpointUrls` of the adapter, which can either just use string matching or a regular expression. If one of the endpoints matches, the adapter is chosen to analyze the request. Where the same endpoint expects different data formats, multiple adapters with identical `endpointUrls` might be required. In that case, the `match` function of an adapter will be used to determine which adapter to apply to a request. The first adapter to return `true` in its matching method is chosen. Only one adapter can match a request at a time.
@@ -212,7 +221,7 @@ To extract the data from the decoded request, the adapter specifies the path in 
 
 Properties in `containedDataPaths` may also contain an array of several `DataPath`s, because one data type might be found in several places in a request, e.g. the `language` might be part of the `query` but also a property in the `body`. If a property in a request contains more than one data type, it should be mentioned in all of these data types. For example, a property `body.platform` might contain a value like `Android 13.2`, which contains the `osName` as well as the `osVersion`. In this case, you’ll need to add the path `body.platform` to both of these properties in the `containedDataPaths`.
 
-In case you come across a data type that is not defined in the types yet, add your data type to the `Property` type in the `index.ts`. Give it an obvious, camelCased name and also a human-readable description in the [tracker-wiki translations](https://github.com/tweaselORG/tracker-wiki/tree/main/i18n).
+In case you come across a data type that is not defined in the types yet, give it an obvious, camelCased name and add that together with a human-readable description to the translations files in the `i18n` folder under `properties`.
 
 ### Debugging adapters
 
