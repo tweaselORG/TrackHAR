@@ -2,7 +2,7 @@
 import deepmerge from 'deepmerge';
 import { writeFile } from 'fs/promises';
 import { allAdapters } from '../src/common/adapters';
-import { debugAdapter, mergeAdapterResults } from './lib/debug';
+import { loadTestDataFromDb, mergeTestDataResults } from './lib/test-data';
 
 const adapterArgument = process.argv[2];
 if (!adapterArgument) throw new Error('You need to specify the adapter as the first argument.');
@@ -14,11 +14,11 @@ const mergeResult = process.argv.includes('--merge-result');
     const adapter = allAdapters.find((a) => a.tracker.slug === trackerSlug && a.slug === adapterSlug);
     if (!adapter) throw new Error(`Adapter ${adapterSlug} not found.`);
 
-    const { adapterResults, decodingResults } = await debugAdapter(adapter);
+    const { adapterResults, decodingResults } = await loadTestDataFromDb(adapter);
 
     // We print the adapter results to the console and save the deepmerged decoding results to a file.
     if (mergeResult) {
-        console.dir(mergeAdapterResults(adapterResults), { depth: null });
+        console.dir(mergeTestDataResults(adapterResults), { depth: null });
     } else {
         for (const r of adapterResults) {
             console.dir(r, { depth: null });
