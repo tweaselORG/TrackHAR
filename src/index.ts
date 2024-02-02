@@ -3,6 +3,7 @@ import escapeStringRegexp from 'escape-string-regexp';
 import type { Har } from 'har-format';
 import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
+import type translations from '../i18n/en.json';
 import { allAdapters } from './common/adapters';
 import { decodeFunctions } from './common/decode-functions';
 import type { Request } from './common/request';
@@ -42,68 +43,7 @@ export type Tracker = {
  * These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
  * by the tracker.
  */
-export type Property =
-    | 'accelerometerX'
-    | 'accelerometerY'
-    | 'accelerometerZ'
-    | 'appId'
-    | 'appName'
-    | 'appVersion'
-    | 'architecture'
-    | 'batteryLevel'
-    | 'carrier'
-    | 'country'
-    | 'deviceName'
-    | 'diskFree'
-    | 'diskTotal'
-    | 'diskUsed'
-    | 'hashedIdfa'
-    | 'idfa'
-    | 'idfv'
-    | 'installTime'
-    | 'isCharging'
-    | 'isEmulator'
-    | 'isFirstLaunch'
-    | 'isInDarkMode'
-    | 'isInForeground'
-    | 'isRoaming'
-    | 'isRooted'
-    | 'language'
-    | 'latitude'
-    | 'localIp'
-    | 'longitude'
-    | 'macAddress'
-    | 'manufacturer'
-    | 'model'
-    | 'networkConnectionType'
-    | 'orientation'
-    | 'osName'
-    | 'osVersion'
-    | 'otherIdentifiers'
-    | 'publicIp'
-    | 'pushNotificationToken'
-    | 'ramFree'
-    | 'ramTotal'
-    | 'ramUsed'
-    | 'revenue'
-    | 'referer'
-    | 'rotationX'
-    | 'rotationY'
-    | 'rotationZ'
-    | 'screenHeight'
-    | 'screenWidth'
-    | 'signalStrengthCellular'
-    | 'signalStrengthWifi'
-    | 'startTime'
-    // As in: subnational political entity
-    | 'state'
-    | 'timeSpent'
-    | 'timezone'
-    | 'trackerSdkVersion'
-    | 'uptime'
-    | 'userAgent'
-    | 'viewedPage'
-    | 'volume';
+export type Property = keyof (typeof translations)['properties'];
 /** A variable on the global state used in the decoding process of a request. This doesn't allow nested property access. */
 export type Variable = LiteralUnion<Context | 'res', string>;
 /**
