@@ -3,7 +3,22 @@ import { fetch } from 'cross-fetch';
 import deepmerge from 'deepmerge';
 import { adapterForRequest, decodeRequest, processRequest, type Adapter, type Request } from '../../src';
 
-export const debugAdapter = async (adapter: Adapter, options?: { accumulateToPath?: boolean; rowLimit?: number }) => {
+type LoadTestDataOptions = {
+    /** Whether to return an object where the results are grouped by the path or as single results. */
+    accumulateToPath?: boolean;
+    /** The maximum number of requests to load. Defaults to `max` which loads all entries in the database. */
+    rowLimit?: number;
+};
+
+/**
+ * Loads test requests concerning the given adapter from the online database and processes them in it.
+ *
+ * @param adapter The adapter to load and process requests for.
+ * @param options Options for loading the adapters.
+ *
+ * @returns An object containing the processed `adapterResults` and only the decoded request in `decodingResults`.
+ */
+export const loadTestDataFromDb = async (adapter: Adapter, options?: LoadTestDataOptions) => {
     // Fetch requests from Datasette.
     const adapterClauses = adapter.endpointUrls.map((u) =>
         u instanceof RegExp
@@ -21,14 +36,14 @@ export const debugAdapter = async (adapter: Adapter, options?: { accumulateToPat
     )}&_json=headers&_json=cookies&_nocol=initiator&_nocol=platform&_nocol=runType&_nofacet=1&_nosuggest=1&_nocount=1&_size=${
         options?.rowLimit || 'max'
     }`;
-    while (nextUrl && options?.rowLimit && requests.length < options?.rowLimit) {
+    while (nextUrl && (!options?.rowLimit || requests.length < options.rowLimit)) {
         const res = await fetch(nextUrl).then((r) => r.json());
         requests.push(...res.rows);
         nextUrl = res.next_url;
     }
 
     const requestsForAdapter = requests
-        // And if the content is binary, Datasette encodes it as base64
+        // If the content is binary, Datasette encodes it as base64
         // (https://docs.datasette.io/en/stable/binary_data.html).
         .map((r) => {
             const content = r.content as string | { $base64: true; encoded: string } | undefined;
@@ -63,8 +78,8 @@ export const debugAdapter = async (adapter: Adapter, options?: { accumulateToPat
     return { adapterResults, decodingResults };
 };
 
-export const mergeAdapterResults = (adapterResults: (Record<string, unknown[]> | undefined)[]) => {
-    const mergedResult = deepmerge.all(adapterResults.filter(Boolean) as Record<string, unknown[]>[]);
+export const mergeTestDataResults = (testDataResults: (Record<string, unknown[]> | undefined)[]) => {
+    const mergedResult = deepmerge.all(testDataResults.filter(Boolean) as Record<string, unknown[]>[]);
     for (const key of Object.keys(mergedResult)) mergedResult[key] = [...new Set(mergedResult[key] as unknown[])];
     return mergedResult;
 };
