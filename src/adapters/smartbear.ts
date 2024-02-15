@@ -3,12 +3,16 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'smartbear',
     name: 'SmartBear Software',
+    description: 'smartbear-bugsnag',
     exodusId: 207,
 };
 
 export const adapters: Adapter[] = [
     {
         slug: 'bugsnag-sessions',
+        // See: https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting
+        name: 'BugSnag Session Tracking API',
+        description: 'smartbear-bugsnag-session',
         tracker,
 
         endpointUrls: ['https://sessions.bugsnag.com/'],
@@ -255,6 +259,9 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'bugsnag-notify',
+        // See: https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports
+        name: 'BugSnag Error Reporting API (Notify)',
+        description: 'smartbear-bugsnag-notify',
         tracker,
 
         endpointUrls: ['https://notify.bugsnag.com/'],

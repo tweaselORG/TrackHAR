@@ -9,6 +9,7 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'logs',
+        name: 'ironSource logs',
         tracker,
 
         endpointUrls: ['https://logs.ironsrc.mobi/logs'],

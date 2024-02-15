@@ -3,12 +3,14 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'singular-net',
     name: 'Singular Labs, Inc.',
+    description: 'singular-net',
     exodusId: 251,
 };
 
 export const adapters: Adapter[] = [
     {
         slug: 'api-v1',
+        name: 'Singular API v1',
         tracker,
 
         endpointUrls: [

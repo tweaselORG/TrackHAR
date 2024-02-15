@@ -307,6 +307,8 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
 export const adapters: Adapter[] = [
     {
         slug: 'graph-activities-json',
+        name: 'Facebook Graph App Events API (JSON)',
+        description: 'facebook-graph-app-events',
         tracker,
 
         endpointUrls: [graphActivitiesEndpointRegex],
@@ -321,6 +323,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'graph-activities-qs',
+        name: 'Facebook Graph App Events API (query string)',
+        description: 'facebook-graph-app-events',
         tracker,
 
         endpointUrls: [graphActivitiesEndpointRegex],
@@ -335,6 +339,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'graph',
+        name: 'Facebook Graph Batch API',
+        description: 'facebook-graph-app-events',
         tracker,
 
         endpointUrls: [/^https:\/\/graph\.facebook\.com\/v\d{1,2}.\d$/],
@@ -360,6 +366,9 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'graph-network-ads-common',
+        // See: https://developers.facebook.com/docs/audience-network/setting-up/test/validate-ad-requests/#view-ad-requests
+        name: 'Meta Audience Network SDK',
+        description: 'facebook-audience-network',
         tracker,
 
         endpointUrls: ['https://graph.facebook.com/network_ads_common'],
@@ -374,6 +383,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'adnw-sync2',
+        name: 'Facebook Ad Network Sync 2',
         tracker,
 
         endpointUrls: [/^https:\/\/(www|web)\.facebook\.com\/adnw_sync2?$/],

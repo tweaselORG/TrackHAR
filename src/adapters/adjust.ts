@@ -3,6 +3,7 @@ import type { Adapter, Context, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'adjust',
     name: 'Adjust GmbH',
+    description: 'adjust',
     datenanfragenSlug: 'adjust-com',
     exodusId: 52,
 };
@@ -140,6 +141,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
 export const adapters: Adapter[] = [
     {
         slug: 'body',
+        name: 'Adjust (POST body)',
         tracker,
 
         endpointUrls: [
@@ -201,6 +203,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'qs',
+        name: 'Adjust (query string)',
         tracker,
 
         endpointUrls: [
