@@ -10,6 +10,7 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'unityads-games',
+        name: 'Unity Ads',
         tracker,
 
         endpointUrls: [

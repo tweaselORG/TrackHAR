@@ -10,6 +10,7 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'adc3-launch',
+        name: 'AdColony (adc3-launch)',
         tracker,
 
         endpointUrls: ['https://adc3-launch.adcolony.com/v4/launch'],
@@ -168,6 +169,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'configure',
+        name: 'AdColony (configure)',
         tracker,
 
         endpointUrls: [/^https:\/\/(android|ios)?ads\d-?\d\.adcolony\.com\/configure$/],

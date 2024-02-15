@@ -3,6 +3,7 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'chartboost',
     name: 'Chartboost, Inc.',
+    description: 'chartboost',
     datenanfragenSlug: 'chartboost',
     exodusId: 53,
 };
@@ -10,6 +11,8 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'live-unnested',
+        // See: https://docs.chartboost.com/en/monetization/charles-web-proxy/#interpreting-charles-results
+        name: 'Chartboost initialization calls',
         tracker,
 
         endpointUrls: [
@@ -156,6 +159,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'live-nested',
+        name: 'Chartboost ad view',
         tracker,
 
         endpointUrls: [

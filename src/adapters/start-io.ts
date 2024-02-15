@@ -163,6 +163,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
 export const adapters: Adapter[] = [
     {
         slug: 'infoevent',
+        name: 'Start.io (infoevent)',
         tracker,
 
         endpointUrls: [
@@ -176,6 +177,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'trackdownload',
+        name: 'Start.io (trackdownload)',
         tracker,
 
         endpointUrls: ['https://trackdownload.startappservice.com/trackdownload/api/1.0/trackdownload'],

@@ -20,6 +20,7 @@ trackhar
 - [Request](README.md#request)
 - [Result](README.md#result)
 - [Tracker](README.md#tracker)
+- [TrackerDescriptionTranslationKey](README.md#trackerdescriptiontranslationkey)
 - [TrackingDataValue](README.md#trackingdatavalue)
 - [Variable](README.md#variable)
 
@@ -52,16 +53,16 @@ The first adapter that matches a request will be used to decode it.
 | :------ | :------ | :------ |
 | `containedDataPaths` | `Partial`<`Record`<[`Property`](README.md#property), [`ArrayOrSingle`](README.md#arrayorsingle)<[`DataPath`](README.md#datapath)\>\>\> | A description of how to extract the transmitted tracking data from the decoded object. |
 | `decodingSteps` | [`DecodingStep`](README.md#decodingstep)[] | An array of the steps (in order) used to decode the request into an object format. |
-| `description?` | keyof typeof `translations`[``"tracker-descriptions"``] | TODO. |
+| `description?` | [`TrackerDescriptionTranslationKey`](README.md#trackerdescriptiontranslationkey) | The translation key for a description that gives context on the endpoint, if that makes sense. |
 | `endpointUrls` | (`string` \| `RegExp`)[] | The endpoints that this adapter can handle. Each entry can either be a string (which will have to be equal to the full endpoint URL in the request) or a regular expression that is matched against the endpoint URL. The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query string. |
 | `match?` | (`r`: [`Request`](README.md#request)) => `boolean` \| `undefined` | An optional function to further filter which requests can be handled by this adapter. This is useful if there are multiple adapters for one endpoint that handle different request formats. |
-| `name?` | `string` | A human-readable name for the adapter. |
+| `name` | `string` | A human-readable name for the adapter. This should be as close as possible to the official name for the endpoint. |
 | `slug` | `string` | A slug to identify the adapter. These only need to be unique per tracker, not globally. |
 | `tracker` | [`Tracker`](README.md#tracker) | The tracking company behind these endpoints. |
 
 #### Defined in
 
-[index.ts:130](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L130)
+[index.ts:144](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L144)
 
 ___
 
@@ -91,7 +92,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:362](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L362)
+[index.ts:376](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L376)
 
 ___
 
@@ -121,7 +122,7 @@ A part of a request, to explain where some information was found.
 
 #### Defined in
 
-[index.ts:21](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L21)
+[index.ts:30](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L30)
 
 ___
 
@@ -141,7 +142,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:106](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L106)
+[index.ts:120](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L120)
 
 ___
 
@@ -177,7 +178,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:90](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L90)
+[index.ts:104](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L104)
 
 ___
 
@@ -190,7 +191,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:58](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L58)
+[index.ts:72](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L72)
 
 ___
 
@@ -218,7 +219,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:400](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L400)
+[index.ts:414](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L414)
 
 ___
 
@@ -243,7 +244,7 @@ process of a request.
 
 #### Defined in
 
-[index.ts:53](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L53)
+[index.ts:67](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L67)
 
 ___
 
@@ -258,7 +259,7 @@ by the tracker.
 
 #### Defined in
 
-[index.ts:46](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L46)
+[index.ts:60](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L60)
 
 ___
 
@@ -302,7 +303,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:379](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L379)
+[index.ts:393](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L393)
 
 ___
 
@@ -317,13 +318,30 @@ A tracking company that we have adapters for.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `datenanfragenSlug?` | `string` | The slug of the tracking company in the [Datenanfragen.de company database](https://www.datarequests.org/company) (if available). |
+| `description?` | [`TrackerDescriptionTranslationKey`](README.md#trackerdescriptiontranslationkey) | The translation key for an introductory description that gives context on the tracking company, if that makes sense and the description applies equally to all adapters assigned to the company. |
 | `exodusId?` | `number` | The numeric ID of the tracker in the [Exodus tracker database](https://reports.exodus-privacy.eu.org/en/trackers/) (if available). |
 | `name` | `string` | The legal name of the tracking company. |
 | `slug` | `string` | A slug to identify the tracker. |
 
 #### Defined in
 
-[index.ts:24](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L24)
+[index.ts:33](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L33)
+
+___
+
+### TrackerDescriptionTranslationKey
+
+Ƭ **TrackerDescriptionTranslationKey**: keyof typeof `translations`[``"tracker-descriptions"``]
+
+A translation key for a tracker description, either for a [Tracker](README.md#tracker) or for an [Adapter](README.md#adapter). At least the
+English translation for the actual description needs to be provided in `i18n/en.json`.
+
+See the [README](https://github.com/tweaselORG/TrackHAR/blob/main/README.md#tracker-and-adapter-descriptions) for
+additional details on the contents and markup.
+
+#### Defined in
+
+[index.ts:23](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L23)
 
 ___
 
@@ -335,7 +353,7 @@ Some value transmitted by a tracker. We don't have any type information about it
 
 #### Defined in
 
-[index.ts:18](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L18)
+[index.ts:27](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L27)
 
 ___
 
@@ -347,7 +365,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:48](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L48)
+[index.ts:62](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L62)
 
 ## Variables
 
@@ -364,7 +382,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:451](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L451)
+[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
 
 ## Functions
 
@@ -392,7 +410,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:239](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L239)
+[index.ts:253](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L253)
 
 ___
 
@@ -421,7 +439,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:174](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L174)
+[index.ts:188](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L188)
 
 ___
 
@@ -459,7 +477,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:422](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L422)
+[index.ts:436](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L436)
 
 ___
 
@@ -488,4 +506,4 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:259](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L259)
+[index.ts:273](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L273)
