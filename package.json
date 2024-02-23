@@ -57,6 +57,7 @@
     "dependencies": {
         "@types/har-format": "^1.2.10",
         "base64-search": "^1.0.0",
+        "buffer": "^6.0.3",
         "cross-dirname": "^0.1.0",
         "escape-string-regexp": "^5.0.0",
         "fflate": "^0.8.0",
