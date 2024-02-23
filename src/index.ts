@@ -506,4 +506,5 @@ export const process = async <ValuesOnly extends boolean = false>(
 // Somehow export ... from './common/adapters' breaks the typedef, so we use this
 export const adapters = allAdapters;
 
+export { unhar };
 export { ArrayOrSingle, Request };

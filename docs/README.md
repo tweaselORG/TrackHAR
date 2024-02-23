@@ -33,6 +33,7 @@ trackhar
 - [decodeRequest](README.md#decoderequest)
 - [process](README.md#process)
 - [processRequest](README.md#processrequest)
+- [unhar](README.md#unhar)
 
 ## Type Aliases
 
@@ -487,3 +488,25 @@ This is not needed for the main purposes of this library, but can be useful for 
 #### Defined in
 
 [index.ts:315](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L315)
+
+___
+
+### unhar
+
+▸ **unhar**(`har`): [`Request`](README.md#request)[]
+
+Parse a traffic dump in HAR format into our internal request representation.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `har` | `Har` | The HAR traffic dump. |
+
+#### Returns
+
+[`Request`](README.md#request)[]
+
+#### Defined in
+
+[common/request.ts:34](https://github.com/tweaselORG/TrackHAR/blob/main/src/common/request.ts#L34)
