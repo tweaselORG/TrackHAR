@@ -10,6 +10,7 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'api-new',
+        name: 'Vungle SDK (api/new)',
         tracker,
 
         endpointUrls: [/^https:\/\/api\.vungle.com\/api\/v\d\/new$/],
@@ -26,6 +27,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'api-ads',
+        name: 'Vungle SDK (api/ads)',
         tracker,
 
         endpointUrls: [

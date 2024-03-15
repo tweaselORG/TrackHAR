@@ -4,6 +4,7 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'infonline',
     name: 'INFOnline GmbH',
+    description: 'infonline',
     datenanfragenSlug: 'infonline-de',
     exodusId: 197,
 };
@@ -223,6 +224,7 @@ const ioamTxQueryDataPaths: Adapter['containedDataPaths'] = {
 export const adapters: Adapter[] = [
     {
         slug: 'ioam',
+        name: 'INFOnline Measurement',
         tracker,
 
         endpointUrls: ['https://config.ioam.de/appcfg.php'],
@@ -233,6 +235,9 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'ioam-tx-query',
+        // See: https://www.infonline.de/publisher/
+        name: 'INFOnline Measurement pseudonymous (query string)',
+        description: 'infonline-pseudonymous',
         tracker,
 
         endpointUrls: ['https://de.ioam.de/tx.io', 'https://at.iocnt.net/tx.io'],
@@ -257,6 +262,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'ioam-tx-body-gzip',
+        name: 'INFOnline Measurement pseudonymous (GZIP body)',
+        description: 'infonline-pseudonymous',
         tracker,
 
         endpointUrls: ['https://de.ioam.de/tx.io', 'https://at.iocnt.net/tx.io'],
@@ -284,6 +291,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'ioam-tx-body-json',
+        name: 'INFOnline Measurement pseudonymous (JSON body)',
+        description: 'infonline-pseudonymous',
         tracker,
 
         endpointUrls: ['https://de.ioam.de/tx.io', 'https://at.iocnt.net/tx.io'],

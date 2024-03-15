@@ -101,6 +101,7 @@ const containedDataPathsDoubleclickMadsGma = (context: Context): Adapter['contai
 export const adapters: Adapter[] = [
     {
         slug: 'app-measurement',
+        name: 'Google Analytics for Firebase (app-measurement.com)',
         tracker,
 
         endpointUrls: ['https://app-measurement.com/a'],
@@ -150,6 +151,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'device-provisioning-checkin',
+        // See: https://github.com/firebase/firebase-ios-sdk/blob/ab0d0854a3682f14c0ee26859469cb4b1636d5e1/FirebaseMessaging/Sources/Token/FIRMessagingCheckinService.m#L27
+        name: 'Firebase Cloud Messaging (device checkin)',
         tracker,
 
         endpointUrls: ['https://device-provisioning.googleapis.com/checkin'],
@@ -197,6 +200,8 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'fcmtoken-register',
+        // See: https://github.com/firebase/firebase-ios-sdk/blob/ab0d0854a3682f14c0ee26859469cb4b1636d5e1/FirebaseMessaging/Sources/FIRMessagingUtilities.m#L41
+        name: 'Firebase Cloud Messaging (register token)',
         tracker,
 
         endpointUrls: ['https://fcmtoken.googleapis.com/register'],
@@ -237,6 +242,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'doubleclick-mads-gma-body',
+        name: 'Google Mobile Ads SDK (DoubleClick, body)',
         tracker,
 
         endpointUrls: ['https://googleads.g.doubleclick.net/mads/gma'],
@@ -248,6 +254,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'doubleclick-mads-gma-qs',
+        name: 'Google Mobile Ads SDK (DoubleClick, query string)',
         tracker,
 
         endpointUrls: ['https://googleads.g.doubleclick.net/mads/gma'],
