@@ -262,4 +262,95 @@ export const adapters: Adapter[] = [
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
         containedDataPaths: containedDataPathsDoubleclickMadsGma('query'),
     },
+
+    {
+        slug: 'fundingchoicesmessages',
+        name: 'Privacy & Messaging API',
+        description: 'google-fundingchoices',
+        tracker,
+
+        endpointUrls: ['https://fundingchoicesmessages.google.com/a/consent'],
+
+        decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
+        containedDataPaths: {
+            idfa: {
+                context: 'body',
+                path: 'adid',
+                reasoning: 'observed values match known device parameters',
+            },
+
+            osName: {
+                context: 'body',
+                path: 'device_info.os_type',
+                reasoning: 'google/device_info.os_type.md',
+            },
+
+            model: {
+                context: 'body',
+                path: 'device_info.model',
+                reasoning: 'obvious property name',
+            },
+
+            osVersion: [
+                {
+                    context: 'body',
+                    path: 'device_info.android_api_level',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'device_info.version',
+                    reasoning: 'observed values match known device parameters',
+                },
+            ],
+
+            language: {
+                context: 'body',
+                path: 'language_code',
+                reasoning: 'obvious property name',
+            },
+
+            screenWidth: {
+                context: 'body',
+                path: 'screen_info.width',
+                reasoning: 'obvious property name',
+            },
+
+            screenHeight: {
+                context: 'body',
+                path: 'screen_info.height',
+                reasoning: 'obvious property name',
+            },
+
+            appId: {
+                context: 'body',
+                path: 'app_info.package_name',
+                reasoning: 'obvious property name',
+            },
+
+            appName: {
+                context: 'body',
+                path: 'app_info.publisher_display_name',
+                reasoning: 'obvious property name',
+            },
+
+            appVersion: {
+                context: 'body',
+                path: 'app_info.version',
+                reasoning: 'obvious property name',
+            },
+
+            trackerSdkVersion: {
+                context: 'body',
+                path: 'sdk_info.version',
+                reasoning: 'obvious property name',
+            },
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'rdid',
+                reasoning: 'google/rdid.md',
+            },
+        },
+    },
 ];
