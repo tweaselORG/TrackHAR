@@ -418,4 +418,36 @@ export const adapters: Adapter[] = [
             },
         },
     },
+
+    {
+        slug: 'doubleclick-pagead-interaction',
+        name: 'DoubleClick (pagead/interaction)',
+        tracker,
+
+        endpointUrls: ['https://googleads.g.doubleclick.net/pagead/interaction/'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.IDE', options: { path: 'IDE' } },
+            {
+                function: 'getProperty',
+                input: 'header',
+                output: 'res.header.x-requested-with',
+                options: { path: 'x-requested-with' },
+            },
+        ],
+        containedDataPaths: {
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
 ];
