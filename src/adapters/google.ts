@@ -96,6 +96,12 @@ const containedDataPathsDoubleclickMadsGma = (context: Context): Adapter['contai
         path: 'dtsdk',
         reasoning: 'obvious property name',
     },
+
+    otherIdentifiers: {
+        context: 'cookie',
+        path: 'IDE',
+        reasoning: 'google/IDE.md',
+    },
 });
 
 export const adapters: Adapter[] = [
@@ -248,7 +254,10 @@ export const adapters: Adapter[] = [
         endpointUrls: ['https://googleads.g.doubleclick.net/mads/gma'],
         match: (r) => !!r.content,
 
-        decodingSteps: [{ function: 'parseQueryString', input: 'body', output: 'res.body' }],
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.IDE', options: { path: 'IDE' } },
+        ],
         containedDataPaths: containedDataPathsDoubleclickMadsGma('body'),
     },
 
@@ -259,8 +268,64 @@ export const adapters: Adapter[] = [
 
         endpointUrls: ['https://googleads.g.doubleclick.net/mads/gma'],
 
-        decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
-        containedDataPaths: containedDataPathsDoubleclickMadsGma('query'),
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.IDE', options: { path: 'IDE' } },
+        ],
+        containedDataPaths: {
+            ...containedDataPathsDoubleclickMadsGma('query'),
+
+            appVersion: {
+                context: 'query',
+                path: 'vnm',
+                reasoning: 'google/vnm.md',
+            },
+        },
+    },
+
+    {
+        slug: 'doubleclick-getconfig-pubsetting',
+        name: 'DoubleClick (getconfig/pubsetting)',
+        tracker,
+
+        endpointUrls: ['https://googleads.g.doubleclick.net/getconfig/pubsetting'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            {
+                function: 'getProperty',
+                input: 'header',
+                output: 'res.header.x-requested-with',
+                options: { path: 'x-requested-with' },
+            },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie.IDE', options: { path: 'IDE' } },
+        ],
+        containedDataPaths: {
+            appId: [
+                {
+                    context: 'query',
+                    path: 'app_name',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'header',
+                    path: 'x-requested-with',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            appVersion: {
+                context: 'query',
+                path: 'vnm',
+                reasoning: 'google/vnm.md',
+            },
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
     },
 
     {
