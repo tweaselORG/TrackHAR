@@ -1,0 +1,56 @@
+The `idToken` property contains a JWT token that is used to identify and authenticate the user. The token at least contains a unique user ID. It can also be linked with and include additional information like an email address.
+
+### Example without additional information
+
+[Token](https://data.tweasel.org/data/requests/monkey-july-2023,8131):
+
+`eyJhbGciOiJSUzI1NiIsImtpZCI6ImIyZGZmNzhhMGJkZDVhMDIyMTIwNjM0OTlkNzdlZjRkZWVkMWY2NWIiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9zcGVlY2hpZnltb2JpbGUiLCJhdWQiOiJzcGVlY2hpZnltb2JpbGUiLCJhdXRoX3RpbWUiOjE2OTA0MTQzOTgsInVzZXJfaWQiOiJqUkJSNTBzZEpEVHo3SURSbjk0dXBQQUh3akkyIiwic3ViIjoialJCUjUwc2RKRFR6N0lEUm45NHVwUEFId2pJMiIsImlhdCI6MTY5MDQxNDM5OCwiZXhwIjoxNjkwNDE3OTk4LCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7fSwic2lnbl9pbl9wcm92aWRlciI6ImFub255bW91cyJ9fQ.OJq6IblUtrXcdaA9PYCDzCFoT527U8umn-UGdMBJOA33wT_GhlEeK-i0uc0LHj--OcrSiSrAZ2cc3uharZ3ZAm2ZXP89o-_zaCn1HY7dnnK2unNvyBSjqzast5NKNZD9wt_UbWNA8QEPeOsMMoQfipE_j-qJsHwgF3C6ehcm0Yr_1cMyu5wpJjvq-siIIQXAlPovE7G4emwJS2IMsty-8KjsKXeTRJ_Al_w8-mBI2XIN_xuDt_v5FG8XfioalP6AkCw34QNhUXOuu8EtzYQFiMuRNYxVqRB2BSOvAEvuXfnS-fFENN14sMIR9aBsoWZeu86QtHyPn46B2zXeah9kEw`
+
+[Decoded](https://cyberchef.bn.al/#recipe=JWT_Decode()&input=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkltSXlaR1ptTnpoaE1HSmtaRFZoTURJeU1USXdOak0wT1Rsa056ZGxaalJrWldWa01XWTJOV0lpTENKMGVYQWlPaUpLVjFRaWZRLmV5SndjbTkyYVdSbGNsOXBaQ0k2SW1GdWIyNTViVzkxY3lJc0ltbHpjeUk2SW1oMGRIQnpPaTh2YzJWamRYSmxkRzlyWlc0dVoyOXZaMnhsTG1OdmJTOXpjR1ZsWTJocFpubHRiMkpwYkdVaUxDSmhkV1FpT2lKemNHVmxZMmhwWm5sdGIySnBiR1VpTENKaGRYUm9YM1JwYldVaU9qRTJPVEEwTVRRek9UZ3NJblZ6WlhKZmFXUWlPaUpxVWtKU05UQnpaRXBFVkhvM1NVUlNiamswZFhCUVFVaDNha2t5SWl3aWMzVmlJam9pYWxKQ1VqVXdjMlJLUkZSNk4wbEVVbTQ1TkhWd1VFRklkMnBKTWlJc0ltbGhkQ0k2TVRZNU1EUXhORE01T0N3aVpYaHdJam94Tmprd05ERTNPVGs0TENKbWFYSmxZbUZ6WlNJNmV5SnBaR1Z1ZEdsMGFXVnpJanA3ZlN3aWMybG5ibDlwYmw5d2NtOTJhV1JsY2lJNkltRnViMjU1Ylc5MWN5SjlmUS5PSnE2SWJsVXRyWGNkYUE5UFlDRHpDRm9UNTI3VTh1bW4tVUdkTUJKT0EzM3dUX0dobEVlSy1pMHVjMExIai0tT2NyU2lTckFaMmNjM3VoYXJaM1pBbTJaWFA4OW8tX3phQ24xSFk3ZG5uSzJ1bk52eUJTanF6YXN0NU5LTlpEOXd0X1ViV05BOFFFUGVPc01Nb1FmaXBFX2otcUpzSHdnRjNDNmVoY20wWXJfMWNNeXU1d3BKanZxLXNpSUlRWEFsUG92RTdHNGVtd0pTMklNc3R5LThLanNLWGVUUkpfQWxfdzgtbUJJMlhJTl94dUR0X3Y1Rkc4WGZpb2FsUDZBa0N3MzRRTmhVWE91dThFdHpZUUZpTXVSTll4VnFSQjJCU092QUV2dVhmblMtZkZFTk4xNHNNSVI5YUJzb1daZXU4NlF0SHlQbjQ2QjJ6WGVhaDlrRXc):
+
+```json
+{
+    "provider_id": "anonymous",
+    "iss": "https://securetoken.google.com/speechifymobile",
+    "aud": "speechifymobile",
+    "auth_time": 1690414398,
+    "user_id": "jRBR50sdJDTz7IDRn94upPAHwjI2",
+    "sub": "jRBR50sdJDTz7IDRn94upPAHwjI2",
+    "iat": 1690414398,
+    "exp": 1690417998,
+    "firebase": {
+        "identities": {},
+        "sign_in_provider": "anonymous"
+    }
+}
+```
+
+### Example with email address
+
+[Token](https://data.tweasel.org/data/requests/informed-consent,116398):
+
+`eyJhbGciOiJSUzI1NiIsImtpZCI6IjQ2NDExN2FjMzk2YmM3MWM4YzU5ZmI1MTlmMDEzZTJiNWJiNmM2ZTEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaHVnLXByb2R1Y3Rpb24tOWRkZTMiLCJhdWQiOiJodWctcHJvZHVjdGlvbi05ZGRlMyIsImF1dGhfdGltZSI6MTY0ODY3ODMzMSwidXNlcl9pZCI6InlGWHJMckE2SXJYak1BRWhlRmFqbGw5dEJxSDIiLCJzdWIiOiJ5RlhyTHJBNklyWGpNQUVoZUZhamxsOXRCcUgyIiwiaWF0IjoxNjQ4Njc4MzMxLCJleHAiOjE2NDg2ODE5MzEsImVtYWlsIjoiM2ZiZDI5OTctNjJkNS00MTEzLTk1MjEtZGZiOTM3MjlkMzM5X2EzY2Y0N2E5YmIxODRjOGRAYXBwdGl2YXRlLml0IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbIjNmYmQyOTk3LTYyZDUtNDExMy05NTIxLWRmYjkzNzI5ZDMzOV9hM2NmNDdhOWJiMTg0YzhkQGFwcHRpdmF0ZS5pdCJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.cjp4uyKf_aAhw4FdUt4u6dSs1O5mwyiitNUeIbdHFLYZ4L85hJJjxus4nvbLeHBz5nKAtkng0EITj6XwaUtrXmEWLtbpTVPJNo5C8YP-SUzxWeEKSlhWeF_pJo7saBpBCXxnukf7EQG7F7TW0qqEkqJyrM4y0ApLEO9z8l-3Rpuc1fO24VxML5xjxtYwkhftUDVdvnNaHwCexKw0HmS9cSYT_ey1sCxbLFldYgh0XYJ_R-UoGopSiAfaXtzbJpVwT5eYkXI_IEZyNB2UEVoO-f8Pg2WdnNPwFCGXLZeIPv5o_epaYAtUeLh7vN0aFN1jxVGyirJ9t8hY_5GaQky6Pw`
+
+[Decoded](https://cyberchef.bn.al/#recipe=JWT_Decode()&input=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklqUTJOREV4TjJGak16azJZbU0zTVdNNFl6VTVabUkxTVRsbU1ERXpaVEppTldKaU5tTTJaVEVpTENKMGVYQWlPaUpLVjFRaWZRLmV5SnBjM01pT2lKb2RIUndjem92TDNObFkzVnlaWFJ2YTJWdUxtZHZiMmRzWlM1amIyMHZhSFZuTFhCeWIyUjFZM1JwYjI0dE9XUmtaVE1pTENKaGRXUWlPaUpvZFdjdGNISnZaSFZqZEdsdmJpMDVaR1JsTXlJc0ltRjFkR2hmZEdsdFpTSTZNVFkwT0RZM09ETXpNU3dpZFhObGNsOXBaQ0k2SW5sR1dISk1ja0UyU1hKWWFrMUJSV2hsUm1GcWJHdzVkRUp4U0RJaUxDSnpkV0lpT2lKNVJsaHlUSEpCTmtseVdHcE5RVVZvWlVaaGFteHNPWFJDY1VneUlpd2lhV0YwSWpveE5qUTROamM0TXpNeExDSmxlSEFpT2pFMk5EZzJPREU1TXpFc0ltVnRZV2xzSWpvaU0yWmlaREk1T1RjdE5qSmtOUzAwTVRFekxUazFNakV0WkdaaU9UTTNNamxrTXpNNVgyRXpZMlkwTjJFNVltSXhPRFJqT0dSQVlYQndkR2wyWVhSbExtbDBJaXdpWlcxaGFXeGZkbVZ5YVdacFpXUWlPbVpoYkhObExDSm1hWEpsWW1GelpTSTZleUpwWkdWdWRHbDBhV1Z6SWpwN0ltVnRZV2xzSWpwYklqTm1ZbVF5T1RrM0xUWXlaRFV0TkRFeE15MDVOVEl4TFdSbVlqa3pOekk1WkRNek9WOWhNMk5tTkRkaE9XSmlNVGcwWXpoa1FHRndjSFJwZG1GMFpTNXBkQ0pkZlN3aWMybG5ibDlwYmw5d2NtOTJhV1JsY2lJNkluQmhjM04zYjNKa0luMTkuY2pwNHV5S2ZfYUFodzRGZFV0NHU2ZFNzMU81bXd5aWl0TlVlSWJkSEZMWVo0TDg1aEpKanh1czRudmJMZUhCejVuS0F0a25nMEVJVGo2WHdhVXRyWG1FV0x0YnBUVlBKTm81QzhZUC1TVXp4V2VFS1NsaFdlRl9wSm83c2FCcEJDWHhudWtmN0VRRzdGN1RXMHFxRWtxSnlyTTR5MEFwTEVPOXo4bC0zUnB1YzFmTzI0VnhNTDV4anh0WXdraGZ0VURWZHZuTmFId0NleEt3MEhtUzljU1lUX2V5MXNDeGJMRmxkWWdoMFhZSl9SLVVvR29wU2lBZmFYdHpiSnBWd1Q1ZVlrWElfSUVaeU5CMlVFVm9PLWY4UGcyV2RuTlB3RkNHWExaZUlQdjVvX2VwYVlBdFVlTGg3dk4wYUZOMWp4Vkd5aXJKOXQ4aFlfNUdhUWt5NlB3):
+
+```json
+{
+    "iss": "https://securetoken.google.com/hug-production-9dde3",
+    "aud": "hug-production-9dde3",
+    "auth_time": 1648678331,
+    "user_id": "yFXrLrA6IrXjMAEheFajll9tBqH2",
+    "sub": "yFXrLrA6IrXjMAEheFajll9tBqH2",
+    "iat": 1648678331,
+    "exp": 1648681931,
+    "email": "3fbd2997-62d5-4113-9521-dfb93729d339_a3cf47a9bb184c8d@apptivate.it",
+    "email_verified": false,
+    "firebase": {
+        "identities": {
+            "email": [
+                "3fbd2997-62d5-4113-9521-dfb93729d339_a3cf47a9bb184c8d@apptivate.it"
+            ]
+        },
+        "sign_in_provider": "password"
+    }
+}
+```
