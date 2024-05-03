@@ -1315,4 +1315,52 @@ export const adapters: Adapter[] = [
             containedDataPathsMlLogsIos
         ),
     },
+
+    {
+        slug: 'firebaseinstallations',
+        name: 'Firebase Installations SDK',
+        description: 'firebaseinstallations',
+        tracker,
+
+        endpointUrls: [/^https:\/\/firebaseinstallations\.googleapis\.com\/v1\/projects\/.+\/installations\/?$/],
+        match: (r) => r.content?.startsWith('{"'),
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            otherIdentifiers: {
+                context: 'body',
+                path: 'fid',
+                reasoning: 'https://firebase.google.com/docs/projects/manage-installations',
+            },
+
+            trackerSdkVersion: [
+                {
+                    context: 'body',
+                    path: 'sdkVersion',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'x-firebase-client',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            appId: [
+                {
+                    context: 'header',
+                    path: 'X-Android-Package',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'x-ios-bundle-identifier',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
 ];
