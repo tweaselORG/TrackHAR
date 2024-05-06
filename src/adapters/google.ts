@@ -1528,4 +1528,153 @@ export const adapters: Adapter[] = [
         ],
         containedDataPaths: containedDataPathsIdentityToolkitHeaders,
     },
+
+    {
+        slug: 'firebaseremoteconfig',
+        name: 'Firebase Remote Config',
+        description: 'firebaseremoteconfig',
+        tracker,
+
+        endpointUrls: [
+            /^https:\/\/firebaseremoteconfig\.googleapis\.com\/v1\/projects\/.+\/namespaces\/firebase:fetch$/,
+        ],
+        match: (r) => r.content?.startsWith('{"'),
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            appVersion: {
+                context: 'body',
+                path: 'appVersion',
+                reasoning: 'obvious property name',
+            },
+
+            country: [
+                {
+                    context: 'body',
+                    path: 'countryCode',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            language: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.language',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'languageCode',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            installTime: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.FirstAppStartTimestamp',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'firstOpenTime',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            screenHeight: {
+                context: 'body',
+                path: 'analyticsUserProperties.Screensize',
+                reasoning: 'obvious property name',
+            },
+
+            screenWidth: {
+                context: 'body',
+                path: 'analyticsUserProperties.Screensize',
+                reasoning: 'obvious property name',
+            },
+
+            appId: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.PackageName',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'X-Android-Package',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            networkConnectionType: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.network_type_name',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.network_type',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.deviceId',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.device_id',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.uuid',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'appInstanceIdToken',
+                    reasoning: 'google/appInstanceIdToken.md',
+                },
+                {
+                    context: 'header',
+                    path: 'X-Goog-Firebase-Installations-Auth',
+                    reasoning: 'google/appInstanceIdToken.md',
+                },
+            ],
+
+            osVersion: [
+                {
+                    context: 'body',
+                    path: 'analyticsUserProperties.android_sdk',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'platformVersion',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            timezone: {
+                context: 'body',
+                path: 'timeZone',
+                reasoning: 'obvious property name',
+            },
+
+            trackerSdkVersion: {
+                context: 'body',
+                path: 'sdkVersion',
+                reasoning: 'obvious property name',
+            },
+        },
+    },
 ];
