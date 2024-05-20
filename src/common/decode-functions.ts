@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer/';
 import { gunzipSync } from 'fflate';
 import { JSONPath } from 'jsonpath-plus';
 import qs from 'qs';
