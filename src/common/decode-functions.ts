@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer/';
+import { Buffer } from 'buffer/index.js';
 import { gunzipSync } from 'fflate';
 import { JSONPath } from 'jsonpath-plus';
 import qs from 'qs';
