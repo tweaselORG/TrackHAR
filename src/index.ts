@@ -3,6 +3,7 @@ import escapeStringRegexp from 'escape-string-regexp';
 import type { Har } from 'har-format';
 import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
+import type translations from '../i18n/en.json';
 import { allAdapters } from './common/adapters';
 import { decodeFunctions } from './common/decode-functions';
 import type { Request } from './common/request';
@@ -11,6 +12,15 @@ import type { ArrayOrSingle } from './common/type-utils';
 
 /** A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath. */
 export type JsonPath = string;
+
+/**
+ * A translation key for a tracker description, either for a {@link Tracker} or for an {@link Adapter}. At least the
+ * English translation for the actual description needs to be provided in `i18n/en.json`.
+ *
+ * See the [README](https://github.com/tweaselORG/TrackHAR/blob/main/README.md#tracker-and-adapter-descriptions) for
+ * additional details on the contents and markup.
+ */
+export type TrackerDescriptionTranslationKey = keyof (typeof translations)['tracker-descriptions'];
 
 /** Some value transmitted by a tracker. We don't have any type information about it. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +35,11 @@ export type Tracker = {
     slug: string;
     /** The legal name of the tracking company. */
     name: string;
+    /**
+     * The translation key for an introductory description that gives context on the tracking company, if that makes
+     * sense and the description applies equally to all adapters assigned to the company.
+     */
+    description?: TrackerDescriptionTranslationKey;
     /**
      * The numeric ID of the tracker in the [Exodus tracker
      * database](https://reports.exodus-privacy.eu.org/en/trackers/) (if available).
@@ -42,68 +57,7 @@ export type Tracker = {
  * These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
  * by the tracker.
  */
-export type Property =
-    | 'accelerometerX'
-    | 'accelerometerY'
-    | 'accelerometerZ'
-    | 'appId'
-    | 'appName'
-    | 'appVersion'
-    | 'architecture'
-    | 'batteryLevel'
-    | 'carrier'
-    | 'country'
-    | 'deviceName'
-    | 'diskFree'
-    | 'diskTotal'
-    | 'diskUsed'
-    | 'hashedIdfa'
-    | 'idfa'
-    | 'idfv'
-    | 'installTime'
-    | 'isCharging'
-    | 'isEmulator'
-    | 'isFirstLaunch'
-    | 'isInDarkMode'
-    | 'isInForeground'
-    | 'isRoaming'
-    | 'isRooted'
-    | 'language'
-    | 'latitude'
-    | 'localIp'
-    | 'longitude'
-    | 'macAddress'
-    | 'manufacturer'
-    | 'model'
-    | 'networkConnectionType'
-    | 'orientation'
-    | 'osName'
-    | 'osVersion'
-    | 'otherIdentifiers'
-    | 'publicIp'
-    | 'pushNotificationToken'
-    | 'ramFree'
-    | 'ramTotal'
-    | 'ramUsed'
-    | 'revenue'
-    | 'referer'
-    | 'rotationX'
-    | 'rotationY'
-    | 'rotationZ'
-    | 'screenHeight'
-    | 'screenWidth'
-    | 'signalStrengthCellular'
-    | 'signalStrengthWifi'
-    | 'startTime'
-    // As in: subnational political entity
-    | 'state'
-    | 'timeSpent'
-    | 'timezone'
-    | 'trackerSdkVersion'
-    | 'uptime'
-    | 'userAgent'
-    | 'viewedPage'
-    | 'volume';
+export type Property = keyof (typeof translations)['properties'];
 /** A variable on the global state used in the decoding process of a request. This doesn't allow nested property access. */
 export type Variable = LiteralUnion<Context | 'res', string>;
 /**
@@ -190,6 +144,10 @@ export type DataPath = {
 export type Adapter = {
     /** A slug to identify the adapter. These only need to be unique per tracker, not globally. */
     slug: string;
+    /** A human-readable name for the adapter. This should be as close as possible to the official name for the endpoint. */
+    name: string;
+    /** The translation key for a description that gives context on the endpoint, if that makes sense. */
+    description?: TrackerDescriptionTranslationKey;
     /** The tracking company behind these endpoints. */
     tracker: Tracker;
 

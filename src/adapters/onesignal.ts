@@ -3,6 +3,7 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'onesignal',
     name: 'OneSignal, Inc.',
+    description: 'onesignal',
     datenanfragenSlug: 'onesignal',
     exodusId: 193,
 };
@@ -10,6 +11,8 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'players',
+        name: 'OneSignal (Add a device)',
+        description: 'onesignal-add-a-device',
         tracker,
 
         endpointUrls: [

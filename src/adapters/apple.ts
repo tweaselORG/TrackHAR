@@ -9,6 +9,7 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'iadsdk-attribution-v2',
+        name: 'iAd SDK Attribution v2',
         tracker,
 
         endpointUrls: ['https://ca.iadsdk.apple.com/adserver/attribution/v2'],

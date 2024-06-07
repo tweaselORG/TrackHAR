@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Buffer } from 'buffer/';
+import { Buffer } from 'buffer/index.js';
 import { fetch } from 'cross-fetch';
 import deepmerge from 'deepmerge';
 import { writeFile } from 'fs/promises';

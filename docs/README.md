@@ -20,6 +20,7 @@ trackhar
 - [Request](README.md#request)
 - [Result](README.md#result)
 - [Tracker](README.md#tracker)
+- [TrackerDescriptionTranslationKey](README.md#trackerdescriptiontranslationkey)
 - [TrackingDataValue](README.md#trackingdatavalue)
 - [Variable](README.md#variable)
 
@@ -53,14 +54,16 @@ The first adapter that matches a request will be used to decode it.
 | :------ | :------ | :------ |
 | `containedDataPaths` | `Partial`<`Record`<[`Property`](README.md#property), [`ArrayOrSingle`](README.md#arrayorsingle)<[`DataPath`](README.md#datapath)\>\>\> | A description of how to extract the transmitted tracking data from the decoded object. |
 | `decodingSteps` | [`DecodingStep`](README.md#decodingstep)[] | An array of the steps (in order) used to decode the request into an object format. |
+| `description?` | [`TrackerDescriptionTranslationKey`](README.md#trackerdescriptiontranslationkey) | The translation key for a description that gives context on the endpoint, if that makes sense. |
 | `endpointUrls` | (`string` \| `RegExp`)[] | The endpoints that this adapter can handle. Each entry can either be a string (which will have to be equal to the full endpoint URL in the request) or a regular expression that is matched against the endpoint URL. The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query string. |
 | `match?` | (`r`: [`Request`](README.md#request)) => `boolean` \| `undefined` | An optional function to further filter which requests can be handled by this adapter. This is useful if there are multiple adapters for one endpoint that handle different request formats. |
+| `name` | `string` | A human-readable name for the adapter. This should be as close as possible to the official name for the endpoint. |
 | `slug` | `string` | A slug to identify the adapter. These only need to be unique per tracker, not globally. |
 | `tracker` | [`Tracker`](README.md#tracker) | The tracking company behind these endpoints. |
 
 #### Defined in
 
-[index.ts:190](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L190)
+[index.ts:144](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L144)
 
 ___
 
@@ -90,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:418](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L418)
+[index.ts:376](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L376)
 
 ___
 
@@ -120,7 +123,7 @@ A part of a request, to explain where some information was found.
 
 #### Defined in
 
-[index.ts:20](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L20)
+[index.ts:30](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L30)
 
 ___
 
@@ -140,7 +143,7 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:166](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L166)
+[index.ts:120](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L120)
 
 ___
 
@@ -176,7 +179,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:150](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L150)
+[index.ts:104](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L104)
 
 ___
 
@@ -189,7 +192,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:118](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L118)
+[index.ts:72](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L72)
 
 ___
 
@@ -217,7 +220,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:456](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L456)
+[index.ts:414](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L414)
 
 ___
 
@@ -229,7 +232,7 @@ A JSONPath expression to be parsed by https://github.com/JSONPath-Plus/JSONPath.
 
 #### Defined in
 
-[index.ts:13](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L13)
+[index.ts:14](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L14)
 
 ___
 
@@ -242,13 +245,13 @@ process of a request.
 
 #### Defined in
 
-[index.ts:113](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L113)
+[index.ts:67](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L67)
 
 ___
 
 ### Property
 
-Ƭ **Property**: ``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"revenue"`` \| ``"referer"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``
+Ƭ **Property**: keyof typeof `translations`[``"properties"``]
 
 A type of tracking data that we can detect in a request.
 
@@ -257,7 +260,7 @@ by the tracker.
 
 #### Defined in
 
-[index.ts:45](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L45)
+[index.ts:60](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L60)
 
 ___
 
@@ -301,7 +304,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:435](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L435)
+[index.ts:393](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L393)
 
 ___
 
@@ -316,9 +319,26 @@ A tracking company that we have adapters for.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `datenanfragenSlug?` | `string` | The slug of the tracking company in the [Datenanfragen.de company database](https://www.datarequests.org/company) (if available). |
+| `description?` | [`TrackerDescriptionTranslationKey`](README.md#trackerdescriptiontranslationkey) | The translation key for an introductory description that gives context on the tracking company, if that makes sense and the description applies equally to all adapters assigned to the company. |
 | `exodusId?` | `number` | The numeric ID of the tracker in the [Exodus tracker database](https://reports.exodus-privacy.eu.org/en/trackers/) (if available). |
 | `name` | `string` | The legal name of the tracking company. |
 | `slug` | `string` | A slug to identify the tracker. |
+
+#### Defined in
+
+[index.ts:33](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L33)
+
+___
+
+### TrackerDescriptionTranslationKey
+
+Ƭ **TrackerDescriptionTranslationKey**: keyof typeof `translations`[``"tracker-descriptions"``]
+
+A translation key for a tracker description, either for a [Tracker](README.md#tracker) or for an [Adapter](README.md#adapter). At least the
+English translation for the actual description needs to be provided in `i18n/en.json`.
+
+See the [README](https://github.com/tweaselORG/TrackHAR/blob/main/README.md#tracker-and-adapter-descriptions) for
+additional details on the contents and markup.
 
 #### Defined in
 
@@ -334,7 +354,7 @@ Some value transmitted by a tracker. We don't have any type information about it
 
 #### Defined in
 
-[index.ts:17](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L17)
+[index.ts:27](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L27)
 
 ___
 
@@ -346,7 +366,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:108](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L108)
+[index.ts:62](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L62)
 
 ## Variables
 
@@ -363,7 +383,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:507](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L507)
+[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
 
 ## Functions
 
@@ -391,7 +411,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:295](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L295)
+[index.ts:253](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L253)
 
 ___
 
@@ -420,13 +440,13 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:230](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L230)
+[index.ts:188](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L188)
 
 ___
 
 ### process
 
-▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 Parse the requests in a HAR traffic dump and extract tracking data.
 
@@ -445,12 +465,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
 #### Returns
 
-`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
   (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
@@ -458,7 +478,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:478](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L478)
+[index.ts:436](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L436)
 
 ___
 
@@ -479,7 +499,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<[`Property`](README.md#property), `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
 
@@ -487,7 +507,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:315](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L315)
+[index.ts:273](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L273)
 
 ___
 

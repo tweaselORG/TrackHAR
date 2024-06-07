@@ -151,6 +151,18 @@ With this, we can see that our device's advertising ID was transmitted in the fi
 
 In this case, it was not transmitted as plain text but base64-encoded. TrackHAR was still able to detect it. The `path` indicates the index into the body where the IDFA was found.
 
+Finally, TrackHAR bundles translations for human-readable descriptions of our standardized property names, as well as introductory descriptions for trackers and adapters. You can use those like this:
+
+```ts
+import translationsEn from 'trackhar/i18n/en.json';
+
+console.log(translationsEn.properties.diskTotal);
+// => "Total disk space"
+
+console.log(translationsEn['tracker-descriptions'].adjust);
+// => "Adjust offers the following services: […]"
+```
+
 ## Contributing adapters
 
 As stated, TrackHAR uses so-called adapters to detect tracking traffic. They are JavaScript objects defining a decoding algorithm for the request and the paths to the transmitted data in the decoded request. For each endpoint of a tracker, a separate adapter needs to be defined. To determine which adapter fits a request, the URL is matched against the `endpointUrls` of the adapter, which can either just use string matching or a regular expression. If one of the endpoints matches, the adapter is chosen to analyze the request. Where the same endpoint expects different data formats, multiple adapters with identical `endpointUrls` might be required. In that case, the `match` function of an adapter will be used to determine which adapter to apply to a request. The first adapter to return `true` in its matching method is chosen. Only one adapter can match a request at a time.
@@ -165,10 +177,11 @@ One way of doing that is by the property name. Some property names are obviously
 
 Adapters are grouped within one file for each tracking company in the `src/adapters` directory. The file name must be the `slug` of the `Tracker` the the adapters in that file belong to. Each file must export an array of adapters as `adapters`. In the tracker file, first define the meta information of the tracker, such as:  
 
-```js
+```ts
 const tracker: Tracker = {
     slug: '<tracker slug>',
     name: '<legal name of the tracking company>',
+    description: '<translation key>',
     datenanfragenSlug: '<slug of the tracking company at datarequests.org>',
     exodusId: 0, // ID of the tracker in the Exodus database
 };
@@ -176,9 +189,38 @@ const tracker: Tracker = {
 
 You can find the `datenanfragenSlug` of the tracking company in [the datarequests.org database](https://www.datarequests.org/company/), by searching for the company and copying the slug from the URL: `https://www.datarequests.org/company/<datenanfragenSlug>/`. For the `exodusId`, search the tracker in [their database](https://reports.exodus-privacy.eu.org/en/trackers/) and again copy the ID from the URL: `https://reports.exodus-privacy.eu.org/en/trackers/<exodusId>/`.
 
+After that, you can start by defining the adapter. You can use variables to reuse parts of adapters you need more than once. Start by giving your adapter a `slug`, which needs to be unique within one tracking company. You will also need to define a human-readable name for the adapter in the `name` property, which should be as close as possible to the official name for the endpoint, where there is one. To distinguish different adapters for the same endpoint that parse different formats, append a short description in parentheses (e.g. `Facebook Graph App Events API (JSON)` and `Facebook Graph App Events API (query string)`). Add the tracker information you defined earlier in the `tracker` property.
+
+### Tracker and adapter descriptions
+
+Both the `Tracker` and `Adapter` can also have a `description` property to give context on the tracking company/endpoint. The description is not provided directly. Instead, provide a translation key and add the description under `tracker-descriptions` in `i18n/*.json`.
+
+Sometimes, it makes sense to add only either a `Tracker` or an `Adapter` description (e.g. if all adapters just parse slightly different formats of the same endpoint, or conversely, if all adapters are for different tracking products that just happen to be run by the same company), other times, it makes sense to have both (e.g. if all adapters describe the same tracking service, but different endpoints serve different purposes). Between the description for the tracker and adapter, the following information should be conveyed:
+
+* A list of services offered by the tracker, focusing only on those relevant to users' personal data. For example, we don't care if the tracker advertises with offering a fancy dashboard with a modern design. However, if they claim to be able to be able to do attribution of advertising clicks or linking of devices IDs, that is very relevant.
+* If available, any additional justification of why the data the collected data is personal data.
+* If applicable, details about third-party trackers/advertisers that the data is shared/synced with.
+* If available, quotes from the documentation that explain that the developer needs to obtain the user's consent for the tracker.
+
+Where necessary, the description service can go into more detail to properly explain the tracker's claims. Try not to unnecessarily repeat the company's marketing language. The descriptions should make heavy use of references (see below) to support all of our claims. Where it makes sense, you can include direct quotes instead of editorializing.
+
+You can use the following limited markup:
+
+- Unnumbered lists using dashes, e.g.:
+
+  ```
+  - Item 1
+    - Item 1.1
+    - Item 1.2
+  - Item 2
+  ```
+- References/citations to URLs in square brackets, e.g. `SampleTracker claims to be able to infer a user’s legal identity based on the screen resolution.[https://sampletracker.tld/features/ai-identity-inference]`.
+
 ### Adapter matching
 
-After that, you can start by defining the adapter. You can use variables to reuse parts of adapters you need more than once. Start by giving your adapter a `slug`, which needs to be unique within one tracking company. You can also add the tracker information you defined earlier, in the `tracker` property. In the `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code. If there are different requests which require specific handling to the same endpoint, you also need to split your adapter to match only a single type of request. To do that, match the adapter to the same endpoint and define a `match` method in both adapters. It receives a `Request` object containing the raw data of the request and should return `true` if the adapter applies to the request. Typically you’d match against characteristic characters in the body or the `Content-Type` header to determine if you an adapter can parse the request, see e.g. this `match` method of a Facebook adapter:
+In the `Tracker`'s `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code.
+
+If there are different requests which require specific handling to the same endpoint, you also need to split your adapter to match only a single type of request. To do that, match the adapter to the same endpoint and define a `match` method in both adapters. It receives a `Request` object containing the raw data of the request and should return `true` if the adapter applies to the request. Typically you’d match against characteristic characters in the body or the `Content-Type` header to determine if you an adapter can parse the request, see e.g. this `match` method of a Facebook adapter:
 
 ```js
 match: (request) => request.content?.startsWith('{"'),
@@ -212,7 +254,7 @@ To extract the data from the decoded request, the adapter specifies the path in 
 
 Properties in `containedDataPaths` may also contain an array of several `DataPath`s, because one data type might be found in several places in a request, e.g. the `language` might be part of the `query` but also a property in the `body`. If a property in a request contains more than one data type, it should be mentioned in all of these data types. For example, a property `body.platform` might contain a value like `Android 13.2`, which contains the `osName` as well as the `osVersion`. In this case, you’ll need to add the path `body.platform` to both of these properties in the `containedDataPaths`.
 
-In case you come across a data type that is not defined in the types yet, add your data type to the `Property` type in the `index.ts`. Give it an obvious, camelCased name and also a human-readable description in the [tracker-wiki translations](https://github.com/tweaselORG/tracker-wiki/tree/main/i18n).
+In case you come across a data type that is not defined in the types yet, give it an obvious, camelCased name and add that together with a human-readable description to the translations files in the `i18n` folder under `properties`.
 
 ### Debugging adapters
 

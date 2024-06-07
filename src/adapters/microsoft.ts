@@ -10,6 +10,9 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'appcenter-logs',
+        // See: https://learn.microsoft.com/en-us/appcenter/
+        name: 'Visual Studio App Center',
+        description: 'microsoft-appcenter',
         tracker,
 
         endpointUrls: ['https://in.appcenter.ms/logs'],

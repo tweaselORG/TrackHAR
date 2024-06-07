@@ -3,6 +3,7 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'mopub',
     name: 'MoPub',
+    description: 'mopub',
     exodusId: 35,
 };
 
@@ -12,6 +13,7 @@ const keyUrl = (lineNumber: number) =>
 export const adapters: Adapter[] = [
     {
         slug: 'ads',
+        name: 'MoPub SDK',
         tracker,
 
         endpointUrls: [

@@ -159,6 +159,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
 export const adapters: Adapter[] = [
     {
         slug: 'setting',
+        name: 'Rayjump (setting)',
         tracker,
 
         endpointUrls: ['https://configure.rayjump.com/setting'],
@@ -169,6 +170,7 @@ export const adapters: Adapter[] = [
 
     {
         slug: 'analytics',
+        name: 'Rayjump (analytics)',
         tracker,
 
         endpointUrls: ['https://analytics.rayjump.com/'],

@@ -3,6 +3,7 @@ import type { Adapter, Tracker } from '../index';
 const tracker: Tracker = {
     slug: 'branch-io',
     name: 'Branch Metrics, Inc.',
+    description: 'branch-io',
     datenanfragenSlug: 'branch-io',
     exodusId: 167,
 };
@@ -10,6 +11,8 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'v1',
+        name: 'Branch Attribution API',
+        description: 'branch-io-attribution-api',
         tracker,
 
         endpointUrls: [

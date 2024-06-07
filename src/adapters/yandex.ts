@@ -10,6 +10,8 @@ const tracker: Tracker = {
 export const adapters: Adapter[] = [
     {
         slug: 'appmetrica',
+        // See: https://appmetrica.yandex.com/about
+        name: 'AppMetrica Analytics',
         tracker,
 
         endpointUrls: [
