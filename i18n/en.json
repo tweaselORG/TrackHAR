@@ -52,7 +52,7 @@
         "signalStrengthCellular": "Signal strength (cellular)",
         "signalStrengthWifi": "Signal strength (Wi-Fi)",
         "startTime": "App start time",
-        "state": "State",
+        "state": "State/Sub national entity",
         "timeSpent": "Time spent in app",
         "timezone": "Time zone",
         "trackerSdkVersion": "Tracker SDK version",
