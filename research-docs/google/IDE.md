@@ -1,0 +1,3 @@
+According to the [cookie section](https://policies.google.com/technologies/cookies?hl=en-US) of Google's privacy policy ([archived](https://web.archive.org/web/20240425205614/https://policies.google.com/technologies/cookies?hl=en-US)), the `IDE` cookie is “used to show Google ads on non-Google sites” and “to personalize the ads [users] see”. It lasts for 13 months.
+
+According to the [cookie information for Google's ad products](https://business.safety.google/adscookies/) ([archived](https://web.archive.org/web/20240428070401/https://business.safety.google/adscookies/)), it is stored on the `doubleclick.net` domain and used by the following products: Campaign Manager, Display & Video 360, Google Ad Manager, Google Analytics, Search Ads 360
