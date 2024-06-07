@@ -221,7 +221,7 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
 
     for (const step of decodingSteps) {
         if ('mapInput' in step) {
-            const mapInput = get(step.mapInput);
+            const mapInput = get(step.mapInput) || [];
             if (!Array.isArray(mapInput)) throw new Error('mapInput must be an array.');
             const result = mapInput
                 .filter((i) => i !== undefined && i !== null)
