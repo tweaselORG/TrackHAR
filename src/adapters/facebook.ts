@@ -328,7 +328,7 @@ export const adapters: Adapter[] = [
         tracker,
 
         endpointUrls: [graphActivitiesEndpointRegex],
-        match: (r) => r.content?.startsWith('format=json&'),
+        match: (r) => r.content?.includes('format=json&'),
 
         decodingSteps: [
             { function: 'parseQueryString', input: 'body', output: 'res.body' },
