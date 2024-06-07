@@ -1,0 +1,3 @@
+According to the [targeting parameter documentation](https://support.google.com/admanager/answer/7320899?hl=en#rdid-idtype-is_lat) in Google's Ad Manager Help ([archived](https://web.archive.org/web/20240429092541/https://support.google.com/admanager/answer/7320899?hl=en#rdid-idtype-is_lat)), the `rdid` property holds a "resettable device identifier".
+
+Google's further [documentation on resettable device identifiers](https://support.google.com/admanager/answer/6238701) ([archived](https://web.archive.org/web/20240429092547/https://support.google.com/admanager/answer/6238701)) lists the following examples of RDIDs: Google AdID, Apple IDFA, Amazon AFAI, Roku RIDA, Xbox MSAI
