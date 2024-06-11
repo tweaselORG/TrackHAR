@@ -63,9 +63,9 @@ export const loadTestDataFromDb = async (adapter: Adapter, options?: LoadTestDat
     const reduction = options?.accumulateToPath
         ? (acc, cur) => ({
               ...acc,
-              [`${cur.property}/${cur.context}/${cur.path}`]: acc[`${cur.property}/${cur.context}/${cur.path}`]?.concat(
-                  cur.value
-              ) || [cur.value],
+              [`${cur.property}/${cur.context}/${cur.path}`.toLowerCase()]: acc[
+                  `${cur.property}/${cur.context}/${cur.path}`.toLowerCase()
+              ]?.concat(cur.value) || [cur.value],
           })
         : (acc, cur) => ({
               ...acc,
