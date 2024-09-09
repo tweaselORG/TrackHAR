@@ -1411,16 +1411,29 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [
             { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.idToken', output: 'res.body.idToken' },
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
         ],
         containedDataPaths: {
             ...containedDataPathsIdentityToolkitHeaders,
 
-            otherIdentifiers: {
-                context: 'body',
-                path: 'idToken',
-                reasoning: 'google/idToken.md',
-            },
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'idToken.user_id',
+                    reasoning: 'google/idToken.md',
+                },
+                {
+                    context: 'body',
+                    path: 'idToken.firebase.identities.email.*',
+                    reasoning: 'google/idToken.md',
+                },
+                {
+                    context: 'body',
+                    path: 'idToken.email',
+                    reasoning: 'google/idToken.md',
+                },
+            ],
         },
     },
 
@@ -1434,6 +1447,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [
             { function: 'decodeProtobuf', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.1', output: 'res.body.idToken' },
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
         ],
         containedDataPaths: {
@@ -1441,7 +1455,7 @@ export const adapters: Adapter[] = [
 
             otherIdentifiers: {
                 context: 'body',
-                path: '1',
+                path: 'idToken.user_id',
                 reasoning: 'google/idToken.md',
             },
         },
@@ -1456,6 +1470,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [
             { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.token', output: 'res.body.token' },
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
         ],
         containedDataPaths: {
@@ -1463,7 +1478,7 @@ export const adapters: Adapter[] = [
 
             otherIdentifiers: {
                 context: 'body',
-                path: 'token',
+                path: 'token.uid',
                 reasoning: 'google/idToken.md',
             },
         },
