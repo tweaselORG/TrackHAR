@@ -96,6 +96,7 @@ export type Identifier =
  * - `decodeUrl`: Decodes a URL-encoded string.
  * - `decodeProtobuf`: Decodes a Protobuf blob. This doesn't use a schema, as such property names are not available in the
  *   result.
+ * - `decodeJwt`: Decodes the payload of a JSON Web Token (JWT) string into an object.
  * - `ensureArray`: Ensures that the given value is an array. If it is not, it is wrapped in an array.
  * - `getProperty`: Gets a property from an object. The property name is given in the `options.path` option. This is
  *   useful for either copying a nested property to a variable, or to extract a nested property from an array when used
@@ -109,6 +110,7 @@ export type DecodingStep = (
               | 'decodeBase64'
               | 'decodeUrl'
               | 'decodeProtobuf'
+              | 'decodeJwt'
               | 'ensureArray'
               | 'gunzip';
       }

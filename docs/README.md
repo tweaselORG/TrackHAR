@@ -63,7 +63,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:144](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L144)
+[index.ts:146](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L146)
 
 ___
 
@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:376](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L376)
+[index.ts:378](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L378)
 
 ___
 
@@ -143,13 +143,13 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:120](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L120)
+[index.ts:122](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L122)
 
 ___
 
 ### DecodingStep
 
-Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"ensureArray"`` \| ``"gunzip"``  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
+Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"decodeJwt"`` \| ``"ensureArray"`` \| ``"gunzip"``  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
 
 A step in the process of decoding a tracking request. This is essentially a function call with some input and output,
 and potentially additional options.
@@ -172,6 +172,7 @@ The following `function`s are available:
 - `decodeUrl`: Decodes a URL-encoded string.
 - `decodeProtobuf`: Decodes a Protobuf blob. This doesn't use a schema, as such property names are not available in the
   result.
+- `decodeJwt`: Decodes the payload of a JSON Web Token (JWT) string into an object.
 - `ensureArray`: Ensures that the given value is an array. If it is not, it is wrapped in an array.
 - `getProperty`: Gets a property from an object. The property name is given in the `options.path` option. This is
   useful for either copying a nested property to a variable, or to extract a nested property from an array when used
@@ -179,7 +180,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:104](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L104)
+[index.ts:105](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L105)
 
 ___
 
@@ -220,7 +221,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:414](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L414)
+[index.ts:416](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L416)
 
 ___
 
@@ -304,7 +305,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:393](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L393)
+[index.ts:395](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L395)
 
 ___
 
@@ -383,7 +384,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
+[index.ts:467](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L467)
 
 ## Functions
 
@@ -411,7 +412,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:253](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L253)
+[index.ts:255](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L255)
 
 ___
 
@@ -440,7 +441,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:188](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L188)
+[index.ts:190](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L190)
 
 ___
 
@@ -478,7 +479,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:436](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L436)
+[index.ts:438](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L438)
 
 ___
 
@@ -507,7 +508,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:273](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L273)
+[index.ts:275](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L275)
 
 ___
 

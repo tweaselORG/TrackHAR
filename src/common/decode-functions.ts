@@ -1,6 +1,7 @@
 import { Buffer } from 'buffer/index.js';
 import { gunzipSync } from 'fflate';
 import { JSONPath } from 'jsonpath-plus';
+import { jwtDecode } from 'jwt-decode';
 import qs from 'qs';
 import type { DecodingStep } from '../index';
 import { Protobuf } from './protobuf.mjs';
@@ -12,6 +13,7 @@ export const decodeFunctions: Record<DecodingStep['function'], (input: any, opti
     decodeBase64: (input) => Buffer.from(input, 'base64').toString('binary'),
     decodeUrl: (input) => decodeURIComponent(input),
     decodeProtobuf: (input) => Protobuf.decode(Buffer.from(input, 'binary'), ['', false, false]),
+    decodeJwt: (input) => jwtDecode(input),
     ensureArray: (input) => (Array.isArray(input) ? input : [input]),
     getProperty: (input, options) => JSONPath({ path: options.path, json: input, wrap: false }),
     gunzip: (input) => {
