@@ -561,6 +561,43 @@ const containedDataPathsLocationEngine: Adapter['containedDataPaths'] = {
         reasoning: 'obvious observed values',
     },
 };
+const containedDataPathsIdentityToolkitHeaders: Adapter['containedDataPaths'] = {
+    trackerSdkVersion: [
+        {
+            context: 'header',
+            path: 'x-client-version',
+            reasoning: 'obvious property name',
+        },
+        {
+            context: 'header',
+            path: 'X-Client-Version',
+            reasoning: 'obvious property name',
+        },
+        {
+            context: 'header',
+            path: 'x-firebase-client',
+            reasoning: 'obvious property name',
+        },
+    ],
+
+    appId: [
+        {
+            context: 'header',
+            path: 'x-requested-with',
+            reasoning: 'obvious observed values',
+        },
+        {
+            context: 'header',
+            path: 'X-Android-Package',
+            reasoning: 'obvious property name',
+        },
+        {
+            context: 'header',
+            path: 'x-ios-bundle-identifier',
+            reasoning: 'obvious property name',
+        },
+    ],
+};
 
 export const adapters: Adapter[] = [
     {
@@ -1362,5 +1399,131 @@ export const adapters: Adapter[] = [
                 },
             ],
         },
+    },
+
+    {
+        slug: 'identitytoolkit-relyingparty-getaccountinfo-json',
+        name: 'Identity Toolkit API v3 (getAccountInfo, JSON)',
+        tracker,
+
+        endpointUrls: ['https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo'],
+        match: (r) => r.content?.startsWith('{"'),
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.idToken', output: 'res.body.idToken' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            ...containedDataPathsIdentityToolkitHeaders,
+
+            otherIdentifiers: [
+                {
+                    context: 'body',
+                    path: 'idToken.user_id',
+                    reasoning: 'google/idToken.md',
+                },
+                {
+                    context: 'body',
+                    path: 'idToken.firebase.identities.email.*',
+                    reasoning: 'google/idToken.md',
+                },
+                {
+                    context: 'body',
+                    path: 'idToken.email',
+                    reasoning: 'google/idToken.md',
+                },
+            ],
+        },
+    },
+
+    {
+        slug: 'identitytoolkit-relyingparty-getaccountinfo-protobuf',
+        name: 'Identity Toolkit API v3 (getAccountInfo, Protobuf)',
+        tracker,
+
+        endpointUrls: ['https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo'],
+        match: (r) => !r.content?.startsWith('{"'),
+
+        decodingSteps: [
+            { function: 'decodeProtobuf', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.1', output: 'res.body.idToken' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            ...containedDataPathsIdentityToolkitHeaders,
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'idToken.user_id',
+                reasoning: 'google/idToken.md',
+            },
+        },
+    },
+
+    {
+        slug: 'identitytoolkit-relyingparty-verifycustomtoken',
+        name: 'Identity Toolkit API v3 (verifyCustomToken)',
+        tracker,
+
+        endpointUrls: ['https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken'],
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'decodeJwt', input: 'res.body.token', output: 'res.body.token' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            ...containedDataPathsIdentityToolkitHeaders,
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'token.uid',
+                reasoning: 'google/idToken.md',
+            },
+        },
+    },
+
+    {
+        slug: 'identitytoolkit-relyingparty-signupnewuser',
+        name: 'Identity Toolkit API v3 (signupNewUser)',
+        tracker,
+
+        endpointUrls: ['https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser'],
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            ...containedDataPathsIdentityToolkitHeaders,
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'email',
+                reasoning:
+                    'https://developers.google.com/resources/api-libraries/documentation/identitytoolkit/v3/csharp/latest/classGoogle_1_1Apis_1_1IdentityToolkit_1_1v3_1_1Data_1_1IdentitytoolkitRelyingpartySignupNewUserRequest.html#a0a6e4c4c92b9ff59c34877f4d6c5e964',
+            },
+
+            osName: {
+                context: 'body',
+                path: 'clientType',
+                reasoning: 'obvious observed values',
+            },
+        },
+    },
+
+    {
+        slug: 'identitytoolkit-relyingparty-getprojectconfig',
+        name: 'Identity Toolkit API v3 (getProjectConfig)',
+        tracker,
+
+        endpointUrls: ['https://www.googleapis.com/identitytoolkit/v3/relyingparty/getProjectConfig'],
+
+        decodingSteps: [
+            { function: 'parseJson', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: containedDataPathsIdentityToolkitHeaders,
     },
 ];
