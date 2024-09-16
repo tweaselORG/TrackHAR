@@ -33,6 +33,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'id',
+                    onlyIf: /^[a-z0-9]+\.[a-z0-9.]+$/i,
                     reasoning: 'obvious observed values',
                 },
             ],

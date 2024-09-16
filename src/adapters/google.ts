@@ -1,4 +1,4 @@
-import { mergeContainedDataPaths } from '../common/adapter-util';
+import { emptyIdfa, mergeContainedDataPaths } from '../common/adapter-util';
 import type { Adapter, Context, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -911,6 +911,7 @@ export const adapters: Adapter[] = [
             deviceId: {
                 context: 'body',
                 path: 'rdid',
+                notIf: emptyIdfa,
                 reasoning: 'google/rdid.md',
             },
         },
