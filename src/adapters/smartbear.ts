@@ -237,6 +237,7 @@ export const adapters: Adapter[] = [
             userId: {
                 context: 'body',
                 path: 'sessions.*.user.id',
+                notIf: '0',
                 reasoning:
                     'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
             },

@@ -59,6 +59,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
     idfa: {
         context,
         path: 'userAdvertisingId',
+        notIf: '0',
         reasoning: 'obvious property name',
     },
 
