@@ -63,7 +63,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:166](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L166)
+[index.ts:170](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L170)
 
 ___
 
@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:398](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L398)
+[index.ts:427](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L427)
 
 ___
 
@@ -138,6 +138,8 @@ A description of where a certain piece of tracking data can be found in the deco
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `context` | [`Context`](README.md#context) | The part of the original request that the data can be found in. |
+| `notIf?` | `string` \| `RegExp` | An optional filter that stops a discovered value from being considered an instance of the respective property. |
+| `onlyIf?` | `string` \| `RegExp` | An optional filter that causes only matching values to be considered instances of the respective property. |
 | `path` | [`JsonPath`](README.md#jsonpath) | A JSONPath expression describing where in the decoded request object the data can be found. |
 | `reasoning` | ``"obvious property name"`` \| ``"obvious observed values"`` \| ``"observed values match known device parameters"`` \| \`https://${string}\` \| \`http://${string}\` \| \`${string}.md\` | An explanation of how we concluded that this is information is actually the type of data we labelled it as. This can either be a standardized description, or a URL to a more in-depth research report. |
 
@@ -221,7 +223,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:436](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L436)
+[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
 
 ___
 
@@ -326,7 +328,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:415](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L415)
+[index.ts:444](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L444)
 
 ___
 
@@ -405,7 +407,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:487](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L487)
+[index.ts:516](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L516)
 
 ## Functions
 
@@ -433,7 +435,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:275](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L275)
+[index.ts:279](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L279)
 
 ___
 
@@ -462,7 +464,7 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:210](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L210)
+[index.ts:214](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L214)
 
 ___
 
@@ -500,7 +502,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:458](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L458)
+[index.ts:487](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L487)
 
 ___
 
@@ -529,7 +531,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:295](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L295)
+[index.ts:299](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L299)
 
 ___
 
