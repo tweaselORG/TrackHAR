@@ -56,6 +56,10 @@ export type Tracker = {
  *
  * These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
  * by the tracker.
+ *
+ * @remarks
+ * - `state` here means "subnational political entity"
+ * - Locales should not be listed under `country`
  */
 export type Property = keyof (typeof translations)['properties'];
 /** A variable on the global state used in the decoding process of a request. This doesn't allow nested property access. */
