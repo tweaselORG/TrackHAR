@@ -21,7 +21,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
         containedDataPaths: {
-            idfa: [
+            advertisingId: [
                 {
                     context: 'query',
                     path: 'adv_id',
@@ -34,7 +34,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: {
+            developerScopedId: {
                 context: 'query',
                 path: 'ifv',
                 reasoning: 'obvious property name',

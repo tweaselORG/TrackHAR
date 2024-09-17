@@ -17,7 +17,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
         containedDataPaths: {
-            idfa: {
+            advertisingId: {
                 context: 'query',
                 path: 'ifa',
                 reasoning: 'obvious property name',
@@ -80,7 +80,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious observed values',
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'body',
                     path: 'device.ifa',
@@ -98,7 +98,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: {
+            developerScopedId: {
                 context: 'body',
                 path: 'device.ext.vungle.ios.idfv',
                 reasoning: 'obvious property name',

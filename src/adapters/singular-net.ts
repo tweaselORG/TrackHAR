@@ -67,7 +67,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'query',
                     path: 'idfa',
@@ -82,7 +82,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: [
+            developerScopedId: [
                 {
                     context: 'query',
                     path: 'idfv',
