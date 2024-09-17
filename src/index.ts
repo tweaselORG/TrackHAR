@@ -160,7 +160,7 @@ export type Adapter = {
      * regular expression that is matched against the endpoint URL.
      *
      * The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query
-     * string.
+     * string. It should not have a trailing slash.
      */
     endpointUrls: (string | RegExp)[];
     /**
@@ -255,8 +255,11 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
 export const adapterForRequest = (r: Request) =>
     allAdapters.find(
         (a) =>
-            a.endpointUrls.some((url) => (url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl)) &&
-            (a.match ? a.match(r) : true)
+            a.endpointUrls.some((url) =>
+                url instanceof RegExp
+                    ? url.test(r.endpointUrl) || url.test(r.endpointUrl.replace(/\/$/, ''))
+                    : url === r.endpointUrl || url === r.endpointUrl.replace(/\/$/, '')
+            ) && (a.match ? a.match(r) : true)
     );
 /**
  * Parse a single request in our internal request representation and extract tracking data as an annotated result from
