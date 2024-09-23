@@ -178,7 +178,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: {
+            userId: {
                 context: 'query',
                 path: 'custom_user_id',
                 reasoning: 'singular-net/custom_user_id.md',

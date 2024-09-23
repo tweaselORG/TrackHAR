@@ -52,7 +52,7 @@ undefined
 [
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'deviceid',
         reasoning: 'obvious property name',
@@ -60,7 +60,7 @@ undefined
     },
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'android_id',
         reasoning: 'obvious property name',
@@ -107,7 +107,7 @@ For our HAR file, this will produce the following output:
 undefined
 
 {
-    otherIdentifiers: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
+    deviceId: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
     osName: [ 'android' ],
     osVersion: [ '13' ]
 }

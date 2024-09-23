@@ -227,26 +227,26 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'device.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-                {
-                    context: 'body',
-                    path: 'sessions.*.user.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-                {
-                    context: 'body',
-                    path: 'sessions.*.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-            ],
+            deviceId: {
+                context: 'body',
+                path: 'device.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
+
+            userId: {
+                context: 'body',
+                path: 'sessions.*.user.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
+
+            sessionId: {
+                context: 'body',
+                path: 'sessions.*.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
 
             startTime: {
                 context: 'body',
@@ -276,23 +276,23 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'events.*.user.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-                {
-                    context: 'body',
-                    path: 'events.*.device.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-                {
-                    context: 'body',
-                    path: 'events.*.session.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-            ],
+            userId: {
+                context: 'body',
+                path: 'events.*.user.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
+
+            deviceId: {
+                context: 'body',
+                path: 'events.*.device.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
+
+            sessionId: {
+                context: 'body',
+                path: 'events.*.session.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
 
             appId: {
                 context: 'body',

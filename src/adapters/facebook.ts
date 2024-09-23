@@ -20,17 +20,19 @@ const graphActivitiesDataPaths = ({
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
     },
 
-    otherIdentifiers: [
+    userId: {
+        context: 'body',
+        path: pathPrefix + 'app_user_id',
+        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+    },
+
+    deviceId: [
         {
             context: 'body',
             path: pathPrefix + 'anon_id',
             reasoning: 'facebook/anon_id.md',
         },
-        {
-            context: 'body',
-            path: pathPrefix + 'app_user_id',
-            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
-        },
+
         {
             context: 'body',
             path: pathPrefix + 'device_token',
@@ -164,7 +166,7 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
         reasoning: 'obvious property name',
     },
 
-    otherIdentifiers: {
+    sessionId: {
         context: 'body',
         path: pathPrefix + 'SESSION_ID',
         reasoning: 'obvious property name',
