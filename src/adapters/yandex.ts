@@ -40,7 +40,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: [
+            deviceId: [
                 {
                     context: 'query',
                     path: 'deviceid',
@@ -54,11 +54,6 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'android_id',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'query',
-                    path: 'yandex_adv_id',
                     reasoning: 'obvious property name',
                 },
             ],

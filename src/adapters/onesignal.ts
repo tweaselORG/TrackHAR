@@ -58,24 +58,23 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://documentation.onesignal.com/v9.0/reference/add-a-device',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'external_user_id',
-                    reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#external-user-ids',
-                },
-                {
-                    context: 'path',
-                    path: '$',
-                    reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#player-id',
-                },
+            userId: {
+                context: 'body',
+                path: 'external_user_id',
+                reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#external-user-ids',
+            },
 
-                {
-                    context: 'body',
-                    path: 'tags.deviceId',
-                    reasoning: 'obvious property name',
-                },
-            ],
+            installationId: {
+                context: 'path',
+                path: '$',
+                reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#player-id',
+            },
+
+            deviceId: {
+                context: 'body',
+                path: 'tags.deviceId',
+                reasoning: 'obvious property name',
+            },
 
             osName: {
                 context: 'body',

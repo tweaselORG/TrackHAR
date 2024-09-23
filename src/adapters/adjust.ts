@@ -61,7 +61,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         },
     ],
 
-    otherIdentifiers: [
+    deviceId: [
         {
             context,
             path: 'android_uuid',

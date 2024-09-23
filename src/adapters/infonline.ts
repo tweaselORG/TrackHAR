@@ -214,7 +214,7 @@ const ioamTxQueryDataPaths: Adapter['containedDataPaths'] = {
         reasoning: 'https://docs.infonline.de/infonline-measurement/en/services/logfilebereitstellung/',
     },
 
-    otherIdentifiers: {
+    deviceId: {
         context: 'cookie',
         path: 'i00',
         reasoning: 'infonline/i00.md',
@@ -281,7 +281,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...ioamJsonDataPaths({ context: 'body', prefix: 'ae.', hasEvents: true }),
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'cookie',
                 path: 'i00',
                 reasoning: 'infonline/i00.md',
@@ -309,7 +309,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...ioamJsonDataPaths({ context: 'body', prefix: 'ae.', hasEvents: true }),
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'cookie',
                 path: 'i00',
                 reasoning: 'infonline/i00.md',

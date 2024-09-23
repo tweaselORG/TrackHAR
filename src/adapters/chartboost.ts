@@ -58,7 +58,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: [
+            sessionId: [
                 {
                     context: 'body',
                     path: 'session_id',
@@ -206,7 +206,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: {
+            sessionId: {
                 context: 'body',
                 path: 'app.session_id',
                 reasoning: 'obvious property name',
