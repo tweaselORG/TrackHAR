@@ -56,6 +56,26 @@ export type Tracker = {
  *
  * These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
  * by the tracker.
+ *
+ * @remarks
+ * - `state` here means "subnational political entity"
+ * - Locales should not be listed under `country`
+ * - We distinguish the following types of IDs (that are personal data under the GDPR):
+ *
+ *   - An `advertisingId` is a unique identifier assigned to a device by the operating system that is the same across
+ *       apps/websites. In particular, this includes the Google Advertising ID (GAID) and Apple's Identifier for
+ *       Advertisers (IDFA). These can typically be reset by the user.
+ *   - A `developerScopedId` is a unique identifier assigned to a device by the operating that is specific to a certain app
+ *       developer. Apps from different developers will see different `developerScopedId`s. In particular, this includes
+ *       Apple's Identifier for Vendor (IDFV), Google's App set ID (ASID), and the `ANDROID_ID`.
+ *   - A `sessionId` identifies a single (time-limited) session and is specific to a certain website/app and device.
+ *   - An `installationId` identifies an installation of an app on a device. It specific to that app and device, and reset
+ *       when the app is un- and reinstalled.
+ *   - A `deviceId` identifies a device across apps/websites.
+ *   - A `userId` identifies a user across apps/websites and devices.
+ *   - We use the `otherIdentifiers` data property to denote UUIDs and other identifiers where we don't know how they are
+ *       actually used. This should only be used sparingly and where, despite not knowing the precise function, it is
+ *       obvious (from context or otherwise) that this ID is personal data.
  */
 export type Property = keyof (typeof translations)['properties'];
 /** A variable on the global state used in the decoding process of a request. This doesn't allow nested property access. */
@@ -124,6 +144,10 @@ export type DataPath = {
     context: Context;
     /** A JSONPath expression describing where in the decoded request object the data can be found. */
     path: JsonPath;
+    /** An optional filter that stops a discovered value from being considered an instance of the respective property. */
+    notIf?: string | RegExp;
+    /** An optional filter that causes only matching values to be considered instances of the respective property. */
+    onlyIf?: string | RegExp;
     /**
      * An explanation of how we concluded that this is information is actually the type of data we labelled it as. This
      * can either be a standardized description, or a URL to a more in-depth research report.
@@ -340,6 +364,17 @@ export const processRequest = (
     const flattenedPaths = Object.entries(adapter.containedDataPaths)
         .map(([property, paths]) => (Array.isArray(paths) ? paths : [paths]).map((p) => [property, p] as const))
         .flat();
+    /**
+     * Transform a value transmitted by a tracker, which can be any type, into a string, choosing the most
+     * "natural-feeling" representation to make it filterable.
+     *
+     * For example, objects and arrays will be returned as JSON strings, whereas strings will be returned as-is (and
+     * thus notably without enclosing quotes as `JSON.stringify` would add).
+     */
+    const stringify = (v: unknown) =>
+        typeof v === 'bigint' || typeof v === 'string' || typeof v === 'symbol' || typeof v === 'function'
+            ? v.toString()
+            : JSON.stringify(v);
     return flattenedPaths
         .map(([property, path]) =>
             (JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true }) ?? [])
@@ -350,6 +385,20 @@ export const processRequest = (
                     value: v,
                 }))
                 .filter((v) => v.value !== undefined && v.value !== null && v.value.trim?.() !== '')
+                .filter(
+                    (v) =>
+                        !v.onlyIf ||
+                        (typeof v.onlyIf === 'string'
+                            ? v.onlyIf === stringify(v.value)
+                            : v.onlyIf.test(stringify(v.value)))
+                )
+                .filter(
+                    (v) =>
+                        !v.notIf ||
+                        (typeof v.notIf === 'string'
+                            ? v.notIf !== stringify(v.value)
+                            : !v.notIf.test(stringify(v.value)))
+                )
         )
         .flat();
 };

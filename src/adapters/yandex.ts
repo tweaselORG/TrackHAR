@@ -1,3 +1,4 @@
+import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -30,6 +31,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'ifa',
+                    notIf: emptyIdfa,
                     reasoning: 'obvious property name',
                 },
             ],
@@ -40,7 +42,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: [
+            deviceId: [
                 {
                     context: 'query',
                     path: 'deviceid',
@@ -54,11 +56,6 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'android_id',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'query',
-                    path: 'yandex_adv_id',
                     reasoning: 'obvious property name',
                 },
             ],

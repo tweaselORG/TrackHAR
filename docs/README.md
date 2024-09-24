@@ -63,7 +63,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:146](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L146)
+[index.ts:170](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L170)
 
 ___
 
@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:378](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L378)
+[index.ts:427](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L427)
 
 ___
 
@@ -138,12 +138,14 @@ A description of where a certain piece of tracking data can be found in the deco
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `context` | [`Context`](README.md#context) | The part of the original request that the data can be found in. |
+| `notIf?` | `string` \| `RegExp` | An optional filter that stops a discovered value from being considered an instance of the respective property. |
+| `onlyIf?` | `string` \| `RegExp` | An optional filter that causes only matching values to be considered instances of the respective property. |
 | `path` | [`JsonPath`](README.md#jsonpath) | A JSONPath expression describing where in the decoded request object the data can be found. |
 | `reasoning` | ``"obvious property name"`` \| ``"obvious observed values"`` \| ``"observed values match known device parameters"`` \| \`https://${string}\` \| \`http://${string}\` \| \`${string}.md\` | An explanation of how we concluded that this is information is actually the type of data we labelled it as. This can either be a standardized description, or a URL to a more in-depth research report. |
 
 #### Defined in
 
-[index.ts:122](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L122)
+[index.ts:142](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L142)
 
 ___
 
@@ -180,7 +182,7 @@ The following `function`s are available:
 
 #### Defined in
 
-[index.ts:105](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L105)
+[index.ts:125](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L125)
 
 ___
 
@@ -193,7 +195,7 @@ An identifer for a variable or nested property on the global state in the decodi
 
 #### Defined in
 
-[index.ts:72](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L72)
+[index.ts:92](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L92)
 
 ___
 
@@ -221,7 +223,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:416](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L416)
+[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
 
 ___
 
@@ -246,7 +248,7 @@ process of a request.
 
 #### Defined in
 
-[index.ts:67](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L67)
+[index.ts:87](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L87)
 
 ___
 
@@ -259,9 +261,30 @@ A type of tracking data that we can detect in a request.
 These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
 by the tracker.
 
+**`Remarks`**
+
+- `state` here means "subnational political entity"
+- Locales should not be listed under `country`
+- We distinguish the following types of IDs (that are personal data under the GDPR):
+
+  - An `advertisingId` is a unique identifier assigned to a device by the operating system that is the same across
+      apps/websites. In particular, this includes the Google Advertising ID (GAID) and Apple's Identifier for
+      Advertisers (IDFA). These can typically be reset by the user.
+  - A `developerScopedId` is a unique identifier assigned to a device by the operating that is specific to a certain app
+      developer. Apps from different developers will see different `developerScopedId`s. In particular, this includes
+      Apple's Identifier for Vendor (IDFV), Google's App set ID (ASID), and the `ANDROID_ID`.
+  - A `sessionId` identifies a single (time-limited) session and is specific to a certain website/app and device.
+  - An `installationId` identifies an installation of an app on a device. It specific to that app and device, and reset
+      when the app is un- and reinstalled.
+  - A `deviceId` identifies a device across apps/websites.
+  - A `userId` identifies a user across apps/websites and devices.
+  - We use the `otherIdentifiers` data property to denote UUIDs and other identifiers where we don't know how they are
+      actually used. This should only be used sparingly and where, despite not knowing the precise function, it is
+      obvious (from context or otherwise) that this ID is personal data.
+
 #### Defined in
 
-[index.ts:60](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L60)
+[index.ts:80](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L80)
 
 ___
 
@@ -305,7 +328,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:395](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L395)
+[index.ts:444](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L444)
 
 ___
 
@@ -367,7 +390,7 @@ A variable on the global state used in the decoding process of a request. This d
 
 #### Defined in
 
-[index.ts:62](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L62)
+[index.ts:82](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L82)
 
 ## Variables
 
@@ -384,7 +407,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:467](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L467)
+[index.ts:516](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L516)
 
 ## Functions
 
@@ -412,7 +435,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:255](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L255)
+[index.ts:279](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L279)
 
 ___
 
@@ -441,13 +464,13 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:190](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L190)
+[index.ts:214](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L214)
 
 ___
 
 ### process
 
-▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 Parse the requests in a HAR traffic dump and extract tracking data.
 
@@ -466,12 +489,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
 #### Returns
 
-`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
   (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
@@ -479,7 +502,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:438](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L438)
+[index.ts:487](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L487)
 
 ___
 
@@ -500,7 +523,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedIdfa"`` \| ``"idfa"`` \| ``"idfv"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
 
@@ -508,7 +531,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:275](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L275)
+[index.ts:299](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L299)
 
 ___
 

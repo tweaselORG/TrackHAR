@@ -58,24 +58,25 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://documentation.onesignal.com/v9.0/reference/add-a-device',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'external_user_id',
-                    reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#external-user-ids',
-                },
-                {
-                    context: 'path',
-                    path: '$',
-                    reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#player-id',
-                },
+            userId: {
+                context: 'body',
+                path: 'external_user_id',
+                notIf: '0',
+                reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#external-user-ids',
+            },
 
-                {
-                    context: 'body',
-                    path: 'tags.deviceId',
-                    reasoning: 'obvious property name',
-                },
-            ],
+            installationId: {
+                context: 'path',
+                path: '$',
+                onlyIf: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
+                reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#player-id',
+            },
+
+            deviceId: {
+                context: 'body',
+                path: 'tags.deviceId',
+                reasoning: 'obvious property name',
+            },
 
             osName: {
                 context: 'body',
@@ -123,6 +124,7 @@ export const adapters: Adapter[] = [
             country: {
                 context: 'body',
                 path: 'tags.country',
+                notIf: 'unknown',
                 reasoning: 'obvious property name',
             },
 

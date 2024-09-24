@@ -1,4 +1,4 @@
-import { mergeContainedDataPaths } from '../common/adapter-util';
+import { emptyIdfa, mergeContainedDataPaths } from '../common/adapter-util';
 import type { Adapter, Context, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -169,7 +169,7 @@ const containedDataPathsFireperf: Adapter['containedDataPaths'] = {
         reasoning: fireperfAndroidUrl('L314-L315'),
     },
 
-    otherIdentifiers: {
+    sessionId: {
         context: 'body',
         path: 'logEvents_FIREPERF.*.4.1',
         reasoning: fireperfAndroidUrl('L213-L217'),
@@ -215,7 +215,7 @@ const containedDataPathsCrashlyticsReport: Adapter['containedDataPaths'] = {
         reasoning: crashlyticsUrl('L34-L35'),
     },
 
-    otherIdentifiers: {
+    installationId: {
         context: 'body',
         path: 'logEvents_FIREBASE_CRASHLYTICS_REPORT.*.installationUuid',
         reasoning: crashlyticsUrl('L37-L39'),
@@ -330,7 +330,7 @@ const containedDataPathsCrashlyticsReport: Adapter['containedDataPaths'] = {
     },
 };
 const containedDataPathsAppQualityAndroid: Adapter['containedDataPaths'] = {
-    otherIdentifiers: [
+    sessionId: [
         {
             context: 'body',
             path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.sessionData.sessionId',
@@ -341,12 +341,13 @@ const containedDataPathsAppQualityAndroid: Adapter['containedDataPaths'] = {
             path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.sessionData.firstSessionId',
             reasoning: appqualityUrl('L122-L124'),
         },
-        {
-            context: 'body',
-            path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.sessionData.firebaseInstallationId',
-            reasoning: appqualityUrl('L128-L129'),
-        },
     ],
+
+    installationId: {
+        context: 'body',
+        path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.sessionData.firebaseInstallationId',
+        reasoning: appqualityUrl('L128-L129'),
+    },
 
     model: {
         context: 'body',
@@ -392,7 +393,7 @@ const containedDataPathsAppQualityAndroid: Adapter['containedDataPaths'] = {
     },
 };
 const containedDataPathsAppQualityIos: Adapter['containedDataPaths'] = {
-    otherIdentifiers: [
+    sessionId: [
         {
             context: 'body',
             path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.2.1',
@@ -403,12 +404,13 @@ const containedDataPathsAppQualityIos: Adapter['containedDataPaths'] = {
             path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.2.7',
             reasoning: appqualityUrl('L122-L124'),
         },
-        {
-            context: 'body',
-            path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.2.3',
-            reasoning: appqualityUrl('L128-L129'),
-        },
     ],
+
+    installationId: {
+        context: 'body',
+        path: 'logEvents_FIREBASE_APPQUALITY_SESSION.*.2.3',
+        reasoning: appqualityUrl('L128-L129'),
+    },
 
     model: {
         context: 'body',
@@ -721,7 +723,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'body',
                 path: 'device',
                 reasoning: 'obvious property name',
@@ -906,9 +908,10 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'body',
                 path: 'rdid',
+                notIf: emptyIdfa,
                 reasoning: 'google/rdid.md',
             },
         },
@@ -1367,7 +1370,7 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
         ],
         containedDataPaths: {
-            otherIdentifiers: {
+            installationId: {
                 context: 'body',
                 path: 'fid',
                 reasoning: 'https://firebase.google.com/docs/projects/manage-installations',
@@ -1417,7 +1420,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...containedDataPathsIdentityToolkitHeaders,
 
-            otherIdentifiers: [
+            userId: [
                 {
                     context: 'body',
                     path: 'idToken.user_id',
@@ -1453,7 +1456,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...containedDataPathsIdentityToolkitHeaders,
 
-            otherIdentifiers: {
+            userId: {
                 context: 'body',
                 path: 'idToken.user_id',
                 reasoning: 'google/idToken.md',
@@ -1476,7 +1479,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...containedDataPathsIdentityToolkitHeaders,
 
-            otherIdentifiers: {
+            userId: {
                 context: 'body',
                 path: 'token.uid',
                 reasoning: 'google/idToken.md',
@@ -1498,7 +1501,7 @@ export const adapters: Adapter[] = [
         containedDataPaths: {
             ...containedDataPathsIdentityToolkitHeaders,
 
-            otherIdentifiers: {
+            userId: {
                 context: 'body',
                 path: 'email',
                 reasoning:

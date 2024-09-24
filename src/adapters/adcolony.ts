@@ -23,7 +23,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious observed values',
             },
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'body',
                 path: 'device_id',
                 reasoning: 'obvious property name',
@@ -95,6 +95,7 @@ export const adapters: Adapter[] = [
             networkConnectionType: {
                 context: 'body',
                 path: 'network_type',
+                notIf: 'unknown',
                 reasoning: 'obvious property name',
             },
 
@@ -213,7 +214,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: {
+            sessionId: {
                 context: 'body',
                 path: 'sid',
                 reasoning: 'obvious property name',

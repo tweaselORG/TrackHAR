@@ -38,7 +38,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         reasoning: 'obvious property name',
     },
 
-    otherIdentifiers: {
+    sessionId: {
         context,
         path: 'clientSessionId',
         reasoning: 'obvious property name',
@@ -59,6 +59,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
     idfa: {
         context,
         path: 'userAdvertisingId',
+        notIf: '0',
         reasoning: 'obvious property name',
     },
 

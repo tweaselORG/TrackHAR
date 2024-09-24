@@ -1,3 +1,4 @@
+import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -17,19 +18,22 @@ const graphActivitiesDataPaths = ({
     idfa: {
         context: 'body',
         path: pathPrefix + 'advertiser_id',
+        notIf: emptyIdfa,
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
     },
 
-    otherIdentifiers: [
+    userId: {
+        context: 'body',
+        path: pathPrefix + 'app_user_id',
+        notIf: '0',
+        reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
+    },
+
+    deviceId: [
         {
             context: 'body',
             path: pathPrefix + 'anon_id',
             reasoning: 'facebook/anon_id.md',
-        },
-        {
-            context: 'body',
-            path: pathPrefix + 'app_user_id',
-            reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
         },
         {
             context: 'body',
@@ -164,7 +168,7 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
         reasoning: 'obvious property name',
     },
 
-    otherIdentifiers: {
+    sessionId: {
         context: 'body',
         path: pathPrefix + 'SESSION_ID',
         reasoning: 'obvious property name',
@@ -256,16 +260,19 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
     accelerometerX: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_x',
+        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
     accelerometerY: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_y',
+        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
     accelerometerZ: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_z',
+        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
 

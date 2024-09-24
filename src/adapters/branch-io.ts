@@ -45,7 +45,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
             },
 
-            otherIdentifiers: [
+            deviceId: [
                 {
                     context: 'body',
                     path: 'hardware_id',
@@ -53,22 +53,7 @@ export const adapters: Adapter[] = [
                 },
                 {
                     context: 'body',
-                    path: 'metadata.$marketing_cloud_visitor_id',
-                    reasoning: 'https://help.branch.io/partners-portal/docs/adobe-analytics',
-                },
-                {
-                    context: 'body',
-                    path: 'metadata.$braze_install_id',
-                    reasoning: 'https://help.branch.io/partners-portal/docs/braze',
-                },
-                {
-                    context: 'body',
                     path: 'metadata.device_id',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'body',
-                    path: 'metadata.uuid',
                     reasoning: 'obvious property name',
                 },
                 {
@@ -78,13 +63,26 @@ export const adapters: Adapter[] = [
                 },
                 {
                     context: 'body',
+                    path: 'device_fingerprint_id',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            userId: [
+                {
+                    context: 'body',
+                    path: 'metadata.$marketing_cloud_visitor_id',
+                    reasoning: 'branch-io/marketing_cloud_visitor_id.md',
+                },
+                {
+                    context: 'body',
                     path: 'metadata.$mixpanel_distinct_id',
-                    reasoning: 'https://help.branch.io/partners-portal/docs/mixpanel',
+                    reasoning: 'branch-io/mixpanel_distinct_id.md',
                 },
                 {
                     context: 'body',
                     path: 'metadata.$segment_anonymous_id',
-                    reasoning: 'https://help.branch.io/partners-portal/docs/segment-export',
+                    reasoning: 'branch-io/segment_anonymous_id.md',
                 },
                 {
                     context: 'body',
@@ -93,23 +91,32 @@ export const adapters: Adapter[] = [
                 },
                 {
                     context: 'body',
-                    path: 'UDID',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'body',
-                    path: 'device_fingerprint_id',
-                    reasoning: 'obvious property name',
+                    path: 'identity',
+                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
                 },
                 {
                     context: 'body',
                     path: 'identity_id',
                     reasoning: 'obvious property name',
                 },
+            ],
+
+            installationId: {
+                context: 'body',
+                path: 'metadata.$braze_install_id',
+                reasoning: 'https://help.branch.io/partners-portal/docs/braze',
+            },
+
+            otherIdentifiers: [
                 {
                     context: 'body',
-                    path: 'identity',
-                    reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',
+                    path: 'metadata.uuid',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'UDID',
+                    reasoning: 'obvious property name',
                 },
             ],
 

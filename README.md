@@ -52,7 +52,7 @@ undefined
 [
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'deviceid',
         reasoning: 'obvious property name',
@@ -60,7 +60,7 @@ undefined
     },
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'android_id',
         reasoning: 'obvious property name',
@@ -107,7 +107,7 @@ For our HAR file, this will produce the following output:
 undefined
 
 {
-    otherIdentifiers: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
+    deviceId: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
     osName: [ 'android' ],
     osVersion: [ '13' ]
 }
@@ -251,6 +251,8 @@ To extract the data from the decoded request, the adapter specifies the path in 
 - The `context` where the data was found, e.g. the `body`.
 - `path`, the JSONPath to access the property in the `res.<context>` object of the decoding context. This can contain [complex JSONPath notation supported by `jsonpath-plus`](https://jsonpath-plus.github.io/JSONPath/docs/ts/#syntax-through-examples).
 - The `reasoning` for why the path is assumed to contain this data type. This should either link to further reserach or documentation that makes that point clear, or reference to how either the property name or the value is really obviously connected to the data type.
+
+Sometimes, trackers will transmit something like `idfa: none`. This should obviously not be matched as an advertising ID transmission. To solve that you can use the optional `notIf` or `onlyIf` filters, which, as the names imply, stop a discovered value from being considered an instance of the respective property or cause only matching values to be considered instances of the respective property, respectively.
 
 Properties in `containedDataPaths` may also contain an array of several `DataPath`s, because one data type might be found in several places in a request, e.g. the `language` might be part of the `query` but also a property in the `body`. If a property in a request contains more than one data type, it should be mentioned in all of these data types. For example, a property `body.platform` might contain a value like `Android 13.2`, which contains the `osName` as well as the `osVersion`. In this case, you’ll need to add the path `body.platform` to both of these properties in the `containedDataPaths`.
 
