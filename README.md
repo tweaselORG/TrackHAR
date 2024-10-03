@@ -218,7 +218,9 @@ You can use the following limited markup:
 
 ### Adapter matching
 
-In the `Tracker`'s `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code.
+In the `Tracker`'s `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. Trailing slashes in requests URLs are ignored and should not be included in the `endpointUrls`.
+
+If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code.
 
 If there are different requests which require specific handling to the same endpoint, you also need to split your adapter to match only a single type of request. To do that, match the adapter to the same endpoint and define a `match` method in both adapters. It receives a `Request` object containing the raw data of the request and should return `true` if the adapter applies to the request. Typically you’d match against characteristic characters in the body or the `Content-Type` header to determine if you an adapter can parse the request, see e.g. this `match` method of a Facebook adapter:
 

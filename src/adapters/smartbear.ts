@@ -15,7 +15,7 @@ export const adapters: Adapter[] = [
         description: 'smartbear-bugsnag-session',
         tracker,
 
-        endpointUrls: ['https://sessions.bugsnag.com/'],
+        endpointUrls: ['https://sessions.bugsnag.com'],
         match: (r) => r.method === 'POST',
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
@@ -264,7 +264,7 @@ export const adapters: Adapter[] = [
         description: 'smartbear-bugsnag-notify',
         tracker,
 
-        endpointUrls: ['https://notify.bugsnag.com/'],
+        endpointUrls: ['https://notify.bugsnag.com'],
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         // The `events.*.metaData.*` properties are custom properties that can be set by the app developer, though the

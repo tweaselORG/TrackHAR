@@ -55,7 +55,7 @@ The first adapter that matches a request will be used to decode it.
 | `containedDataPaths` | `Partial`<`Record`<[`Property`](README.md#property), [`ArrayOrSingle`](README.md#arrayorsingle)<[`DataPath`](README.md#datapath)\>\>\> | A description of how to extract the transmitted tracking data from the decoded object. |
 | `decodingSteps` | [`DecodingStep`](README.md#decodingstep)[] | An array of the steps (in order) used to decode the request into an object format. |
 | `description?` | [`TrackerDescriptionTranslationKey`](README.md#trackerdescriptiontranslationkey) | The translation key for a description that gives context on the endpoint, if that makes sense. |
-| `endpointUrls` | (`string` \| `RegExp`)[] | The endpoints that this adapter can handle. Each entry can either be a string (which will have to be equal to the full endpoint URL in the request) or a regular expression that is matched against the endpoint URL. The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query string. |
+| `endpointUrls` | (`string` \| `RegExp`)[] | The endpoints that this adapter can handle. Each entry can either be a string (which will have to be equal to the full endpoint URL in the request) or a regular expression that is matched against the endpoint URL. The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query string. It should not have a trailing slash. |
 | `match?` | (`r`: [`Request`](README.md#request)) => `boolean` \| `undefined` | An optional function to further filter which requests can be handled by this adapter. This is useful if there are multiple adapters for one endpoint that handle different request formats. |
 | `name` | `string` | A human-readable name for the adapter. This should be as close as possible to the official name for the endpoint. |
 | `slug` | `string` | A slug to identify the adapter. These only need to be unique per tracker, not globally. |
@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:378](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L378)
+[index.ts:381](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L381)
 
 ___
 
@@ -221,7 +221,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:416](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L416)
+[index.ts:419](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L419)
 
 ___
 
@@ -305,7 +305,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:395](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L395)
+[index.ts:398](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L398)
 
 ___
 
@@ -384,7 +384,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:467](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L467)
+[index.ts:470](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L470)
 
 ## Functions
 
@@ -479,7 +479,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:438](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L438)
+[index.ts:441](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L441)
 
 ___
 
@@ -508,7 +508,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:275](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L275)
+[index.ts:278](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L278)
 
 ___
 

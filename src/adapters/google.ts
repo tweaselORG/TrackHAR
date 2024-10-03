@@ -919,7 +919,7 @@ export const adapters: Adapter[] = [
         name: 'DoubleClick (pagead/interaction)',
         tracker,
 
-        endpointUrls: ['https://googleads.g.doubleclick.net/pagead/interaction/'],
+        endpointUrls: ['https://googleads.g.doubleclick.net/pagead/interaction'],
 
         decodingSteps: [
             { function: 'parseQueryString', input: 'query', output: 'res.query' },
@@ -1359,7 +1359,7 @@ export const adapters: Adapter[] = [
         description: 'firebaseinstallations',
         tracker,
 
-        endpointUrls: [/^https:\/\/firebaseinstallations\.googleapis\.com\/v1\/projects\/.+\/installations\/?$/],
+        endpointUrls: [/^https:\/\/firebaseinstallations\.googleapis\.com\/v1\/projects\/.+\/installations$/],
         match: (r) => r.content?.startsWith('{"'),
 
         decodingSteps: [

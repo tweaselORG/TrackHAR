@@ -173,7 +173,7 @@ export const adapters: Adapter[] = [
         name: 'Rayjump (analytics)',
         tracker,
 
-        endpointUrls: ['https://analytics.rayjump.com/'],
+        endpointUrls: ['https://analytics.rayjump.com'],
 
         decodingSteps: [
             { function: 'decodeUrl', input: 'body', output: 'q' },
