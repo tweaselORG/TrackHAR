@@ -44,7 +44,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious observed values',
             },
 
-            otherIdentifiers: {
+            userId: {
                 context: 'query',
                 path: 'analyticsUserId',
                 reasoning: 'obvious property name',

@@ -52,17 +52,19 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'header',
-                    path: 'Install-ID',
-                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
-                },
-                {
-                    context: 'body',
-                    path: 'logs.*.sid',
-                    reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
-                },
+            installationId: {
+                context: 'header',
+                path: 'Install-ID',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+            },
+
+            sessionId: {
+                context: 'body',
+                path: 'logs.*.sid',
+                reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
+            },
+
+            userId: [
                 {
                     context: 'body',
                     path: 'logs.*.userId',
