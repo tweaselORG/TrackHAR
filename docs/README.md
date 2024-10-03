@@ -268,9 +268,9 @@ by the tracker.
   - An `advertisingId` is a unique identifier assigned to a device by the operating system that is the same across
       apps/websites. In particular, this includes the Google Advertising ID (GAID) and Apple's Identifier for
       Advertisers (IDFA). These can typically be reset by the user.
-  - A `developerScopedId` is a unique identifier assigned to a device by the operating that is specific to a certain app
-      developer. Apps from different developers will see different `developerScopedId`s. In particular, this includes
-      Apple's Identifier for Vendor (IDFV), Google's App set ID (ASID), and the `ANDROID_ID`.
+  - A `developerScopedId` is a unique identifier assigned to a device by the operating system that is specific to a
+      certain app developer. Apps from different developers will see different `developerScopedId`s. In particular,
+      this includes Apple's Identifier for Vendor (IDFV), Google's App set ID (ASID), and the `ANDROID_ID`.
   - A `sessionId` identifies a single (time-limited) session and is specific to a certain website/app and device.
   - An `installationId` identifies an installation of an app on a device. It specific to that app and device, and reset
       when the app is un- and reinstalled.
