@@ -624,13 +624,13 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious observed values',
             },
 
-            idfa: {
+            advertisingId: {
                 context: 'body',
                 path: '1.*.19',
                 reasoning: 'obvious observed values',
             },
 
-            idfv: {
+            developerScopedId: {
                 context: 'body',
                 path: '1.*.27',
                 reasoning: 'obvious observed values',
@@ -833,7 +833,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         containedDataPaths: {
-            idfa: {
+            advertisingId: {
                 context: 'body',
                 path: 'adid',
                 reasoning: 'observed values match known device parameters',

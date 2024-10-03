@@ -14,7 +14,7 @@ const graphActivitiesDataPaths = ({
     pathPrefix: string;
     includeExtinfo?: boolean;
 }): Adapter['containedDataPaths'] => ({
-    idfa: {
+    advertisingId: {
         context: 'body',
         path: pathPrefix + 'advertiser_id',
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
@@ -158,7 +158,7 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
         reasoning: 'obvious property name',
     },
 
-    idfa: {
+    advertisingId: {
         context: 'body',
         path: pathPrefix + 'IDFA',
         reasoning: 'obvious property name',

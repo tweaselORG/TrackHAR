@@ -26,7 +26,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         containedDataPaths: {
-            idfa: [
+            advertisingId: [
                 {
                     context: 'body',
                     path: 'google_advertising_id',
@@ -39,7 +39,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: {
+            developerScopedId: {
                 context: 'body',
                 path: 'ios_vendor_id',
                 reasoning: 'https://help.branch.io/developers-hub/reference/attribution-api',

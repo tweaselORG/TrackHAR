@@ -412,7 +412,7 @@ export type Result = Partial<Record<LiteralUnion<Property, string>, TrackingData
  * ```ts
  * {
  *     "localIp": ["10.0.0.2", "fd31:4159::a2a1"],
- *     "idfa": "6a1c1487-a0af-4223-b142-a0f4621d0311"
+ *     "advertisingId": "6a1c1487-a0af-4223-b142-a0f4621d0311"
  * }
  * ```
  *

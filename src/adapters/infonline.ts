@@ -55,7 +55,7 @@ const ioamJsonDataPaths = ({
         reasoning: 'obvious property name',
     },
 
-    hashedIdfa: {
+    hashedAdvertisingId: {
         context,
         path: prefix + 'client.uuids.advertisingIdentifier',
         reasoning: 'infonline/client.uuids.advertisingIdentifier.md',
