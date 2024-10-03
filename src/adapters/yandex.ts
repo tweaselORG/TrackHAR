@@ -105,12 +105,6 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            country: {
-                context: 'query',
-                path: 'locale',
-                reasoning: 'obvious property name',
-            },
-
             isRooted: {
                 context: 'query',
                 path: 'is_rooted',
