@@ -5,7 +5,7 @@ import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
 import type translations from '../i18n/en.json';
 import { allAdapters } from './common/adapters';
-import { decodeFunctions } from './common/decode-functions';
+import { decodeFunction } from './common/decode-functions';
 import type { Request } from './common/request';
 import { unhar } from './common/request';
 import type { ArrayOrSingle } from './common/type-utils';
@@ -247,7 +247,7 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
             if (!Array.isArray(mapInput)) throw new Error('mapInput must be an array.');
             const result = mapInput
                 .filter((i) => i !== undefined && i !== null)
-                .map((i) => decodeFunctions[step.function](i, (step as { options: unknown }).options));
+                .map((i) => decodeFunction(step.function, i, (step as { options: unknown }).options));
             if (result) set(step.output, result);
             continue;
         }
@@ -255,7 +255,7 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
         const input = get(step.input);
         if (!input) continue;
 
-        const result = decodeFunctions[step.function](input, (step as { options: unknown }).options);
+        const result = decodeFunction(step.function, input, (step as { options: unknown }).options);
         if (result) set(step.output, result);
     }
 

@@ -7,7 +7,7 @@ import type { DecodingStep } from '../index';
 import { Protobuf } from './protobuf.mjs';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const decodeFunctions: Record<DecodingStep['function'], (input: any, options?: any) => any> = {
+const decodeFunctions: Record<DecodingStep['function'], (input: any, options?: any) => any> = {
     parseQueryString: (input) => qs.parse(input.replace(/^.+?\?/, '')),
     parseJson: (input) => JSON.parse(input),
     decodeBase64: (input) => Buffer.from(input, 'base64').toString('binary'),
@@ -20,4 +20,15 @@ export const decodeFunctions: Record<DecodingStep['function'], (input: any, opti
         const uint8Array = gunzipSync(Buffer.from(input, 'binary'));
         return Buffer.from(uint8Array).toString('binary');
     },
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const decodeFunction = (fn: DecodingStep['function'], input: any, options?: any) => {
+    try {
+        return decodeFunctions[fn](input, options);
+    } catch {
+        // Decode functions are used eagerly. If they fail, they are simply ignored, cf:
+        // https://github.com/tweaselORG/TrackHAR/pull/76#issuecomment-2370376873
+        return undefined;
+    }
 };
