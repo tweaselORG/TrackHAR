@@ -1,4 +1,3 @@
-import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Context, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -45,7 +44,6 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         {
             context,
             path: 'idfa',
-            notIf: emptyIdfa,
             reasoning: 'https://help.adjust.com/en/article/device-identifiers',
         },
     ],

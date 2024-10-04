@@ -1,4 +1,3 @@
-import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -18,7 +17,6 @@ const graphActivitiesDataPaths = ({
     advertisingId: {
         context: 'body',
         path: pathPrefix + 'advertiser_id',
-        notIf: emptyIdfa,
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
     },
 
@@ -260,19 +258,16 @@ const adDataPaths = ({ pathPrefix }: { pathPrefix: string }): Adapter['contained
     accelerometerX: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_x',
-        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
     accelerometerY: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_y',
-        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
     accelerometerZ: {
         context: 'body',
         path: pathPrefix + 'ANALOG.accelerometer_z',
-        notIf: 'NaN',
         reasoning: 'obvious property name',
     },
 

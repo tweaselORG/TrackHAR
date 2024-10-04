@@ -390,6 +390,18 @@ export const processRequest = (
                 .filter((v) => v.value !== undefined && v.value !== null && v.value.trim?.() !== '')
                 .filter(
                     (v) =>
+                        ![
+                            'unknown',
+                            'null',
+                            'undefined',
+                            'none',
+                            'n/a',
+                            '00000000-0000-0000-0000-000000000000',
+                        ].includes(stringify(v.value).toLowerCase().trim()) &&
+                        !['NaN'].includes(stringify(v.value).trim())
+                )
+                .filter(
+                    (v) =>
                         !v.onlyIf ||
                         (typeof v.onlyIf === 'string'
                             ? v.onlyIf === stringify(v.value)

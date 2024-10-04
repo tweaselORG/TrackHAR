@@ -1,4 +1,3 @@
-import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -42,7 +41,6 @@ export const adapters: Adapter[] = [
             advertisingId: {
                 context: 'query',
                 path: 'advertisingTrackingId',
-                notIf: emptyIdfa,
                 reasoning: 'obvious observed values',
             },
 

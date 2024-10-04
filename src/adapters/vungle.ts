@@ -1,4 +1,3 @@
-import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -21,7 +20,7 @@ export const adapters: Adapter[] = [
             advertisingId: {
                 context: 'query',
                 path: 'ifa',
-                notIf: /^(00000000-0000-0000-0000-000000000000)|(vungle\.invalid\.IFA)$/,
+                notIf: 'vungle.invalid.IFA',
                 reasoning: 'obvious property name',
             },
         },
@@ -86,7 +85,6 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'device.ifa',
-                    notIf: emptyIdfa,
                     reasoning: 'obvious property name',
                 },
                 {
@@ -97,7 +95,6 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'device.ext.vungle.ios.idfa',
-                    notIf: emptyIdfa,
                     reasoning: 'obvious property name',
                 },
             ],
