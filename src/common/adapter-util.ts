@@ -9,5 +9,3 @@ export const mergeContainedDataPaths = (...paths: Record<string, DataPath | Data
         }
         return res;
     }, {});
-
-export const emptyIdfa = '00000000-0000-0000-0000-000000000000';

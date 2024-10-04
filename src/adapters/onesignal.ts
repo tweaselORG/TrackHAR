@@ -124,7 +124,6 @@ export const adapters: Adapter[] = [
             country: {
                 context: 'body',
                 path: 'tags.country',
-                notIf: 'unknown',
                 reasoning: 'obvious property name',
             },
 

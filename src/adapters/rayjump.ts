@@ -1,4 +1,3 @@
-import { emptyIdfa } from '../common/adapter-util';
 import type { Adapter, Context, Tracker } from '../index';
 
 const tracker: Tracker = {
@@ -66,7 +65,6 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         {
             context,
             path: 'idfa',
-            notIf: emptyIdfa,
             reasoning: 'obvious property name',
         },
     ],
@@ -148,7 +146,6 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         {
             context,
             path: 'country_code',
-            notIf: 'UNKNOWN',
             reasoning: 'obvious property name',
         },
     ],

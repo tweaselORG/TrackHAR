@@ -95,7 +95,6 @@ export const adapters: Adapter[] = [
             networkConnectionType: {
                 context: 'body',
                 path: 'network_type',
-                notIf: 'unknown',
                 reasoning: 'obvious property name',
             },
 

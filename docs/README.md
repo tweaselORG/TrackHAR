@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:427](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L427)
+[index.ts:439](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L439)
 
 ___
 
@@ -223,7 +223,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
+[index.ts:477](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L477)
 
 ___
 
@@ -328,7 +328,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:444](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L444)
+[index.ts:456](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L456)
 
 ___
 
@@ -407,7 +407,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:516](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L516)
+[index.ts:528](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L528)
 
 ## Functions
 
@@ -502,7 +502,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:487](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L487)
+[index.ts:499](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L499)
 
 ___
 
