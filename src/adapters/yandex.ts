@@ -21,7 +21,7 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseQueryString', input: 'query', output: 'res.query' }],
         containedDataPaths: {
-            idfa: [
+            advertisingId: [
                 {
                     context: 'query',
                     path: 'adv_id',
@@ -34,13 +34,13 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: {
+            developerScopedId: {
                 context: 'query',
                 path: 'ifv',
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: [
+            deviceId: [
                 {
                     context: 'query',
                     path: 'deviceid',
@@ -54,11 +54,6 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'android_id',
-                    reasoning: 'obvious property name',
-                },
-                {
-                    context: 'query',
-                    path: 'yandex_adv_id',
                     reasoning: 'obvious property name',
                 },
             ],
@@ -100,12 +95,6 @@ export const adapters: Adapter[] = [
             },
 
             language: {
-                context: 'query',
-                path: 'locale',
-                reasoning: 'obvious property name',
-            },
-
-            country: {
                 context: 'query',
                 path: 'locale',
                 reasoning: 'obvious property name',

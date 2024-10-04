@@ -52,7 +52,7 @@ undefined
 [
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'deviceid',
         reasoning: 'obvious property name',
@@ -60,7 +60,7 @@ undefined
     },
     {
         adapter: 'yandex/appmetrica',
-        property: 'otherIdentifiers',
+        property: 'deviceId',
         context: 'query',
         path: 'android_id',
         reasoning: 'obvious property name',
@@ -107,7 +107,7 @@ For our HAR file, this will produce the following output:
 undefined
 
 {
-    otherIdentifiers: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
+    deviceId: [ 'cc89d0f3866e62c804a5a6f81f4aad3b', '355d2c7e339c6855' ],
     osName: [ 'android' ],
     osVersion: [ '13' ]
 }
@@ -124,7 +124,7 @@ import { process as processHar } from 'trackhar';
 
     const indicators = {
         localIp: [ '10.0.0.2', 'fd31:4159::a2a1' ],
-        idfa: '6a1c1487-a0af-4223-b142-a0f4621d0311'
+        advertisingId: '6a1c1487-a0af-4223-b142-a0f4621d0311'
     };
 
     const data = await processHar(JSON.parse(har), { indicatorValues: indicators });
@@ -138,7 +138,7 @@ With this, we can see that our device's advertising ID was transmitted in the fi
 [
     {
         adapter: 'indicators',
-        property: 'idfa',
+        property: 'advertisingId',
         context: 'body',
         path: '$[12]',
         reasoning: 'indicator matching (base64)',
@@ -218,7 +218,9 @@ You can use the following limited markup:
 
 ### Adapter matching
 
-In the `Tracker`'s `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code.
+In the `Tracker`'s `endpointUrls`, TrackHAR expects an array of strings or regular expressions of all URLs the adapter defines decoding steps and data paths for. Often, you'd want to use a regex to match URLs which might contain some data in the URL as well. TrackHAR always matches against the full URL, including protocol and query. Trailing slashes in requests URLs are ignored and should not be included in the `endpointUrls`.
+
+If the requests to two endpoints are similar but slightly different, write two different adapters for them. You should again pull out parts of the adapter into variables to avoid duplicating the code.
 
 If there are different requests which require specific handling to the same endpoint, you also need to split your adapter to match only a single type of request. To do that, match the adapter to the same endpoint and define a `match` method in both adapters. It receives a `Request` object containing the raw data of the request and should return `true` if the adapter applies to the request. Typically you’d match against characteristic characters in the body or the `Content-Type` header to determine if you an adapter can parse the request, see e.g. this `match` method of a Facebook adapter:
 
@@ -228,7 +230,7 @@ match: (request) => request.content?.startsWith('{"'),
 
 ### Decoding Steps
 
-If your adapter matches, next it tries to decode the data in the request. Therefore, you must define the algorithm to use in order to decode all relevant data in the `decodingSteps` property of your adapter. Because we automatically generate documentation for the adapters, we defined our own schema describing the decoding algorithm: The `decodingSteps` are an array of `DecodingStep` objects, which contain a function and what parts of the request they should work on. The `function` is set as the string name of a predefined decoding function, such as `parseJson` (look at the [API docs](/docs/README.md) for the full set). Each function takes an `input` argument, which expects a path in the global decoding state. This state is basically an object in which you can write temporary data to any property. It is initialized with the data from each context of the request, so the `body` property contains the raw request body, the `query` property contains the raw query string and so on. You can overwrite those values and, if the values are objects, use a JSONPath, like `body.identifiers.idfa`, to access or overwrite its properties. If you want to run a function on each element of an array, you can also use the `mapInput` property of a `DecodingStep` instead of the `input` property. In that case the function will be mapped over the non-empty entries of the array at the input path, like so: `mapInput.filter((i) => i !== undefined && i !== null).map(function)`. Each `DecodingStep` also expects an `output` property, which specifies the variable in the decoding state in which to return the result of the function to. This can simply be a generic variable name, a or a property access with the `.` operator (notably, here we don’t support all the other features of JSON path), if you want to save the value into a property on an object in the state, and, notably, a path on the special `res` object. The `res` object has one property for each context (`body`, `query`, etc.) and this is the object in which TrackHAR expects the final decoded request, which is then passed on to the next processing step. These are the basics of how to construct the decoding algorithm. Let’s take a look at an example from the Facebook graph adapter:
+If your adapter matches, next it tries to decode the data in the request. Therefore, you must define the algorithm to use in order to decode all relevant data in the `decodingSteps` property of your adapter. Because we automatically generate documentation for the adapters, we defined our own schema describing the decoding algorithm: The `decodingSteps` are an array of `DecodingStep` objects, which contain a function and what parts of the request they should work on. The `function` is set as the string name of a predefined decoding function, such as `parseJson` (look at the [API docs](/docs/README.md) for the full set). Each function takes an `input` argument, which expects a path in the global decoding state. This state is basically an object in which you can write temporary data to any property. It is initialized with the data from each context of the request, so the `body` property contains the raw request body, the `query` property contains the raw query string and so on. You can overwrite those values and, if the values are objects, use a JSONPath, like `body.identifiers.advertisingId`, to access or overwrite its properties. If you want to run a function on each element of an array, you can also use the `mapInput` property of a `DecodingStep` instead of the `input` property. In that case the function will be mapped over the non-empty entries of the array at the input path, like so: `mapInput.filter((i) => i !== undefined && i !== null).map(function)`. Each `DecodingStep` also expects an `output` property, which specifies the variable in the decoding state in which to return the result of the function to. This can simply be a generic variable name, a or a property access with the `.` operator (notably, here we don’t support all the other features of JSON path), if you want to save the value into a property on an object in the state, and, notably, a path on the special `res` object. The `res` object has one property for each context (`body`, `query`, etc.) and this is the object in which TrackHAR expects the final decoded request, which is then passed on to the next processing step. These are the basics of how to construct the decoding algorithm. Let’s take a look at an example from the Facebook graph adapter:
 
 ```js
 decodingSteps: [

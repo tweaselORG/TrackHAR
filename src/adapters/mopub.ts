@@ -49,7 +49,7 @@ export const adapters: Adapter[] = [
                 reasoning: keyUrl(19),
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'body',
                     path: 'consent_ifa',
@@ -62,7 +62,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: {
+            developerScopedId: {
                 context: 'body',
                 path: 'ifv',
                 reasoning: keyUrl(31),

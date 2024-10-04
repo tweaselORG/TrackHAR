@@ -50,7 +50,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         reasoning: 'obvious property name',
     },
 
-    idfa: [
+    advertisingId: [
         {
             context,
             path: 'gaid',
@@ -68,7 +68,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         },
     ],
 
-    idfv: {
+    developerScopedId: {
         context,
         path: 'idfv',
         reasoning: 'obvious property name',
@@ -173,7 +173,7 @@ export const adapters: Adapter[] = [
         name: 'Rayjump (analytics)',
         tracker,
 
-        endpointUrls: ['https://analytics.rayjump.com/'],
+        endpointUrls: ['https://analytics.rayjump.com'],
 
         decodingSteps: [
             { function: 'decodeUrl', input: 'body', output: 'q' },

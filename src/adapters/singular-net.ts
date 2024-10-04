@@ -67,7 +67,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'query',
                     path: 'idfa',
@@ -82,7 +82,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfv: [
+            developerScopedId: [
                 {
                     context: 'query',
                     path: 'idfv',
@@ -178,7 +178,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: {
+            userId: {
                 context: 'query',
                 path: 'custom_user_id',
                 reasoning: 'singular-net/custom_user_id.md',

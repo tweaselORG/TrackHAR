@@ -45,7 +45,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'body',
                     path: 'identity.gaid',
@@ -58,7 +58,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: [
+            sessionId: [
                 {
                     context: 'body',
                     path: 'session_id',
@@ -193,7 +193,7 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: [
+            advertisingId: [
                 {
                     context: 'body',
                     path: 'device.identity.gaid',
@@ -206,7 +206,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: {
+            sessionId: {
                 context: 'body',
                 path: 'app.session_id',
                 reasoning: 'obvious property name',

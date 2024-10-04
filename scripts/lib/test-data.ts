@@ -20,14 +20,14 @@ type LoadTestDataOptions = {
  */
 export const loadTestDataFromDb = async (adapter: Adapter, options?: LoadTestDataOptions) => {
     // Fetch requests from Datasette.
-    const adapterClauses = adapter.endpointUrls.map((u) =>
-        u instanceof RegExp
-            ? `endpointUrl regexp '${
-                  // JS escapes slashes in regexes, but sqlite-regex doesn't accept that.
-                  u.source.replace(/\\\//g, '/')
-              }'`
-            : `endpointUrl = '${u}'`
-    );
+    const adapterClauses = adapter.endpointUrls.map((u) => {
+        if (u instanceof RegExp) {
+            // JS escapes slashes in regexes, but sqlite-regex doesn't accept that.
+            const regexp = u.source.replace(/\\\//g, '/');
+            return `endpointUrl regexp '${regexp}' or rtrim(endpointUrl, '/') regexp '${regexp}'`;
+        }
+        return `endpointUrl = '${u}' or rtrim(endpointUrl, '/') = '${u}'`;
+    });
     const whereClause = `endpointUrl is not null and (${adapterClauses.join(' or ')})`;
 
     const requests: Request[] = [];

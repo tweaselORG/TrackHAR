@@ -38,13 +38,13 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: {
+            advertisingId: {
                 context: 'query',
                 path: 'advertisingTrackingId',
                 reasoning: 'obvious observed values',
             },
 
-            otherIdentifiers: {
+            userId: {
                 context: 'query',
                 path: 'analyticsUserId',
                 reasoning: 'obvious property name',

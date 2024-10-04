@@ -17,13 +17,13 @@ export const adapters: Adapter[] = [
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         containedDataPaths: {
-            idfa: {
+            advertisingId: {
                 context: 'body',
                 path: 'advertiser_id',
                 reasoning: 'obvious observed values',
             },
 
-            otherIdentifiers: {
+            deviceId: {
                 context: 'body',
                 path: 'device_id',
                 reasoning: 'obvious property name',
@@ -201,19 +201,19 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            idfa: {
+            advertisingId: {
                 context: 'body',
                 path: 'advertiser_id',
                 reasoning: 'obvious property name',
             },
 
-            idfv: {
+            developerScopedId: {
                 context: 'body',
                 path: 'vendor_id',
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: {
+            sessionId: {
                 context: 'body',
                 path: 'sid',
                 reasoning: 'obvious property name',

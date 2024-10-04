@@ -15,7 +15,7 @@ export const adapters: Adapter[] = [
         description: 'smartbear-bugsnag-session',
         tracker,
 
-        endpointUrls: ['https://sessions.bugsnag.com/'],
+        endpointUrls: ['https://sessions.bugsnag.com'],
         match: (r) => r.method === 'POST',
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
@@ -227,26 +227,26 @@ export const adapters: Adapter[] = [
                 reasoning: 'obvious property name',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'device.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-                {
-                    context: 'body',
-                    path: 'sessions.*.user.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-                {
-                    context: 'body',
-                    path: 'sessions.*.id',
-                    reasoning:
-                        'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
-                },
-            ],
+            deviceId: {
+                context: 'body',
+                path: 'device.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
+
+            userId: {
+                context: 'body',
+                path: 'sessions.*.user.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
+
+            sessionId: {
+                context: 'body',
+                path: 'sessions.*.id',
+                reasoning:
+                    'https://bugsnagsessiontrackingapi.docs.apiary.io/#reference/0/session/report-a-session-starting',
+            },
 
             startTime: {
                 context: 'body',
@@ -264,7 +264,7 @@ export const adapters: Adapter[] = [
         description: 'smartbear-bugsnag-notify',
         tracker,
 
-        endpointUrls: ['https://notify.bugsnag.com/'],
+        endpointUrls: ['https://notify.bugsnag.com'],
 
         decodingSteps: [{ function: 'parseJson', input: 'body', output: 'res.body' }],
         // The `events.*.metaData.*` properties are custom properties that can be set by the app developer, though the
@@ -276,23 +276,23 @@ export const adapters: Adapter[] = [
                 reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
             },
 
-            otherIdentifiers: [
-                {
-                    context: 'body',
-                    path: 'events.*.user.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-                {
-                    context: 'body',
-                    path: 'events.*.device.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-                {
-                    context: 'body',
-                    path: 'events.*.session.id',
-                    reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
-                },
-            ],
+            userId: {
+                context: 'body',
+                path: 'events.*.user.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
+
+            deviceId: {
+                context: 'body',
+                path: 'events.*.device.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
+
+            sessionId: {
+                context: 'body',
+                path: 'events.*.session.id',
+                reasoning: 'https://bugsnagerrorreportingapi.docs.apiary.io/#reference/0/notify/send-error-reports',
+            },
 
             appId: {
                 context: 'body',

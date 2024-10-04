@@ -35,7 +35,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         },
     ],
 
-    idfa: [
+    advertisingId: [
         {
             context,
             path: 'gps_adid',
@@ -48,7 +48,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         },
     ],
 
-    idfv: [
+    developerScopedId: [
         {
             context,
             path: 'idfv',
@@ -61,7 +61,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
         },
     ],
 
-    otherIdentifiers: [
+    deviceId: [
         {
             context,
             path: 'android_uuid',

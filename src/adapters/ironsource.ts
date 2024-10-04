@@ -51,7 +51,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            idfa: {
+            advertisingId: {
                 context: 'body',
                 path: 'data.deviceid',
                 reasoning: 'obvious property name',

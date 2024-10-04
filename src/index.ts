@@ -5,7 +5,7 @@ import { JSONPath } from 'jsonpath-plus';
 import type { LiteralUnion } from 'type-fest';
 import type translations from '../i18n/en.json';
 import { allAdapters } from './common/adapters';
-import { decodeFunctions } from './common/decode-functions';
+import { decodeFunction } from './common/decode-functions';
 import type { Request } from './common/request';
 import { unhar } from './common/request';
 import type { ArrayOrSingle } from './common/type-utils';
@@ -56,6 +56,26 @@ export type Tracker = {
  *
  * These are our standardized names for the data that we can detect. They are not necessarily the same as the names used
  * by the tracker.
+ *
+ * @remarks
+ * - `state` here means "subnational political entity"
+ * - Locales should not be listed under `country`
+ * - We distinguish the following types of IDs (that are personal data under the GDPR):
+ *
+ *   - An `advertisingId` is a unique identifier assigned to a device by the operating system that is the same across
+ *       apps/websites. In particular, this includes the Google Advertising ID (GAID) and Apple's Identifier for
+ *       Advertisers (IDFA). These can typically be reset by the user.
+ *   - A `developerScopedId` is a unique identifier assigned to a device by the operating system that is specific to a
+ *       certain app developer. Apps from different developers will see different `developerScopedId`s. In particular,
+ *       this includes Apple's Identifier for Vendor (IDFV), Google's App set ID (ASID), and the `ANDROID_ID`.
+ *   - A `sessionId` identifies a single (time-limited) session and is specific to a certain website/app and device.
+ *   - An `installationId` identifies an installation of an app on a device. It specific to that app and device, and reset
+ *       when the app is un- and reinstalled.
+ *   - A `deviceId` identifies a device across apps/websites.
+ *   - A `userId` identifies a user across apps/websites and devices.
+ *   - We use the `otherIdentifiers` data property to denote UUIDs and other identifiers where we don't know how they are
+ *       actually used. This should only be used sparingly and where, despite not knowing the precise function, it is
+ *       obvious (from context or otherwise) that this ID is personal data.
  */
 export type Property = keyof (typeof translations)['properties'];
 /** A variable on the global state used in the decoding process of a request. This doesn't allow nested property access. */
@@ -160,7 +180,7 @@ export type Adapter = {
      * regular expression that is matched against the endpoint URL.
      *
      * The endpoint URL in this context is the full URL, including protocol, host, and path, but excluding the query
-     * string.
+     * string. It should not have a trailing slash.
      */
     endpointUrls: (string | RegExp)[];
     /**
@@ -227,7 +247,7 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
             if (!Array.isArray(mapInput)) throw new Error('mapInput must be an array.');
             const result = mapInput
                 .filter((i) => i !== undefined && i !== null)
-                .map((i) => decodeFunctions[step.function](i, (step as { options: unknown }).options));
+                .map((i) => decodeFunction(step.function, i, (step as { options: unknown }).options));
             if (result) set(step.output, result);
             continue;
         }
@@ -235,7 +255,7 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
         const input = get(step.input);
         if (!input) continue;
 
-        const result = decodeFunctions[step.function](input, (step as { options: unknown }).options);
+        const result = decodeFunction(step.function, input, (step as { options: unknown }).options);
         if (result) set(step.output, result);
     }
 
@@ -255,8 +275,11 @@ export const decodeRequest = (r: Request, decodingSteps: DecodingStep[]) => {
 export const adapterForRequest = (r: Request) =>
     allAdapters.find(
         (a) =>
-            a.endpointUrls.some((url) => (url instanceof RegExp ? url.test(r.endpointUrl) : url === r.endpointUrl)) &&
-            (a.match ? a.match(r) : true)
+            a.endpointUrls.some((url) =>
+                url instanceof RegExp
+                    ? url.test(r.endpointUrl) || url.test(r.endpointUrl.replace(/\/$/, ''))
+                    : url === r.endpointUrl || url === r.endpointUrl.replace(/\/$/, '')
+            ) && (a.match ? a.match(r) : true)
     );
 /**
  * Parse a single request in our internal request representation and extract tracking data as an annotated result from
@@ -405,7 +428,7 @@ export type Result = Partial<Record<LiteralUnion<Property, string>, TrackingData
  * ```ts
  * {
  *     "localIp": ["10.0.0.2", "fd31:4159::a2a1"],
- *     "idfa": "6a1c1487-a0af-4223-b142-a0f4621d0311"
+ *     "advertisingId": "6a1c1487-a0af-4223-b142-a0f4621d0311"
  * }
  * ```
  *
