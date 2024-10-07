@@ -34,7 +34,7 @@ export const loadTestDataFromDb = async (adapter: Adapter, options?: LoadTestDat
     let nextUrl = `https://data.tweasel.org/data/requests.json?_shape=objects&_where=${encodeURIComponent(
         whereClause
     )}&_json=headers&_json=cookies&_nocol=initiator&_nocol=platform&_nocol=runType&_nofacet=1&_nosuggest=1&_nocount=1&_size=${
-        options?.rowLimit || 'max'
+        options?.rowLimit || '100'
     }`;
     while (nextUrl && (!options?.rowLimit || requests.length < options.rowLimit)) {
         const res = await fetch(nextUrl).then((r) => r.json());
