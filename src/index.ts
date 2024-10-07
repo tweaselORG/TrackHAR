@@ -118,6 +118,8 @@ export type Identifier =
  *   result.
  * - `decodeJwt`: Decodes the payload of a JSON Web Token (JWT) string into an object.
  * - `ensureArray`: Ensures that the given value is an array. If it is not, it is wrapped in an array.
+ * - `gunzip`: Unzips a gzip-compressed blob.
+ * - `split`: Splits a string into an array using the given separator.
  * - `getProperty`: Gets a property from an object. The property name is given in the `options.path` option. This is
  *   useful for either copying a nested property to a variable, or to extract a nested property from an array when used
  *   with a `mapInput`.
@@ -134,6 +136,7 @@ export type DecodingStep = (
               | 'ensureArray'
               | 'gunzip';
       }
+    | { function: 'split'; options: { separator: string } }
     | { function: 'getProperty'; options: { path: JsonPath } }
 ) &
     (({ input: Path } | { mapInput: Path }) & { output: Identifier });
