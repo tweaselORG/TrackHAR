@@ -1367,6 +1367,38 @@ export const adapters: Adapter[] = [
         decodingSteps: [
             { function: 'parseJson', input: 'body', output: 'res.body' },
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+
+            // The `x-firebase-client` header can be plain text or encoded.
+            {
+                function: 'decodeBase64',
+                input: 'res.header.x-firebase-client',
+                output: 'res.header.x-firebase-client-encoded',
+            },
+            {
+                function: 'gunzip',
+                input: 'res.header.x-firebase-client-encoded',
+                output: 'res.header.x-firebase-client-encoded',
+            },
+            {
+                function: 'parseJson',
+                input: 'res.header.x-firebase-client-encoded',
+                output: 'res.header.x-firebase-client-decoded',
+            },
+
+            // The `x-firebase-client` header contains space-separated fields (e.g. `device-model/generic_x86_64_arm64
+            // fire-fcm/23.0.5 android-installer/ device-name/sdk_gphone_x86_64_arm64`).
+            {
+                function: 'split',
+                input: 'res.header.x-firebase-client',
+                output: 'res.header.x-firebase-client-fields',
+                options: { separator: ' ' },
+            },
+            {
+                function: 'split',
+                mapInput: 'res.header.x-firebase-client-decoded.heartbeats.*.agent',
+                output: 'res.header.x-firebase-client-decoded-fields',
+                options: { separator: ' ' },
+            },
         ],
         containedDataPaths: {
             installationId: {
@@ -1384,6 +1416,12 @@ export const adapters: Adapter[] = [
                 {
                     context: 'header',
                     path: 'x-firebase-client',
+                    onlyIf: /\//,
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'x-firebase-client-decoded.heartbeats.*.agent',
                     reasoning: 'obvious property name',
                 },
             ],
@@ -1397,6 +1435,55 @@ export const adapters: Adapter[] = [
                 {
                     context: 'header',
                     path: 'x-ios-bundle-identifier',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            manufacturer: [
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-fields[?(@.startsWith('device-brand/'))]",
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-decoded-fields.*[?(@.startsWith('device-brand/'))]",
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            model: [
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-fields[?(@.startsWith('device-model/'))]",
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-fields[?(@.startsWith('device/'))]",
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-decoded-fields.*[?(@.startsWith('device-model/'))]",
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-decoded-fields.*[?(@.startsWith('device/'))]",
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            deviceName: [
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-fields[?(@.startsWith('device-name/'))]",
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: "$.x-firebase-client-decoded-fields.*[?(@.startsWith('device-name/'))]",
                     reasoning: 'obvious property name',
                 },
             ],
