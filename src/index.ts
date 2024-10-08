@@ -397,6 +397,8 @@ export const processRequest = (
                             'none',
                             'n/a',
                             '00000000-0000-0000-0000-000000000000',
+                            '""',
+                            "''",
                         ].includes(stringify(v.value).toLowerCase().trim()) &&
                         !['NaN'].includes(stringify(v.value).trim())
                 )
