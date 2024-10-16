@@ -23,6 +23,7 @@ const graphActivitiesDataPaths = ({
     userId: {
         context: 'body',
         path: pathPrefix + 'app_user_id',
+        notIf: '0',
         reasoning: 'https://developers.facebook.com/docs/graph-api/reference/v17.0/application/activities',
     },
 
@@ -32,7 +33,6 @@ const graphActivitiesDataPaths = ({
             path: pathPrefix + 'anon_id',
             reasoning: 'facebook/anon_id.md',
         },
-
         {
             context: 'body',
             path: pathPrefix + 'device_token',

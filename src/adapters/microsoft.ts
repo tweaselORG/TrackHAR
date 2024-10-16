@@ -68,6 +68,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'body',
                     path: 'logs.*.userId',
+                    notIf: '-1',
                     reasoning: 'https://learn.microsoft.com/en-us/appcenter/sdk/data-collected',
                 },
             ],

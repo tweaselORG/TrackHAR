@@ -122,6 +122,7 @@ export const adapters: Adapter[] = [
             carrier: {
                 context: 'body',
                 path: 'carrier',
+                notIf: /(^{}$)|("carrier-name":null)/,
                 reasoning: 'obvious property name',
             },
 
@@ -263,6 +264,7 @@ export const adapters: Adapter[] = [
             carrier: {
                 context: 'body',
                 path: 'device.carrier',
+                notIf: /("carrier_name":null)|("carrier_name":"")/,
                 reasoning: 'obvious property name',
             },
 

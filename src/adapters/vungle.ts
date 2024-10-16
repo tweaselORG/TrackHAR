@@ -20,6 +20,7 @@ export const adapters: Adapter[] = [
             advertisingId: {
                 context: 'query',
                 path: 'ifa',
+                notIf: 'vungle.invalid.IFA',
                 reasoning: 'obvious property name',
             },
         },

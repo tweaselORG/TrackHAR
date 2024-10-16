@@ -144,6 +144,10 @@ export type DataPath = {
     context: Context;
     /** A JSONPath expression describing where in the decoded request object the data can be found. */
     path: JsonPath;
+    /** An optional filter that stops a discovered value from being considered an instance of the respective property. */
+    notIf?: string | RegExp;
+    /** An optional filter that causes only matching values to be considered instances of the respective property. */
+    onlyIf?: string | RegExp;
     /**
      * An explanation of how we concluded that this is information is actually the type of data we labelled it as. This
      * can either be a standardized description, or a URL to a more in-depth research report.
@@ -363,6 +367,17 @@ export const processRequest = (
     const flattenedPaths = Object.entries(adapter.containedDataPaths)
         .map(([property, paths]) => (Array.isArray(paths) ? paths : [paths]).map((p) => [property, p] as const))
         .flat();
+    /**
+     * Transform a value transmitted by a tracker, which can be any type, into a string, choosing the most
+     * "natural-feeling" representation to make it filterable.
+     *
+     * For example, objects and arrays will be returned as JSON strings, whereas strings will be returned as-is (and
+     * thus notably without enclosing quotes as `JSON.stringify` would add).
+     */
+    const stringify = (v: unknown) =>
+        typeof v === 'bigint' || typeof v === 'string' || typeof v === 'symbol' || typeof v === 'function'
+            ? v.toString()
+            : JSON.stringify(v);
     return flattenedPaths
         .map(([property, path]) =>
             (JSONPath<TrackingDataValue[]>({ path: path.path, json: decodedRequest[path.context], wrap: true }) ?? [])
@@ -373,6 +388,35 @@ export const processRequest = (
                     value: v,
                 }))
                 .filter((v) => v.value !== undefined && v.value !== null && v.value.trim?.() !== '')
+                .filter(
+                    (v) =>
+                        ![
+                            'unknown',
+                            'null',
+                            'undefined',
+                            'none',
+                            'n/a',
+                            '00000000-0000-0000-0000-000000000000',
+                            '""',
+                            "''",
+                            '[object Object]',
+                        ].includes(stringify(v.value).toLowerCase().trim()) &&
+                        !['NaN'].includes(stringify(v.value).trim())
+                )
+                .filter(
+                    (v) =>
+                        !v.onlyIf ||
+                        (typeof v.onlyIf === 'string'
+                            ? v.onlyIf === stringify(v.value)
+                            : v.onlyIf.test(stringify(v.value)))
+                )
+                .filter(
+                    (v) =>
+                        !v.notIf ||
+                        (typeof v.notIf === 'string'
+                            ? v.notIf !== stringify(v.value)
+                            : !v.notIf.test(stringify(v.value)))
+                )
         )
         .flat();
 };

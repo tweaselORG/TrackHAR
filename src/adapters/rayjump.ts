@@ -35,6 +35,7 @@ const containedDataPaths = (context: Context): Adapter['containedDataPaths'] => 
     orientation: {
         context,
         path: 'orientation',
+        notIf: '-1',
         reasoning: 'obvious property name',
     },
 

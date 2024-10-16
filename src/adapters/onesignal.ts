@@ -61,12 +61,14 @@ export const adapters: Adapter[] = [
             userId: {
                 context: 'body',
                 path: 'external_user_id',
+                notIf: '0',
                 reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#external-user-ids',
             },
 
             installationId: {
                 context: 'path',
                 path: '$',
+                onlyIf: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
                 reasoning: 'https://documentation.onesignal.com/v9.0/docs/users#player-id',
             },
 
