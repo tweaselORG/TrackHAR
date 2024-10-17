@@ -20,6 +20,7 @@ const decodeFunctions: Record<DecodingStep['function'], (input: any, options?: a
         const uint8Array = gunzipSync(Buffer.from(input, 'binary'));
         return Buffer.from(uint8Array).toString('binary');
     },
+    split: (input, options) => input.toString().split(options.separator),
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
