@@ -62,7 +62,7 @@
         "cross-dirname": "^0.1.0",
         "escape-string-regexp": "^5.0.0",
         "fflate": "^0.8.0",
-        "jsonpath-plus": "^7.2.0",
+        "jsonpath-plus": "^10.0.0",
         "jwt-decode": "^4.0.0",
         "protobufjs": "^7.2.3",
         "qs": "^6.11.1"
