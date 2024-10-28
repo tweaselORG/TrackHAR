@@ -2538,4 +2538,58 @@ export const adapters: Adapter[] = [
             },
         },
     },
+
+    {
+        slug: 'google-publisher-tag',
+        // See: https://developers.google.com/publisher-tag/guides/get-started
+        name: 'Google Publisher Tag (GPT)',
+        description: 'google-publisher-tag',
+        tracker,
+
+        endpointUrls: [
+            'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+            'https://www.googletagservices.com/tag/js/gpt.js',
+            // cf.: https://developers.google.com/publisher-tag/common_implementation_mistakes#common-mistakes
+            /https:\/\/securepubads\.g\.doubleclick\.net\/pagead\/managed\/js\/gpt\/.+\/pubads_impl\.js/,
+            /https:\/\/securepubads\.g\.doubleclick\.net\/pagead\/managed\/js\/gpt\/.+\/pubads_impl_page_level_ads\.js/,
+        ],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'network-code',
+                reasoning: 'https://support.google.com/admanager/answer/7674889',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
 ];
