@@ -2592,4 +2592,86 @@ export const adapters: Adapter[] = [
             },
         },
     },
+
+    {
+        slug: 'doubleclick-cookie-matching-pixel',
+        name: 'DoubleClick Pixel for Cookie Matching',
+        description: 'doubleclick-cookie-matching-pixel',
+        tracker,
+
+        endpointUrls: ['https://cm.g.doubleclick.net/pixel'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'google_nid',
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#match-tag-url-parameters',
+            },
+
+            userId: [
+                {
+                    context: 'query',
+                    path: 'google_hm',
+                    notIf: 'MA==',
+                    reasoning:
+                        'https://developers.google.com/authorized-buyers/rtb/cookie-guide#storing-a-match-in-a-google-hosted-match-table',
+                },
+                {
+                    context: 'query',
+                    path: 'google_gid',
+                    reasoning:
+                        'https://developers.google.com/authorized-buyers/rtb/cookie-guide#redirect-url-parameters',
+                },
+                {
+                    context: 'query',
+                    path: 'CriteoUserId',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            consentState: {
+                context: 'query',
+                path: 'gdpr_consent',
+                notIf: /\$/,
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#match-tag-url-parameters',
+            },
+
+            segment: {
+                context: 'query',
+                path: 'google_ula',
+                notIf: /{/,
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#add-to-single-user-list',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
 ];
