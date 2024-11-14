@@ -11,6 +11,7 @@ import { adapters as ironsource } from '../adapters/ironsource';
 import { adapters as microsoft } from '../adapters/microsoft';
 import { adapters as mopub } from '../adapters/mopub';
 import { adapters as onesignal } from '../adapters/onesignal';
+import { adapters as openx } from '../adapters/openx';
 import { adapters as rayjump } from '../adapters/rayjump';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
@@ -33,6 +34,7 @@ export const allAdapters = [
     ...microsoft,
     ...mopub,
     ...onesignal,
+    ...openx,
     ...rayjump,
     ...singularNet,
     ...smartbear,
