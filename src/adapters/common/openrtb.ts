@@ -140,12 +140,20 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         },
     ],
 
-    userId: {
-        context: 'body',
-        path: 'eids.*.uids.*.id',
-        notIf: '0',
-        reasoning: openrtbSpecUrl('3228---object-uid-'),
-    },
+    userId: [
+        {
+            context: 'body',
+            path: 'eids.*.uids.*.id',
+            notIf: '0',
+            reasoning: openrtbSpecUrl('3228---object-uid-'),
+        },
+        {
+            context: 'body',
+            path: 'user.eids.*.uids.*.id',
+            notIf: '0',
+            reasoning: openrtbSpecUrl('3228---object-uid-'),
+        },
+    ],
 
     isMobileDevice: {
         context: 'body',

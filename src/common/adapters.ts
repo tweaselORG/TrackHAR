@@ -6,6 +6,7 @@ import { adapters as chartboost } from '../adapters/chartboost';
 import { adapters as criteo } from '../adapters/criteo';
 import { adapters as facebook } from '../adapters/facebook';
 import { adapters as google } from '../adapters/google';
+import { adapters as indexexchange } from '../adapters/indexexchange';
 import { adapters as infonline } from '../adapters/infonline';
 import { adapters as ironsource } from '../adapters/ironsource';
 import { adapters as microsoft } from '../adapters/microsoft';
@@ -29,6 +30,7 @@ export const allAdapters = [
     ...criteo,
     ...facebook,
     ...google,
+    ...indexexchange,
     ...infonline,
     ...ironsource,
     ...microsoft,

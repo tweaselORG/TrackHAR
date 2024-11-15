@@ -48,6 +48,7 @@
         "isUserActive": "Ist die Nutzer_in aktiv?",
         "isUserInactive": "Ist die Nutzer_in inaktiv?",
         "language": "Sprache",
+        "lastActivityTime": "Zeitpunkt der letzten Aktivität der Nutzer_in",
         "latitude": "Breitengrad",
         "localIp": "Lokale IP-Adresse(n)",
         "longitude": "Längengrad",

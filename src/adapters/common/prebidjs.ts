@@ -64,6 +64,12 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
             path: 'site.ext.keywords',
             reasoning: 'obvious property name',
         },
+        {
+            context: 'body',
+            // "content tags"
+            path: 'site.ext.data.cnt_tags',
+            reasoning: 'obvious property name',
+        },
     ],
 
     propertyId: {
@@ -110,6 +116,11 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
             notIf: '0',
             reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
         },
+        {
+            context: 'body',
+            path: 'site.ext.data.adg_rtd.features.viewport_dimensions',
+            reasoning: 'obvious property name',
+        },
     ],
 
     browserWindowWidth: [
@@ -131,21 +142,40 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
             notIf: '0',
             reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
         },
+        {
+            context: 'body',
+            path: 'site.ext.data.adg_rtd.features.viewport_dimensions',
+            reasoning: 'obvious property name',
+        },
     ],
 
-    pageHeight: {
-        context: 'body',
-        path: 'user.ext.data.pageHeight',
-        notIf: '0',
-        reasoning: 'obvious property name',
-    },
+    pageHeight: [
+        {
+            context: 'body',
+            path: 'user.ext.data.pageHeight',
+            notIf: '0',
+            reasoning: 'obvious property name',
+        },
+        {
+            context: 'body',
+            path: 'site.ext.data.adg_rtd.features.page_dimensions',
+            reasoning: 'obvious property name',
+        },
+    ],
 
-    pageWidth: {
-        context: 'body',
-        path: 'user.ext.data.pageWidth',
-        notIf: '0',
-        reasoning: 'obvious property name',
-    },
+    pageWidth: [
+        {
+            context: 'body',
+            path: 'user.ext.data.pageWidth',
+            notIf: '0',
+            reasoning: 'obvious property name',
+        },
+        {
+            context: 'body',
+            path: 'site.ext.data.adg_rtd.features.page_dimensions',
+            reasoning: 'obvious property name',
+        },
+    ],
 
     sessionDuration: {
         context: 'body',
@@ -220,5 +250,18 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
         context: 'body',
         path: 'device.ext.webdriver',
         reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
+    },
+
+    sessionId: {
+        context: 'body',
+        path: 'site.ext.data.adg_rtd.session.id',
+        reasoning:
+            'https://github.com/prebid/Prebid.js/blob/bb586b85fb59424d366808d1dad82b2602ee0fc8/modules/adagioRtdProvider.js#L99',
+    },
+
+    lastActivityTime: {
+        context: 'body',
+        path: 'site.ext.data.adg_rtd.session.lastActivityTime',
+        reasoning: 'obvious property name',
     },
 };
