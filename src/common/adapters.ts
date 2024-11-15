@@ -4,6 +4,7 @@ import { adapters as apple } from '../adapters/apple';
 import { adapters as branchIo } from '../adapters/branch-io';
 import { adapters as chartboost } from '../adapters/chartboost';
 import { adapters as criteo } from '../adapters/criteo';
+import { adapters as equativ } from '../adapters/equativ';
 import { adapters as facebook } from '../adapters/facebook';
 import { adapters as google } from '../adapters/google';
 import { adapters as indexexchange } from '../adapters/indexexchange';
@@ -28,6 +29,7 @@ export const allAdapters = [
     ...branchIo,
     ...chartboost,
     ...criteo,
+    ...equativ,
     ...facebook,
     ...google,
     ...indexexchange,
