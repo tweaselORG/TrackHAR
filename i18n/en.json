@@ -48,6 +48,7 @@
         "isUserActive": "Is user active?",
         "isUserInactive": "Is user inactive?",
         "language": "Language",
+        "lastActivityTime": "Time of last activity by the user",
         "latitude": "Latitude",
         "localIp": "Local IP address(es)",
         "longitude": "Longitude",
