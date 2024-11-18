@@ -196,4 +196,84 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         path: 'user.gender',
         reasoning: openrtbSpecUrl('3220---object-user-'),
     },
+
+    appName: {
+        context: 'body',
+        path: 'app.name',
+        reasoning: openrtbSpecUrl('3214---object-app-'),
+    },
+
+    appId: [
+        {
+            context: 'body',
+            path: 'app.bundle',
+            reasoning: openrtbSpecUrl('3214---object-app-'),
+        },
+        {
+            context: 'body',
+            path: 'app.storeurl',
+            reasoning: openrtbSpecUrl('3214---object-app-'),
+        },
+    ],
+
+    appVersion: {
+        context: 'body',
+        path: 'app.ver',
+        reasoning: openrtbSpecUrl('3214---object-app-'),
+    },
+
+    manufacturer: {
+        context: 'body',
+        path: 'device.make',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
+
+    model: {
+        context: 'body',
+        path: 'device.model',
+        reasoning: openrtbSpecUrl('3218---object-model-'),
+    },
+
+    osName: {
+        context: 'body',
+        path: 'device.os',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
+
+    osVersion: {
+        context: 'body',
+        path: 'device.osv',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
+
+    carrier: [
+        {
+            context: 'body',
+            path: 'device.carrier',
+            reasoning: openrtbSpecUrl('3218---object-device-'),
+        },
+        {
+            context: 'body',
+            path: 'device.mccmnc',
+            reasoning: openrtbSpecUrl('3218---object-device-'),
+        },
+    ],
+
+    advertisingId: {
+        context: 'body',
+        path: 'device.ifa',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
+
+    networkConnectionType: {
+        context: 'body',
+        path: 'device.connectiontype',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
+
+    userInterests: {
+        context: 'body',
+        path: 'user.keywords',
+        reasoning: openrtbSpecUrl('3220---object-user-'),
+    },
 };
