@@ -96,6 +96,7 @@
         "userAgent": "User-Agent",
         "userGender": "Geschlecht der Nutzer_in",
         "userId": "Eindeutige ID für die Nutzer_in",
+        "userInterests": "Interessen der Nutzer_in",
         "viewedPage": "Angesehene Seite",
         "viewedPageCategory": "Kategorie der angesehenen Seite",
         "viewedPageKeywords": "Schlagworte für die angesehene Seite",
