@@ -1,6 +1,7 @@
 import { mergeContainedDataPaths } from '../common/adapter-util';
 import type { Adapter, Tracker } from '../index';
 import { openrtbDataPaths } from './common/openrtb';
+import { prebidServerSetuidDataPaths } from './common/prebid-server';
 import { prebidjsOpenRtbDataPaths } from './common/prebidjs';
 
 const tracker: Tracker = {
@@ -440,6 +441,8 @@ export const adapters: Adapter[] = [
         slug: 'adnxs-ib-setuid',
         // See:
         // https://learn.microsoft.com/en-us/xandr/bidders/synchronize-your-user-ids#storing-the-mapping-with-xandr
+        // This implements https://docs.prebid.org/prebid-server/endpoints/pbs-endpoint-setuid.html plus
+        // Microsoft-specific extensions.
         name: 'Xandr cookie matching pixel (mapping stored by Xandr)',
         tracker,
 
@@ -450,7 +453,7 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
             { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
         ],
-        containedDataPaths: {
+        containedDataPaths: mergeContainedDataPaths(prebidServerSetuidDataPaths, {
             userAgent: [
                 {
                     context: 'header',
@@ -534,13 +537,6 @@ export const adapters: Adapter[] = [
                 reasoning:
                     'https://learn.microsoft.com/en-us/xandr/bidders/synchronize-your-user-ids#storing-the-mapping-with-xandr',
             },
-
-            consentState: {
-                context: 'query',
-                path: 'gdpr_consent',
-                reasoning:
-                    'https://learn.microsoft.com/en-us/xandr/bidders/synchronize-your-user-ids#bidderdata-provider-stored-mapping',
-            },
-        },
+        }),
     },
 ];
