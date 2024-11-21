@@ -13,6 +13,7 @@ const fileIsTrackedInGit = (path) =>
 
 (async () => {
     const adapterPaths = process.argv.slice(2);
+    let template = '';
 
     const errors = (
         await Promise.all(
@@ -49,31 +50,41 @@ const fileIsTrackedInGit = (path) =>
                         : dataPaths;
 
                     if (unarchivedPaths.length > 0) {
+                        const paths = [...new Set(unarchivedPaths)].join(';');
                         messages.push(
                             chalk.red('"') +
                                 chalk.bold.red(url) +
                                 chalk.red(
-                                    `" is not archived for ${[...new Set(unarchivedPaths)].join(';')}` +
+                                    `" is not archived for ${paths}` +
                                         (archiveErrors[url]
                                             ? `\n  -> There was an error while archiving: "${archiveErrors[url].error.message}"`
                                             : '')
                                 )
                         );
+
+                        template += `"${url}","TODO","${new Date().toISOString()}","${paths}"\n`;
                     }
                 });
 
-                if (messages.length > 0) return { adapterPath, messages };
+                if (messages.length > 0) return { adapterPath, messages, template };
             })
         )
     ).filter(Boolean) as { adapterPath: string; messages: string[] }[];
 
     if (errors.length > 0) {
+        /* eslint-disable no-console */
         errors.forEach(({ adapterPath, messages }) => {
-            /* eslint-disable no-console */
             console.log(chalk.bold.red(`\n${adapterPath}`));
             console.log(messages.join('\n'));
-            /* eslint-enable no-console */
         });
+
+        if (template) {
+            console.log();
+            console.log(chalk.bold('Template for adding them manually:'));
+            console.log(template);
+        }
+        /* eslint-enable no-console */
+
         process.exit(1);
     }
     process.exit(0);

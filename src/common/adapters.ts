@@ -7,6 +7,7 @@ import { adapters as criteo } from '../adapters/criteo';
 import { adapters as equativ } from '../adapters/equativ';
 import { adapters as facebook } from '../adapters/facebook';
 import { adapters as google } from '../adapters/google';
+import { adapters as id5 } from '../adapters/id5';
 import { adapters as indexexchange } from '../adapters/indexexchange';
 import { adapters as infonline } from '../adapters/infonline';
 import { adapters as ironsource } from '../adapters/ironsource';
@@ -32,6 +33,7 @@ export const allAdapters = [
     ...equativ,
     ...facebook,
     ...google,
+    ...id5,
     ...indexexchange,
     ...infonline,
     ...ironsource,
