@@ -1,3 +1,4 @@
+import { adapters as adagio } from '../adapters/adagio';
 import { adapters as adcolony } from '../adapters/adcolony';
 import { adapters as adjust } from '../adapters/adjust';
 import { adapters as apple } from '../adapters/apple';
@@ -24,6 +25,7 @@ import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
 
 export const allAdapters = [
+    ...adagio,
     ...adcolony,
     ...adjust,
     ...apple,
