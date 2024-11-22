@@ -42,7 +42,7 @@
         "isInDarkMode": "Ist die App im Dark-Mode?",
         "isInForeground": "Ist die App im Vordergrund?",
         "isJsEnabled": "Ist JavaScript aktiv?",
-        "isMobile": "Ist das Gerät ein mobiles Gerät?",
+        "isMobileDevice": "Ist das Gerät ein mobiles Gerät?",
         "isRoaming": "Ist Roaming aktiv?",
         "isRooted": "Ist das Gerät gerootet?",
         "isUserActive": "Ist die Nutzer_in aktiv?",

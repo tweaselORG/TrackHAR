@@ -48,11 +48,13 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         {
             context: 'body',
             path: 'site.cat',
+            notIf: '[]',
             reasoning: openrtbSpecUrl('3213---object-site-'),
         },
         {
             context: 'body',
             path: 'site.sectioncat',
+            notIf: '[]',
             reasoning: openrtbSpecUrl('3213---object-site-'),
         },
         {

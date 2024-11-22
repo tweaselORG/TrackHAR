@@ -12,6 +12,7 @@ import { adapters as id5 } from '../adapters/id5';
 import { adapters as indexexchange } from '../adapters/indexexchange';
 import { adapters as infonline } from '../adapters/infonline';
 import { adapters as ironsource } from '../adapters/ironsource';
+import { adapters as magnite } from '../adapters/magnite';
 import { adapters as microsoft } from '../adapters/microsoft';
 import { adapters as mopub } from '../adapters/mopub';
 import { adapters as onesignal } from '../adapters/onesignal';
@@ -39,6 +40,7 @@ export const allAdapters = [
     ...indexexchange,
     ...infonline,
     ...ironsource,
+    ...magnite,
     ...microsoft,
     ...mopub,
     ...onesignal,
