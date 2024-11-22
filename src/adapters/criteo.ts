@@ -236,7 +236,7 @@ export const adapters: Adapter[] = [
                 {
                     context: 'query',
                     path: 'url_query.obUid',
-                    reasoning: 'obvious property name',
+                    reasoning: 'https://www.outbrain.com/privacy/cookies/',
                 },
             ],
 
