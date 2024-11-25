@@ -23,6 +23,7 @@ import { adapters as rayjump } from '../adapters/rayjump';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
 import { adapters as startIo } from '../adapters/start-io';
+import { adapters as taboola } from '../adapters/taboola';
 import { adapters as unity } from '../adapters/unity';
 import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
@@ -53,6 +54,7 @@ export const allAdapters = [
     ...singularNet,
     ...smartbear,
     ...startIo,
+    ...taboola,
     ...unity,
     ...vungle,
     ...yandex,
