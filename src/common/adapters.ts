@@ -1,5 +1,6 @@
 import { adapters as adagio } from '../adapters/adagio';
 import { adapters as adcolony } from '../adapters/adcolony';
+import { adapters as adform } from '../adapters/adform';
 import { adapters as adjust } from '../adapters/adjust';
 import { adapters as apple } from '../adapters/apple';
 import { adapters as branchIo } from '../adapters/branch-io';
@@ -29,6 +30,7 @@ import { adapters as yandex } from '../adapters/yandex';
 export const allAdapters = [
     ...adagio,
     ...adcolony,
+    ...adform,
     ...adjust,
     ...apple,
     ...branchIo,

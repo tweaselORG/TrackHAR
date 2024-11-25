@@ -278,4 +278,10 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         path: 'user.keywords',
         reasoning: openrtbSpecUrl('3220---object-user-'),
     },
+
+    publicIp: {
+        context: 'body',
+        path: 'device.ip',
+        reasoning: openrtbSpecUrl('3218---object-device-'),
+    },
 };
