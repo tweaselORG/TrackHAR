@@ -138,6 +138,7 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         {
             context: 'body',
             path: 'regs.gpp',
+            notIf: 'DBAA',
             reasoning: openrtbSpecUrl('323---object-regs-'),
         },
     ],
