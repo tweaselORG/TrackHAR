@@ -20,6 +20,7 @@ import { adapters as mopub } from '../adapters/mopub';
 import { adapters as onesignal } from '../adapters/onesignal';
 import { adapters as openx } from '../adapters/openx';
 import { adapters as outbrain } from '../adapters/outbrain';
+import { adapters as pubmatic } from '../adapters/pubmatic';
 import { adapters as rayjump } from '../adapters/rayjump';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
@@ -52,6 +53,7 @@ export const allAdapters = [
     ...onesignal,
     ...openx,
     ...outbrain,
+    ...pubmatic,
     ...rayjump,
     ...singularNet,
     ...smartbear,
