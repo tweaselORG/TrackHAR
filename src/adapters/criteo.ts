@@ -118,8 +118,8 @@ export const adapters: Adapter[] = [
         ],
         containedDataPaths: mergeContainedDataPaths(
             criteoCommonHeaderAndCookiePaths,
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
             {
                 trackerSdkVersion: {
                     context: 'query',
@@ -481,8 +481,8 @@ export const adapters: Adapter[] = [
         ],
         containedDataPaths: mergeContainedDataPaths(
             criteoCommonHeaderAndCookiePaths,
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths()
         ),
     },
 ];

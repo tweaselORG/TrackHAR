@@ -317,8 +317,8 @@ export const adapters: Adapter[] = [
         ],
         containedDataPaths: mergeContainedDataPaths(
             // Vendor-specific spec: https://learn.microsoft.com/en-us/xandr/supply-partners/integration-with-openrtb-2-6
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
             {
                 userAgent: [
                     {

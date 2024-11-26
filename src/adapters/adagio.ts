@@ -63,7 +63,7 @@ export const adapters: Adapter[] = [
             { function: 'decodeBase64', input: 'res.cookie.uids', output: 'uidsDecoded' },
             { function: 'parseJson', input: 'uidsDecoded', output: 'res.cookie.uidsParsed' },
         ],
-        containedDataPaths: mergeContainedDataPaths(openrtbDataPaths, adagioCommonHeaderAndCookiePaths, {
+        containedDataPaths: mergeContainedDataPaths(openrtbDataPaths(), adagioCommonHeaderAndCookiePaths, {
             propertyId: {
                 context: 'body',
                 path: 'organizationId',

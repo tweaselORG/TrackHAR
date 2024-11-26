@@ -15,6 +15,7 @@ import { adapters as infonline } from '../adapters/infonline';
 import { adapters as ironsource } from '../adapters/ironsource';
 import { adapters as kidoz } from '../adapters/kidoz';
 import { adapters as magnite } from '../adapters/magnite';
+import { adapters as mediaNet } from '../adapters/media-net';
 import { adapters as microsoft } from '../adapters/microsoft';
 import { adapters as mopub } from '../adapters/mopub';
 import { adapters as onesignal } from '../adapters/onesignal';
@@ -48,6 +49,7 @@ export const allAdapters = [
     ...ironsource,
     ...kidoz,
     ...magnite,
+    ...mediaNet,
     ...microsoft,
     ...mopub,
     ...onesignal,

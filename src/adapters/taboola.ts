@@ -56,8 +56,8 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
         ],
         containedDataPaths: mergeContainedDataPaths(
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
 
             {
                 referer: [
