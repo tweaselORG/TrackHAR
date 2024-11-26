@@ -63,8 +63,8 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
         ],
         containedDataPaths: mergeContainedDataPaths(
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
             indexexchangeCommonHeaderAndCookiePaths
         ),
     },

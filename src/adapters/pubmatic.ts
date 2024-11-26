@@ -69,8 +69,8 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
         ],
         containedDataPaths: mergeContainedDataPaths(
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
             pubmaticCommonHeaderAndCookiePaths,
             {
                 appId: {
@@ -263,7 +263,7 @@ export const adapters: Adapter[] = [
             { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
             { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
         ],
-        containedDataPaths: mergeContainedDataPaths(openrtbDataPaths, prebidjsOpenRtbDataPaths, {
+        containedDataPaths: mergeContainedDataPaths(openrtbDataPaths(), prebidjsOpenRtbDataPaths(), {
             userAgent: [
                 {
                     context: 'header',

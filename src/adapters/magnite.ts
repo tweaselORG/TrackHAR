@@ -71,8 +71,8 @@ export const adapters: Adapter[] = [
             { function: 'parseJson', input: 'uidsDecoded', output: 'res.cookie.uidsParsed' },
         ],
         containedDataPaths: mergeContainedDataPaths(
-            openrtbDataPaths,
-            prebidjsOpenRtbDataPaths,
+            openrtbDataPaths(),
+            prebidjsOpenRtbDataPaths(),
             rubiconCommonHeaderAndCookiePaths,
             {
                 userId: {

@@ -2,17 +2,17 @@ import type { Adapter } from '../../index';
 
 // These fields may not necessarily be among the Prebid.js defaults but can also come from adapters, as such we may not
 // have good references for them.
-export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
+export const prebidjsOpenRtbDataPaths = (prefix = ''): Adapter['containedDataPaths'] => ({
     userAgent: {
         context: 'body',
-        path: 'user.ext.sua.browsers',
+        path: prefix + 'user.ext.sua.browsers',
         reasoning: 'https://docs.prebid.org/features/firstPartyData.html#user-agent-client-hints',
     },
 
     websiteUrl: [
         {
             context: 'body',
-            path: 'publisher.url',
+            path: prefix + 'publisher.url',
             reasoning: 'obvious observed values',
         },
     ],
@@ -20,12 +20,12 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     viewedPage: [
         {
             context: 'body',
-            path: 'publisher.ext.page',
+            path: prefix + 'publisher.ext.page',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'site.ext.page',
+            path: prefix + 'site.ext.page',
             reasoning: 'obvious property name',
         },
     ],
@@ -33,22 +33,22 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     viewedPageCategory: [
         {
             context: 'body',
-            path: 'publisher.ext.cat',
+            path: prefix + 'publisher.ext.cat',
             reasoning: 'obvious observed values',
         },
         {
             context: 'body',
-            path: 'publisher.ext.sectioncat',
+            path: prefix + 'publisher.ext.sectioncat',
             reasoning: 'obvious observed values',
         },
         {
             context: 'body',
-            path: 'site.ext.cat',
+            path: prefix + 'site.ext.cat',
             reasoning: 'obvious observed values',
         },
         {
             context: 'body',
-            path: 'site.ext.sectioncat',
+            path: prefix + 'site.ext.sectioncat',
             reasoning: 'obvious observed values',
         },
     ],
@@ -56,69 +56,69 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     viewedPageKeywords: [
         {
             context: 'body',
-            path: 'publisher.ext.keywords',
+            path: prefix + 'publisher.ext.keywords',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'site.ext.keywords',
+            path: prefix + 'site.ext.keywords',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
             // "content tags"
-            path: 'site.ext.data.cnt_tags',
+            path: prefix + 'site.ext.data.cnt_tags',
             reasoning: 'obvious property name',
         },
     ],
 
     propertyId: {
         context: 'body',
-        path: 'publisher.networkid',
+        path: prefix + 'publisher.networkid',
         reasoning: 'obvious property name',
     },
 
     websiteName: [
         {
             context: 'body',
-            path: 'publisher.ext.name',
+            path: prefix + 'publisher.ext.name',
             reasoning: 'obvious observed values',
         },
         {
             context: 'body',
-            path: 'site.ext.name',
+            path: prefix + 'site.ext.name',
             reasoning: 'obvious observed values',
         },
     ],
 
     language: {
         context: 'body',
-        path: 'user.ext.data.navigatorLanguage',
+        path: prefix + 'user.ext.data.navigatorLanguage',
         reasoning: 'obvious property name',
     },
 
     browserWindowHeight: [
         {
             context: 'body',
-            path: 'user.ext.data.windowInnerHeight',
+            path: prefix + 'user.ext.data.windowInnerHeight',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'viewport.height',
+            path: prefix + 'viewport.height',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'device.ext.vph',
+            path: prefix + 'device.ext.vph',
             notIf: '0',
             reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
         },
         {
             context: 'body',
-            path: 'site.ext.data.adg_rtd.features.viewport_dimensions',
+            path: prefix + 'site.ext.data.adg_rtd.features.viewport_dimensions',
             reasoning: 'obvious property name',
         },
     ],
@@ -126,25 +126,25 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     browserWindowWidth: [
         {
             context: 'body',
-            path: 'user.ext.data.windowInnerWidth',
+            path: prefix + 'user.ext.data.windowInnerWidth',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'viewport.width',
+            path: prefix + 'viewport.width',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'device.ext.vpw',
+            path: prefix + 'device.ext.vpw',
             notIf: '0',
             reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
         },
         {
             context: 'body',
-            path: 'site.ext.data.adg_rtd.features.viewport_dimensions',
+            path: prefix + 'site.ext.data.adg_rtd.features.viewport_dimensions',
             reasoning: 'obvious property name',
         },
     ],
@@ -152,13 +152,13 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     pageHeight: [
         {
             context: 'body',
-            path: 'user.ext.data.pageHeight',
+            path: prefix + 'user.ext.data.pageHeight',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'site.ext.data.adg_rtd.features.page_dimensions',
+            path: prefix + 'site.ext.data.adg_rtd.features.page_dimensions',
             reasoning: 'obvious property name',
         },
     ],
@@ -166,44 +166,44 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
     pageWidth: [
         {
             context: 'body',
-            path: 'user.ext.data.pageWidth',
+            path: prefix + 'user.ext.data.pageWidth',
             notIf: '0',
             reasoning: 'obvious property name',
         },
         {
             context: 'body',
-            path: 'site.ext.data.adg_rtd.features.page_dimensions',
+            path: prefix + 'site.ext.data.adg_rtd.features.page_dimensions',
             reasoning: 'obvious property name',
         },
     ],
 
     sessionDuration: {
         context: 'body',
-        path: 'user.ext.data.sessionDuration',
+        path: prefix + 'user.ext.data.sessionDuration',
         reasoning: 'obvious property name',
     },
 
     viewedPageLanguage: {
         context: 'body',
-        path: 'user.ext.data.contentLanguage',
+        path: prefix + 'user.ext.data.contentLanguage',
         reasoning: 'obvious property name',
     },
 
     orientation: {
         context: 'body',
-        path: 'user.ext.data.orientation',
+        path: prefix + 'user.ext.data.orientation',
         reasoning: 'obvious property name',
     },
 
     screenHeight: {
         context: 'body',
-        path: 'user.ext.device.h',
+        path: prefix + 'user.ext.device.h',
         reasoning: 'obvious property name',
     },
 
     screenWidth: {
         context: 'body',
-        path: 'user.ext.device.w',
+        path: prefix + 'user.ext.device.w',
         reasoning: 'obvious property name',
     },
 
@@ -211,57 +211,57 @@ export const prebidjsOpenRtbDataPaths: Adapter['containedDataPaths'] = {
         // TCF consent string
         {
             context: 'body',
-            path: 'user.ext.consent',
+            path: prefix + 'user.ext.consent',
             reasoning: 'https://docs.prebid.org/prebid-server/endpoints/openrtb2/pbs-endpoint-auction.html#gdpr',
         },
         {
             context: 'body',
-            path: 'gdprConsent.consentData',
+            path: prefix + 'gdprConsent.consentData',
             reasoning: 'https://docs.prebid.org/dev-docs/modules/consentManagementTcf.html#page-integration',
         },
     ],
 
     userId: {
         context: 'body',
-        path: 'user.ext.eids.*.uids.*.id',
+        path: prefix + 'user.ext.eids.*.uids.*.id',
         notIf: '0',
         reasoning: 'obvious observed values',
     },
 
     isMobileDevice: {
         context: 'body',
-        path: 'user.ext.sua.mobile',
+        path: prefix + 'user.ext.sua.mobile',
         reasoning: 'obvious property name',
     },
 
     scrollPositionX: {
         context: 'body',
-        path: 'viewport.scrollTop',
+        path: prefix + 'viewport.scrollTop',
         reasoning: 'obvious property name',
     },
 
     scrollPositionY: {
         context: 'body',
-        path: 'viewport.scrollLeft',
+        path: prefix + 'viewport.scrollLeft',
         reasoning: 'obvious property name',
     },
 
     isAutomated: {
         context: 'body',
-        path: 'device.ext.webdriver',
+        path: prefix + 'device.ext.webdriver',
         reasoning: 'https://docs.prebid.org/features/firstPartyData.html#automatically-collected-first-party-data',
     },
 
     sessionId: {
         context: 'body',
-        path: 'site.ext.data.adg_rtd.session.id',
+        path: prefix + 'site.ext.data.adg_rtd.session.id',
         reasoning:
             'https://github.com/prebid/Prebid.js/blob/bb586b85fb59424d366808d1dad82b2602ee0fc8/modules/adagioRtdProvider.js#L99',
     },
 
     lastActivityTime: {
         context: 'body',
-        path: 'site.ext.data.adg_rtd.session.lastActivityTime',
+        path: prefix + 'site.ext.data.adg_rtd.session.lastActivityTime',
         reasoning: 'obvious property name',
     },
-};
+});
