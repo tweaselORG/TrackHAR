@@ -285,4 +285,10 @@ export const openrtbDataPaths: Adapter['containedDataPaths'] = {
         path: 'device.ip',
         reasoning: openrtbSpecUrl('3218---object-device-'),
     },
+
+    timezone: {
+        context: 'body',
+        path: 'device.geo.utcoffset',
+        reasoning: openrtbSpecUrl('3219---object-geo-'),
+    },
 };
