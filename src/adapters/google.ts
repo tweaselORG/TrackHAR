@@ -82,15 +82,16 @@ const containedDataPathsDoubleclickMadsGma = (context: Context): Adapter['contai
         },
         {
             context,
-            path: 'an',
-            reasoning: 'obvious observed values',
-        },
-        {
-            context,
             path: 'msid',
-            reasoning: 'obvious observed values',
+            reasoning: 'https://support.google.com/admanager/answer/10678356#msid-an',
         },
     ],
+
+    appName: {
+        context,
+        path: 'an',
+        reasoning: 'https://support.google.com/admanager/answer/10678356#msid-an',
+    },
 
     trackerSdkVersion: {
         context,
@@ -1710,7 +1711,7 @@ export const adapters: Adapter[] = [
                 },
             ],
 
-            otherIdentifiers: [
+            deviceId: [
                 {
                     context: 'body',
                     path: 'analyticsUserProperties.deviceId',
@@ -1721,11 +1722,15 @@ export const adapters: Adapter[] = [
                     path: 'analyticsUserProperties.device_id',
                     reasoning: 'obvious property name',
                 },
-                {
-                    context: 'body',
-                    path: 'analyticsUserProperties.uuid',
-                    reasoning: 'obvious property name',
-                },
+            ],
+
+            otherIdentifiers: {
+                context: 'body',
+                path: 'analyticsUserProperties.uuid',
+                reasoning: 'obvious property name',
+            },
+
+            installationId: [
                 {
                     context: 'body',
                     path: 'appInstanceIdToken',
@@ -1761,6 +1766,911 @@ export const adapters: Adapter[] = [
                 context: 'body',
                 path: 'sdkVersion',
                 reasoning: 'obvious property name',
+            },
+        },
+    },
+
+    {
+        slug: 'googletagmanager-gtag',
+        // See: https://developers.google.com/tag-platform/gtagjs
+        name: 'Google tag (gtag.js)',
+        description: 'google-gtag',
+        tracker,
+
+        endpointUrls: ['https://www.googletagmanager.com/gtag/js', 'https://www.googletagmanager.com/gtag/destination'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'id',
+                onlyIf: /^[a-z]{1,3}-[a-z0-9-]{5,}$/i,
+                reasoning: 'https://support.google.com/tagmanager/answer/12326985',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
+
+    {
+        slug: 'googletagmanager-gtm',
+        name: 'Google Tag Manager (gtm.js)',
+        description: 'googletagmanager-gtm',
+        tracker,
+
+        endpointUrls: [
+            'https://www.googletagmanager.com/gtm.js',
+            'https://www.google-analytics.com/gtm/js',
+            'https://www.googletagmanager.com/gtm/ios',
+            'https://www.google-analytics.com/gtm/android',
+        ],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'id',
+                onlyIf: /^[a-z]{1,3}-[a-z0-9-]{5,}$/i,
+                reasoning: 'https://support.google.com/tagmanager/answer/12326985',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
+
+    {
+        // This adapter is mixing GA4 and UA (and various other GA endpoints?) since they use very similar data formats.
+        slug: 'google-analytics',
+        name: 'Google Analytics',
+        description: 'google-analytics',
+        tracker,
+
+        endpointUrls: [
+            'https://region1.google-analytics.com/g/collect',
+            'https://region1.analytics.google.com/g/collect',
+            'https://region1.analytics.google.com/g/s/collect',
+            'https://www.google-analytics.com/j/collect',
+            'https://www.google-analytics.com/g/collect',
+            'https://www.google-analytics.com/collect',
+            'https://analytics.google.com/g/s/collect',
+            'https://ssl.google-analytics.com/collect',
+            'https://www.google.com/ccm/collect',
+            'https://region1.google-analytics.com/privacy-sandbox/register-conversion',
+            'https://ssl.google-analytics.com/batch',
+            /^https:\/\/www\.google\..+\/ads\/ga-audiences$/,
+
+            'https://www.google-analytics.com/analytics.js',
+            'https://ssl.google-analytics.com/ga.js',
+            'https://www.google-analytics.com/plugins/ua/ec.js',
+            'https://www.google-analytics.com/plugins/ua/linkid.js',
+            'https://www.google-analytics.com/plugins/ua/ecommerce.js',
+            'https://www.google-analytics.com/ga.js',
+            'https://www.google-analytics.com/urchin.js',
+            'http://www.google-analytics.com/urchin.js',
+            'http://www.google-analytics.com/ga.js',
+            'http://www.google-analytics.com/analytics.js',
+
+            // GA can also collect through DoubleClick endpoints, cf.: https://news.ycombinator.com/item?id=33733239 and
+            // https://www.namehero.com/blog/how-to-disable-doubleclick-in-google-analytics/
+            'https://stats.g.doubleclick.net/g/collect',
+            'https://stats.g.doubleclick.net/j/collect',
+            'https://stats.g.doubleclick.net/r/collect',
+        ],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'parseQueryString', input: 'body', output: 'res.body' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: [
+                {
+                    context: 'query',
+                    path: 'tid',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#tid',
+                },
+                {
+                    context: 'body',
+                    path: 'tid',
+                    notIf: '__GTM_DEFAULT_TRACKER__',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#tid',
+                },
+            ],
+
+            consentState: [
+                {
+                    context: 'query',
+                    path: 'gcs',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#how-do-i-check-if-consent-mode-is-active',
+                },
+                {
+                    context: 'body',
+                    path: 'gcs',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#how-do-i-check-if-consent-mode-is-active',
+                },
+                {
+                    context: 'query',
+                    path: 'gcd',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#consent-mode-v2-signals',
+                },
+                {
+                    context: 'body',
+                    path: 'gcd',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#consent-mode-v2-signals',
+                },
+                {
+                    context: 'query',
+                    path: 'gdpr_consent',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            language: [
+                {
+                    context: 'query',
+                    path: 'ul',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ul',
+                },
+                {
+                    context: 'body',
+                    path: 'ul',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ul',
+                },
+            ],
+
+            screenHeight: [
+                {
+                    context: 'query',
+                    path: 'sr',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sr',
+                },
+                {
+                    context: 'query',
+                    path: 'vp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#vp',
+                },
+                {
+                    context: 'body',
+                    path: 'sr',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sr',
+                },
+                {
+                    context: 'body',
+                    path: 'vp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#vp',
+                },
+            ],
+
+            screenWidth: [
+                {
+                    context: 'query',
+                    path: 'sr',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sr',
+                },
+                {
+                    context: 'query',
+                    path: 'vp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#vp',
+                },
+                {
+                    context: 'body',
+                    path: 'sr',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sr',
+                },
+                {
+                    context: 'body',
+                    path: 'vp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#vp',
+                },
+            ],
+
+            browserId: [
+                {
+                    context: 'query',
+                    path: 'cid',
+                    reasoning:
+                        'https://louder.com.au/2022/06/27/client-id-in-ga4-what-is-it-and-how-to-get-it-in-your-report/',
+                },
+                {
+                    context: 'body',
+                    path: 'cid',
+                    reasoning:
+                        'https://louder.com.au/2022/06/27/client-id-in-ga4-what-is-it-and-how-to-get-it-in-your-report/',
+                },
+            ],
+
+            viewedPage: [
+                {
+                    context: 'query',
+                    path: 'dl',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dl',
+                },
+                {
+                    context: 'query',
+                    path: 'dt',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dt',
+                },
+                {
+                    context: 'body',
+                    path: 'dl',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dl',
+                },
+                {
+                    context: 'body',
+                    path: 'dt',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dt',
+                },
+                {
+                    context: 'query',
+                    path: 'dp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp',
+                },
+                {
+                    context: 'body',
+                    path: 'dp',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp',
+                },
+            ],
+
+            sessionId: {
+                context: 'query',
+                path: 'sid',
+                reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+            },
+
+            sessionCount: {
+                context: 'query',
+                path: 'sct',
+                reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+            },
+
+            isUserActive: [
+                {
+                    context: 'query',
+                    path: 'seg',
+                    reasoning:
+                        'https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/#37-19-session-engaged',
+                },
+                {
+                    context: 'body',
+                    path: 'seg',
+                    reasoning:
+                        'https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/#37-19-session-engaged',
+                },
+            ],
+
+            isUserInactive: [
+                {
+                    context: 'query',
+                    path: 'ni',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ni',
+                },
+                {
+                    context: 'body',
+                    path: 'ni',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ni',
+                },
+            ],
+
+            architecture: [
+                {
+                    context: 'query',
+                    path: 'uaa',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua-arch',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            model: [
+                {
+                    context: 'query',
+                    path: 'uam',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua-model',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'dm',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'body',
+                    path: 'dm',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            osName: [
+                {
+                    context: 'query',
+                    path: 'uap',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua-platform',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            osVersion: [
+                {
+                    context: 'query',
+                    path: 'uapv',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua-platform-version',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            installationId: {
+                context: 'query',
+                path: '_fid',
+                reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet-beta/?p=_fid',
+            },
+
+            userId: [
+                {
+                    context: 'query',
+                    path: 'uid',
+                    notIf: /nologin|0|(\r\n)|anonymous|(Without Profile)|(not set)|hashedId|--|na|notloggedin/i,
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uid',
+                },
+                {
+                    context: 'body',
+                    path: 'uid',
+                    notIf: /nologin|0|(\r\n)|anonymous|(Without Profile)|(not set)|hashedId|--|na|notloggedin/i,
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uid',
+                },
+                {
+                    context: 'query',
+                    path: '_utma',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?csw=1#gajs_-_cookie_usage',
+                },
+                {
+                    context: 'query',
+                    path: '_gid',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?csw=1#gtagjs_and_analyticsjs_universal_analytics_-_cookie_usage',
+                },
+                {
+                    context: 'body',
+                    path: '_gid',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?csw=1#gtagjs_and_analyticsjs_universal_analytics_-_cookie_usage',
+                },
+            ],
+
+            currency: [
+                {
+                    context: 'query',
+                    path: 'cu',
+                    notIf: /not found/i,
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cu',
+                },
+                {
+                    context: 'body',
+                    path: 'cu',
+                    notIf: /not found/i,
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cu',
+                },
+            ],
+
+            appId: [
+                {
+                    context: 'header',
+                    path: 'x-requested-with',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'aid',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid',
+                },
+                {
+                    context: 'body',
+                    path: 'aid',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid',
+                },
+                {
+                    context: 'body',
+                    path: 'msid',
+                    reasoning: 'https://support.google.com/admanager/answer/10678356#msid-an',
+                },
+            ],
+
+            appName: [
+                {
+                    context: 'query',
+                    path: 'an',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an',
+                },
+                {
+                    context: 'body',
+                    path: 'an',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an',
+                },
+            ],
+
+            appVersion: [
+                {
+                    context: 'query',
+                    path: 'av',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av',
+                },
+                {
+                    context: 'body',
+                    path: 'av',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av',
+                },
+            ],
+
+            campaignSource: [
+                {
+                    context: 'query',
+                    path: 'cs',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cs',
+                },
+                {
+                    context: 'body',
+                    path: 'cs',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cs',
+                },
+            ],
+
+            campaignMedium: {
+                context: 'query',
+                path: 'cm',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cm',
+            },
+
+            campaignName: [
+                {
+                    context: 'query',
+                    path: 'cn',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cn',
+                },
+                {
+                    context: 'query',
+                    path: 'ci',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ci',
+                },
+                {
+                    context: 'query',
+                    path: '$[?(@property.match(/^promo\\d+id$/))]',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: '$[?(@property.match(/^promo\\d+nm$/))]',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: '$[?(@property.match(/^promo\\d+id$/))]',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: '$[?(@property.match(/^promo\\d+nm$/))]',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            campaignCreative: [
+                {
+                    context: 'query',
+                    path: '$[?(@property.match(/^promo\\d+cr$/))]',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: '$[?(@property.match(/^promo\\d+cr$/))]',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            campaignCreativePosition: [
+                {
+                    context: 'query',
+                    path: '$[?(@property.match(/^promo\\d+ps$/))]',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: '$[?(@property.match(/^promo\\d+ps$/))]',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            campaignTerm: {
+                context: 'query',
+                path: 'ck',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ck',
+            },
+
+            isFirstLaunch: {
+                context: 'body',
+                path: '_fv',
+                reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet-beta/?p=_fv',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'dr',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+                {
+                    context: 'body',
+                    path: 'dr',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+            ],
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua-full-version-list',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'ua',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua',
+                },
+                {
+                    context: 'body',
+                    path: 'ua',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua',
+                },
+                {
+                    context: 'query',
+                    path: 'uafvl',
+                    reasoning: 'https://www.thyngster.com/ga4-measurement-protocol-cheatsheet/',
+                },
+            ],
+
+            screenColorDepth: [
+                {
+                    context: 'query',
+                    path: 'sd',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sd',
+                },
+                {
+                    context: 'body',
+                    path: 'sd',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#sd',
+                },
+            ],
+
+            userAction: [
+                {
+                    context: 'query',
+                    path: 'pa',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#pa',
+                },
+                {
+                    context: 'body',
+                    path: 'pa',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#pa',
+                },
+                {
+                    context: 'query',
+                    path: 'ea',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea',
+                },
+                {
+                    context: 'body',
+                    path: 'ea',
+                    reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea',
+                },
+            ],
+
+            userActionSource: [
+                {
+                    context: 'query',
+                    path: 'pal',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#pal',
+                },
+                {
+                    context: 'body',
+                    path: 'pal',
+                    reasoning:
+                        'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#pal',
+                },
+            ],
+
+            advertisingId: [
+                {
+                    context: 'query',
+                    path: 'idfa',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'body',
+                    path: 'idfa',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            interactedElement: {
+                context: 'query',
+                path: 'linkid',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#linkid',
+            },
+
+            revenue: {
+                context: 'query',
+                path: 'tr',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#tr',
+            },
+
+            trackerSdkVersion: [
+                {
+                    context: 'query',
+                    path: '_v',
+                    reasoning:
+                        'https://cheatography.com/dmpg-tom/cheat-sheets/google-universal-analytics-url-collect-parameters/',
+                },
+                {
+                    context: 'body',
+                    path: '_v',
+                    reasoning:
+                        'https://cheatography.com/dmpg-tom/cheat-sheets/google-universal-analytics-url-collect-parameters/',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'query',
+                path: '_gsid',
+                // https://docs.gamesight.io/reference/web-sdk-set suggests it's a session ID but I'm not sure whether
+                // we can trust this as a source and I haven't found any others.
+                reasoning: 'obvious observed values',
+            },
+
+            errorInformation: {
+                context: 'query',
+                path: 'exd',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#exd',
+            },
+
+            isConversion: {
+                context: 'query',
+                path: '_c',
+                reasoning:
+                    'https://www.simoahava.com/analytics/transformations-server-side-google-tag-manager/#use-case-1-flag-custom-events-as-conversions-for-ga4',
+            },
+
+            userActiveTime: {
+                context: 'query',
+                path: '_et',
+                reasoning:
+                    'https://www.optimizesmart.com/what-is-measurement-protocol-in-google-analytics-4-ga4/#42-24-engagement-time',
+            },
+        },
+    },
+
+    {
+        slug: 'google-publisher-tag',
+        // See: https://developers.google.com/publisher-tag/guides/get-started
+        name: 'Google Publisher Tag (GPT)',
+        description: 'google-publisher-tag',
+        tracker,
+
+        endpointUrls: [
+            'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+            'https://www.googletagservices.com/tag/js/gpt.js',
+            // cf.: https://developers.google.com/publisher-tag/common_implementation_mistakes#common-mistakes
+            /https:\/\/securepubads\.g\.doubleclick\.net\/pagead\/managed\/js\/gpt\/.+\/pubads_impl\.js/,
+            /https:\/\/securepubads\.g\.doubleclick\.net\/pagead\/managed\/js\/gpt\/.+\/pubads_impl_page_level_ads\.js/,
+        ],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'network-code',
+                reasoning: 'https://support.google.com/admanager/answer/7674889',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
+
+    {
+        slug: 'doubleclick-cookie-matching-pixel',
+        name: 'DoubleClick Pixel for Cookie Matching',
+        description: 'doubleclick-cookie-matching-pixel',
+        tracker,
+
+        endpointUrls: ['https://cm.g.doubleclick.net/pixel'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'google_nid',
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#match-tag-url-parameters',
+            },
+
+            userId: [
+                {
+                    context: 'query',
+                    path: 'google_hm',
+                    notIf: 'MA==',
+                    reasoning:
+                        'https://developers.google.com/authorized-buyers/rtb/cookie-guide#storing-a-match-in-a-google-hosted-match-table',
+                },
+                {
+                    context: 'query',
+                    path: 'google_gid',
+                    reasoning:
+                        'https://developers.google.com/authorized-buyers/rtb/cookie-guide#redirect-url-parameters',
+                },
+                {
+                    context: 'query',
+                    path: 'CriteoUserId',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            consentState: {
+                context: 'query',
+                path: 'gdpr_consent',
+                notIf: /\$/,
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#match-tag-url-parameters',
+            },
+
+            segment: {
+                context: 'query',
+                path: 'google_ula',
+                notIf: /{/,
+                reasoning: 'https://developers.google.com/authorized-buyers/rtb/cookie-guide#add-to-single-user-list',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
             },
         },
     },

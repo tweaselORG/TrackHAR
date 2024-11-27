@@ -63,7 +63,7 @@ The first adapter that matches a request will be used to decode it.
 
 #### Defined in
 
-[index.ts:170](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L170)
+[index.ts:173](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L173)
 
 ___
 
@@ -93,7 +93,7 @@ in the array is one instance of a tracking data value that was found in a reques
 
 #### Defined in
 
-[index.ts:442](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L442)
+[index.ts:448](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L448)
 
 ___
 
@@ -145,13 +145,13 @@ A description of where a certain piece of tracking data can be found in the deco
 
 #### Defined in
 
-[index.ts:142](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L142)
+[index.ts:145](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L145)
 
 ___
 
 ### DecodingStep
 
-Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"decodeJwt"`` \| ``"ensureArray"`` \| ``"gunzip"``  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
+Ƭ **DecodingStep**: { `function`: ``"parseQueryString"`` \| ``"parseJson"`` \| ``"decodeBase64"`` \| ``"decodeUrl"`` \| ``"decodeProtobuf"`` \| ``"decodeJwt"`` \| ``"ensureArray"`` \| ``"gunzip"``  } \| { `function`: ``"split"`` ; `options`: { `separator`: `string`  }  } \| { `function`: ``"getProperty"`` ; `options`: { `path`: [`JsonPath`](README.md#jsonpath)  }  } & { `input`: [`Path`](README.md#path)  } \| { `mapInput`: [`Path`](README.md#path)  } & { `output`: [`Identifier`](README.md#identifier)  }
 
 A step in the process of decoding a tracking request. This is essentially a function call with some input and output,
 and potentially additional options.
@@ -176,13 +176,15 @@ The following `function`s are available:
   result.
 - `decodeJwt`: Decodes the payload of a JSON Web Token (JWT) string into an object.
 - `ensureArray`: Ensures that the given value is an array. If it is not, it is wrapped in an array.
+- `gunzip`: Unzips a gzip-compressed blob.
+- `split`: Splits a string into an array using the given separator.
 - `getProperty`: Gets a property from an object. The property name is given in the `options.path` option. This is
   useful for either copying a nested property to a variable, or to extract a nested property from an array when used
   with a `mapInput`.
 
 #### Defined in
 
-[index.ts:125](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L125)
+[index.ts:127](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L127)
 
 ___
 
@@ -223,7 +225,7 @@ request, it indicates that the advertising ID is being transmitted.
 
 #### Defined in
 
-[index.ts:480](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L480)
+[index.ts:486](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L486)
 
 ___
 
@@ -328,7 +330,7 @@ indicator matching.
 
 #### Defined in
 
-[index.ts:459](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L459)
+[index.ts:465](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L465)
 
 ___
 
@@ -407,7 +409,7 @@ generate the information in [`tracker-wiki`](https://github.com/tweaselORG/track
 
 #### Defined in
 
-[index.ts:531](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L531)
+[index.ts:537](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L537)
 
 ## Functions
 
@@ -435,7 +437,7 @@ The adapter that can handle the request, or `undefined` if none could be found.
 
 #### Defined in
 
-[index.ts:279](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L279)
+[index.ts:282](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L282)
 
 ___
 
@@ -464,13 +466,13 @@ An object representation of the request.
 
 #### Defined in
 
-[index.ts:214](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L214)
+[index.ts:217](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L217)
 
 ___
 
 ### process
 
-▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+▸ **process**<`ValuesOnly`\>(`har`, `options?`): `Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"browserId"`` \| ``"campaignCreative"`` \| ``"campaignCreativePosition"`` \| ``"campaignMedium"`` \| ``"campaignName"`` \| ``"campaignSource"`` \| ``"campaignTerm"`` \| ``"carrier"`` \| ``"consentState"`` \| ``"country"`` \| ``"currency"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"errorInformation"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"interactedElement"`` \| ``"isCharging"`` \| ``"isConversion"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isMobileDevice"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"isUserActive"`` \| ``"isUserInactive"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"propertyId"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenColorDepth"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"segment"`` \| ``"sessionCount"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userAction"`` \| ``"userActionSource"`` \| ``"userActiveTime"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 Parse the requests in a HAR traffic dump and extract tracking data.
 
@@ -489,12 +491,12 @@ and `options.indicatorValues` is provided, it will fall back to indicator matchi
 | :------ | :------ | :------ |
 | `har` | `Har` | A traffic dump in HAR format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `valuesOnly`: By default, the result contains not just the values but also various metadata (like the adapter that processed the request). If you only need the values, you can set this option to `true` to get a simpler result. - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"browserId"`` \| ``"campaignCreative"`` \| ``"campaignCreativePosition"`` \| ``"campaignMedium"`` \| ``"campaignName"`` \| ``"campaignSource"`` \| ``"campaignTerm"`` \| ``"carrier"`` \| ``"consentState"`` \| ``"country"`` \| ``"currency"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"errorInformation"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"interactedElement"`` \| ``"isCharging"`` \| ``"isConversion"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isMobileDevice"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"isUserActive"`` \| ``"isUserInactive"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"propertyId"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenColorDepth"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"segment"`` \| ``"sessionCount"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userAction"`` \| ``"userActionSource"`` \| ``"userActiveTime"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 | `options.valuesOnly?` | `ValuesOnly` | - |
 
 #### Returns
 
-`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
+`Promise`<`ValuesOnly` extends ``true`` ? (`undefined` \| `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"browserId"`` \| ``"campaignCreative"`` \| ``"campaignCreativePosition"`` \| ``"campaignMedium"`` \| ``"campaignName"`` \| ``"campaignSource"`` \| ``"campaignTerm"`` \| ``"carrier"`` \| ``"consentState"`` \| ``"country"`` \| ``"currency"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"errorInformation"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"interactedElement"`` \| ``"isCharging"`` \| ``"isConversion"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isMobileDevice"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"isUserActive"`` \| ``"isUserInactive"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"propertyId"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenColorDepth"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"segment"`` \| ``"sessionCount"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userAction"`` \| ``"userActionSource"`` \| ``"userActiveTime"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, `any`[]\>\>)[] : (`undefined` \| [`AnnotatedResult`](README.md#annotatedresult))[]\>
 
 An array of results, corresponding to each request in the HAR file. If a request could not be processed
   (i.e. if no adapter was found that could handle it and indicator matching, if enabled, didn't produce any results),
@@ -502,7 +504,7 @@ An array of results, corresponding to each request in the HAR file. If a request
 
 #### Defined in
 
-[index.ts:502](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L502)
+[index.ts:508](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L508)
 
 ___
 
@@ -523,7 +525,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 | :------ | :------ | :------ |
 | `request` | [`Request`](README.md#request) | The request to process in our internal request format. |
 | `options?` | `Object` | An optional object that can configure the following options: - `indicatorValues`: An object that specifies known honey data values for certain properties. If no adapter could match the request but indicator values are provided, this function will fall back to indicator matching and try to find the indicator values in the request headers, path or body. See [IndicatorValues](README.md#indicatorvalues). |
-| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"carrier"`` \| ``"country"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"isCharging"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
+| `options.indicatorValues?` | `Partial`<`Record`<`LiteralUnion`<``"accelerometerX"`` \| ``"accelerometerY"`` \| ``"accelerometerZ"`` \| ``"advertisingId"`` \| ``"appId"`` \| ``"appName"`` \| ``"appVersion"`` \| ``"architecture"`` \| ``"batteryLevel"`` \| ``"browserId"`` \| ``"campaignCreative"`` \| ``"campaignCreativePosition"`` \| ``"campaignMedium"`` \| ``"campaignName"`` \| ``"campaignSource"`` \| ``"campaignTerm"`` \| ``"carrier"`` \| ``"consentState"`` \| ``"country"`` \| ``"currency"`` \| ``"developerScopedId"`` \| ``"deviceId"`` \| ``"deviceName"`` \| ``"diskFree"`` \| ``"diskTotal"`` \| ``"diskUsed"`` \| ``"errorInformation"`` \| ``"hashedAdvertisingId"`` \| ``"installationId"`` \| ``"installTime"`` \| ``"interactedElement"`` \| ``"isCharging"`` \| ``"isConversion"`` \| ``"isEmulator"`` \| ``"isFirstLaunch"`` \| ``"isInDarkMode"`` \| ``"isInForeground"`` \| ``"isMobileDevice"`` \| ``"isRoaming"`` \| ``"isRooted"`` \| ``"isUserActive"`` \| ``"isUserInactive"`` \| ``"language"`` \| ``"latitude"`` \| ``"localIp"`` \| ``"longitude"`` \| ``"macAddress"`` \| ``"manufacturer"`` \| ``"model"`` \| ``"networkConnectionType"`` \| ``"orientation"`` \| ``"osName"`` \| ``"osVersion"`` \| ``"otherIdentifiers"`` \| ``"propertyId"`` \| ``"publicIp"`` \| ``"pushNotificationToken"`` \| ``"ramFree"`` \| ``"ramTotal"`` \| ``"ramUsed"`` \| ``"referer"`` \| ``"revenue"`` \| ``"rotationX"`` \| ``"rotationY"`` \| ``"rotationZ"`` \| ``"screenColorDepth"`` \| ``"screenHeight"`` \| ``"screenWidth"`` \| ``"segment"`` \| ``"sessionCount"`` \| ``"sessionId"`` \| ``"signalStrengthCellular"`` \| ``"signalStrengthWifi"`` \| ``"startTime"`` \| ``"state"`` \| ``"timeSpent"`` \| ``"timezone"`` \| ``"trackerSdkVersion"`` \| ``"uptime"`` \| ``"userAgent"`` \| ``"userAction"`` \| ``"userActionSource"`` \| ``"userActiveTime"`` \| ``"userId"`` \| ``"viewedPage"`` \| ``"volume"``, `string`\>, [`ArrayOrSingle`](README.md#arrayorsingle)<`string`\>\>\> | - |
 
 #### Returns
 
@@ -531,7 +533,7 @@ This is not needed for the main purposes of this library, but can be useful for 
 
 #### Defined in
 
-[index.ts:302](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L302)
+[index.ts:305](https://github.com/tweaselORG/TrackHAR/blob/main/src/index.ts#L305)
 
 ___
 
