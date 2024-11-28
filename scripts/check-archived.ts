@@ -25,9 +25,7 @@ const fileIsTrackedInGit = (path) =>
                 const { archivedUrls, archivedDataPaths } = await getArchivedUrls();
                 const reasoningExternalUrls = await getReasoningUrlsFromAdapters(adapterModule.adapters);
                 const reasoningLocalUrls = await getAllDataPathsFromAdapters(adapterModule.adapters)
-                    .filter(
-                        (dataPath) => !dataPath[2].reasoning.startsWith('http') && /.+\.md/.test(dataPath[2].reasoning)
-                    )
+                    .filter((dataPath) => /^(?!http).+\.md$/.test(dataPath[2].reasoning))
                     .reduce((acc, dataPath) => {
                         acc.add(dataPath[2].reasoning);
                         return acc;
