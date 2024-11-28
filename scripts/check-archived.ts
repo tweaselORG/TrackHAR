@@ -25,7 +25,7 @@ const fileIsTrackedInGit = (path) =>
                 const { archivedUrls, archivedDataPaths } = await getArchivedUrls();
                 const reasoningExternalUrls = await getReasoningUrlsFromAdapters(adapterModule.adapters);
                 const reasoningLocalUrls = await getAllDataPathsFromAdapters(adapterModule.adapters)
-                    .filter((dataPath) => /.+\.md/.test(dataPath[2].reasoning))
+                    .filter((dataPath) => /^(?!http).+\.md$/.test(dataPath[2].reasoning))
                     .reduce((acc, dataPath) => {
                         acc.add(dataPath[2].reasoning);
                         return acc;
@@ -53,7 +53,7 @@ const fileIsTrackedInGit = (path) =>
                             chalk.red('"') +
                                 chalk.bold.red(url) +
                                 chalk.red(
-                                    `" is not archived for ${unarchivedPaths.join(', ')}.` +
+                                    `" is not archived for ${[...new Set(unarchivedPaths)].join(';')}` +
                                         (archiveErrors[url]
                                             ? `\n  -> There was an error while archiving: "${archiveErrors[url].error.message}"`
                                             : '')
