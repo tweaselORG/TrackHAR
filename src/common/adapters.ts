@@ -30,6 +30,7 @@ import { adapters as taboola } from '../adapters/taboola';
 import { adapters as unity } from '../adapters/unity';
 import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
+import { adapters as yoc } from '../adapters/yoc';
 
 export const allAdapters = [
     ...adagio,
@@ -64,4 +65,5 @@ export const allAdapters = [
     ...unity,
     ...vungle,
     ...yandex,
+    ...yoc,
 ];
