@@ -25,11 +25,13 @@ import { adapters as pubmatic } from '../adapters/pubmatic';
 import { adapters as rayjump } from '../adapters/rayjump';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
+import { adapters as sovrn } from '../adapters/sovrn';
 import { adapters as startIo } from '../adapters/start-io';
 import { adapters as taboola } from '../adapters/taboola';
 import { adapters as unity } from '../adapters/unity';
 import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
+import { adapters as yoc } from '../adapters/yoc';
 
 export const allAdapters = [
     ...adagio,
@@ -59,9 +61,11 @@ export const allAdapters = [
     ...rayjump,
     ...singularNet,
     ...smartbear,
+    ...sovrn,
     ...startIo,
     ...taboola,
     ...unity,
     ...vungle,
     ...yandex,
+    ...yoc,
 ];
