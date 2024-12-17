@@ -28,6 +28,7 @@ import { adapters as smartbear } from '../adapters/smartbear';
 import { adapters as sovrn } from '../adapters/sovrn';
 import { adapters as startIo } from '../adapters/start-io';
 import { adapters as taboola } from '../adapters/taboola';
+import { adapters as triplelift } from '../adapters/triplelift';
 import { adapters as unity } from '../adapters/unity';
 import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
@@ -64,6 +65,7 @@ export const allAdapters = [
     ...sovrn,
     ...startIo,
     ...taboola,
+    ...triplelift,
     ...unity,
     ...vungle,
     ...yandex,
