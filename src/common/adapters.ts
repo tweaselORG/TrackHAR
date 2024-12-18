@@ -23,6 +23,7 @@ import { adapters as openx } from '../adapters/openx';
 import { adapters as outbrain } from '../adapters/outbrain';
 import { adapters as pubmatic } from '../adapters/pubmatic';
 import { adapters as rayjump } from '../adapters/rayjump';
+import { adapters as sharethrough } from '../adapters/sharethrough';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
 import { adapters as sovrn } from '../adapters/sovrn';
@@ -60,6 +61,7 @@ export const allAdapters = [
     ...outbrain,
     ...pubmatic,
     ...rayjump,
+    ...sharethrough,
     ...singularNet,
     ...smartbear,
     ...sovrn,
