@@ -23,13 +23,17 @@ import { adapters as openx } from '../adapters/openx';
 import { adapters as outbrain } from '../adapters/outbrain';
 import { adapters as pubmatic } from '../adapters/pubmatic';
 import { adapters as rayjump } from '../adapters/rayjump';
+import { adapters as sharethrough } from '../adapters/sharethrough';
 import { adapters as singularNet } from '../adapters/singular-net';
 import { adapters as smartbear } from '../adapters/smartbear';
+import { adapters as sovrn } from '../adapters/sovrn';
 import { adapters as startIo } from '../adapters/start-io';
 import { adapters as taboola } from '../adapters/taboola';
+import { adapters as triplelift } from '../adapters/triplelift';
 import { adapters as unity } from '../adapters/unity';
 import { adapters as vungle } from '../adapters/vungle';
 import { adapters as yandex } from '../adapters/yandex';
+import { adapters as yoc } from '../adapters/yoc';
 
 export const allAdapters = [
     ...adagio,
@@ -57,11 +61,15 @@ export const allAdapters = [
     ...outbrain,
     ...pubmatic,
     ...rayjump,
+    ...sharethrough,
     ...singularNet,
     ...smartbear,
+    ...sovrn,
     ...startIo,
     ...taboola,
+    ...triplelift,
     ...unity,
     ...vungle,
     ...yandex,
+    ...yoc,
 ];
