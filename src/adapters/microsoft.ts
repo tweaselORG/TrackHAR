@@ -539,4 +539,234 @@ export const adapters: Adapter[] = [
             },
         }),
     },
+
+    {
+        slug: 'bing-bat-action-0',
+        // See:
+        // https://answers.microsoft.com/en-us/msadvs/forum/all/does-batbing-track-your-browser-searches-and-sites/0a402f00-60c2-4d54-bd7d-81b67ccc7f13
+        // and https://bingadsuet.azurewebsites.net/GoogleTagManager.html
+        name: 'Bing Ads conversion tracking (Universal Event Tracking — UET)',
+        tracker,
+
+        endpointUrls: ['https://bat.bing.com/action/0', 'https://bat.bing.com/actionp/0'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+
+        containedDataPaths: {
+            language: {
+                context: 'query',
+                path: 'lg',
+                reasoning: 'obvious observed values',
+            },
+
+            screenWidth: {
+                context: 'query',
+                path: 'sw',
+                reasoning: 'obvious observed values',
+            },
+
+            screenHeight: {
+                context: 'query',
+                path: 'sh',
+                reasoning: 'obvious observed values',
+            },
+
+            viewedPage: [
+                {
+                    context: 'query',
+                    path: 'tl',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'p',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'page_path',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            viewedPageKeywords: {
+                context: 'query',
+                path: 'kw',
+                reasoning: 'obvious observed values',
+            },
+
+            currency: {
+                context: 'query',
+                path: 'gc',
+                reasoning: 'obvious observed values',
+            },
+
+            userId: {
+                context: 'cookie',
+                path: 'MUID',
+                reasoning: 'https://learn.microsoft.com/en-us/clarity/setup-and-installation/glossary-of-terms#muid',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
+
+    {
+        slug: 'bing-bat-js',
+        // See: https://bingadsuet.azurewebsites.net/GoogleTagManager.html
+        name: 'Bing Ads Universal Event Tracking (UET) bat.js script',
+        tracker,
+
+        endpointUrls: ['https://bat.bing.com/bat.js'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+
+        containedDataPaths: {
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
+
+    {
+        slug: 'bing-c-gif',
+        name: 'Bing Ads pixel (c.gif)',
+        tracker,
+
+        endpointUrls: ['https://c.bing.com/c.gif'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+        ],
+
+        containedDataPaths: {
+            viewedPage: [
+                {
+                    context: 'query',
+                    path: '$["pg.n"]',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'tp',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            userId: {
+                context: 'cookie',
+                path: 'MUID',
+                reasoning: 'https://learn.microsoft.com/en-us/clarity/setup-and-installation/glossary-of-terms#muid',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+        },
+    },
 ];
