@@ -6,7 +6,7 @@ const tracker: Tracker = {
     datenanfragenSlug: 'facebook',
 };
 
-const graphActivitiesEndpointRegex = /^https:\/\/graph\.facebook\.com\/v\d{1,2}.\d\/\d+\/activities$/;
+const graphActivitiesEndpointRegex = /^https:\/\/graph\.facebook\.com\/v\d{1,2}\.\d{1,2}\/\d+\/activities$/;
 const graphActivitiesDataPaths = ({
     pathPrefix,
     includeExtinfo,
