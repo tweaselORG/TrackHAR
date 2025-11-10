@@ -221,12 +221,20 @@ export const prebidjsOpenRtbDataPaths = (prefix = ''): Adapter['containedDataPat
         },
     ],
 
-    userId: {
-        context: 'body',
-        path: prefix + 'user.ext.eids.*.uids.*.id',
-        notIf: '0',
-        reasoning: 'obvious observed values',
-    },
+    userId: [
+        {
+            context: 'body',
+            path: prefix + 'user.ext.eids.*.uids.*.id',
+            notIf: '0',
+            reasoning: 'obvious observed values',
+        },
+        {
+            context: 'body',
+            path: prefix + 'user.ext.tpid.*.uid',
+            notIf: '0',
+            reasoning: 'https://prebid.org/dev-docs/modules/userId.html#implementation-details',
+        },
+    ],
 
     isMobileDevice: {
         context: 'body',
