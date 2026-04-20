@@ -950,6 +950,168 @@ export const adapters: Adapter[] = [
     },
 
     {
+        slug: 'doubleclick-pagead-landing',
+        name: 'DoubleClick (pagead/landing)',
+        tracker,
+
+        endpointUrls: [
+            'https://googleads.g.doubleclick.net/pagead/landing',
+            'https://www.google.com/pagead/landing',
+            'https://pagead2.googlesyndication.com/pagead/landing',
+        ],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            consentState: [
+                {
+                    context: 'query',
+                    path: 'gcs',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#how-do-i-check-if-consent-mode-is-active',
+                },
+                {
+                    context: 'query',
+                    path: 'gcd',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#consent-mode-v2-signals',
+                },
+                {
+                    context: 'query',
+                    path: 'gdpr_consent',
+                    notIf: 'tcempty',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            viewedPage: {
+                context: 'query',
+                path: 'url',
+                reasoning: 'obvious observed values',
+            },
+
+            appId: {
+                context: 'header',
+                path: 'x-requested-with',
+                reasoning: 'obvious observed values',
+            },
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
+
+    {
+        slug: 'doubleclick-td-ga-rul',
+        name: 'DoubleClick (td/ga/rul)',
+        tracker,
+
+        endpointUrls: ['https://td.doubleclick.net/td/ga/rul'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'cookie', output: 'res.cookie', options: { path: '$' } },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            propertyId: {
+                context: 'query',
+                path: 'tid',
+                reasoning: 'https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#tid',
+            },
+
+            consentState: [
+                {
+                    context: 'query',
+                    path: 'gcs',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#how-do-i-check-if-consent-mode-is-active',
+                },
+                {
+                    context: 'query',
+                    path: 'gcd',
+                    reasoning:
+                        'https://www.simoahava.com/analytics/consent-mode-v2-google-tags/#consent-mode-v2-signals',
+                },
+            ],
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            otherIdentifiers: {
+                context: 'cookie',
+                path: 'IDE',
+                reasoning: 'google/IDE.md',
+            },
+        },
+    },
+
+    {
         slug: 'googledatatransport-firelog-batchlog-json',
         name: 'GoogleDataTransport (FireLog BatchedLogRequest, JSON)',
         description: 'googledatatransport-batchlog',
@@ -2672,6 +2834,129 @@ export const adapters: Adapter[] = [
                 path: 'IDE',
                 reasoning: 'google/IDE.md',
             },
+        },
+    },
+
+    {
+        slug: 'pagead-gen-204',
+        name: 'Google (pagead2/gen_204)',
+        tracker,
+
+        endpointUrls: ['https://pagead2.googlesyndication.com/pagead/gen_204'],
+
+        decodingSteps: [
+            { function: 'parseQueryString', input: 'query', output: 'res.query' },
+            { function: 'getProperty', input: 'header', output: 'res.header', options: { path: '$' } },
+        ],
+        containedDataPaths: {
+            websiteUrl: [
+                {
+                    context: 'query',
+                    path: 'domain',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'host',
+                    reasoning: 'obvious observed values',
+                },
+            ],
+
+            appId: [
+                {
+                    context: 'query',
+                    notIf: 'app_name_unavailable',
+                    path: 'app_name',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'pn',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'appid',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'appId',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            model: {
+                context: 'query',
+                path: 'device',
+                reasoning: 'obvious observed values',
+            },
+
+            viewedPage: {
+                context: 'query',
+                path: 'pub_url',
+                reasoning: 'obvious observed values',
+            },
+
+            errorInformation: [
+                {
+                    context: 'query',
+                    path: 'err',
+                    reasoning: 'obvious observed values',
+                },
+                {
+                    context: 'query',
+                    path: 'exceptiontype',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'stacktrace',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'query',
+                    path: 'exceptionkey',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            sessionId: {
+                context: 'query',
+                path: 'session_id',
+                reasoning: 'obvious property name',
+            },
+
+            userAgent: [
+                {
+                    context: 'header',
+                    path: 'user-agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'User-Agent',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'sec-ch-ua',
+                    reasoning: 'obvious property name',
+                },
+            ],
+
+            referer: [
+                {
+                    context: 'header',
+                    path: 'referer',
+                    reasoning: 'obvious property name',
+                },
+                {
+                    context: 'header',
+                    path: 'Referer',
+                    reasoning: 'obvious property name',
+                },
+            ],
         },
     },
 ];
